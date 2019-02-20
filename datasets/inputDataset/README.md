@@ -7,6 +7,13 @@ We are going to use as input Dataset a simulated benchmark dataset with known ph
 export PATH=$PATH:${PWD}/scripts
 GenFSGopher.pl -o data --layout cfsan ./Salmonella_enterica_1203NYJAP-1.simulated.tsv
 
+## Dependencies
+1. edirect
+2. sra-toolkit, built from source: https://github.com/ncbi/sra-tools/wiki/Building-and-Installing-from-Source
+3. Perl 5.12.0
+4. Make
+5. wget
+6. sha256sum
 
 ### References
 Timme, Ruth E., et al. "Benchmark datasets for phylogenomic pipeline validation, applications for foodborne pathogen surveillance." PeerJ 5 (2017): e3893.
