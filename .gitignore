@@ -1,0 +1,7 @@
+# Custom
+datasets/inputDataset/data/
+
+# Nextflow
+.nextflow*
+work/
+results/
