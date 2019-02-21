@@ -29,4 +29,4 @@ RUN	echo "Installing checkTreeFormat script" && \
          scif install /opt/checkTreeFormat_v1.0_centos7.scif
 
 ENTRYPOINT	["/opt/docker-entrypoint.sh"]
-CMD [checkTreeFormat.py]
+#CMD [checkTreeFormat.py]

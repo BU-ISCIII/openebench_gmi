@@ -26,12 +26,12 @@ def check_arg (args=None) :
     '''
     parser = argparse.ArgumentParser(prog = 'getLeavesFromNewick.py', formatter_class=argparse.RawDescriptionHelpFormatter, description= 'getLeavesFromNewick.py is a phylogenetic tree validator. It takes a tree file in newick or nexus format, checks its sanity and exports a canonical newick file.')
 
-    parser.add_argument('--version', action='version', version='%(prog)s 0.3.5')
+    parser.add_argument('--version','-v', action='version', version='%(prog)s 0.3.5')
 
-    parser.add_argument('-tree_file', required= True, help ='Path to tree file')
-    parser.add_argument('-tree_format', required= False,choices = ["newick","nexus"], help = 'Tree file format [newick,nexus]', default = "newick")
-    parser.add_argument('-output', required= False, help = 'Path to result tree file.Default = ids.json', default="ids.json")
-    parser.add_argument('-event_id', required= False, help = 'OpenEbench event identifier', default="default")
+    parser.add_argument('--tree_file','-t', required= True, help ='Path to tree file')
+    parser.add_argument('--tree_format','-f' ,required= False,choices = ["newick","nexus"], help = 'Tree file format [newick,nexus]', default = "newick")
+    parser.add_argument('--output' ,'-o',required= False, help = 'Path to result tree file.Default = ids.json', default="ids.json")
+    parser.add_argument('--event_id','-e' ,required= False, help = 'OpenEbench event identifier', default="default")
 
     return parser.parse_args()
 
