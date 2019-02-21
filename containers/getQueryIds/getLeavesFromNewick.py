@@ -3,6 +3,7 @@
 import sys
 import os
 import argparse
+import json
 from Bio import Phylo
 
 #################
@@ -23,13 +24,13 @@ def check_arg (args=None) :
         parser.parse_args() # Parsed arguments
 
     '''
-    parser = argparse.ArgumentParser(prog = 'checkTreeFormat.py', formatter_class=argparse.RawDescriptionHelpFormatter, description= 'CheckNewickFormat.py is a phylogenetic tree validator. It takes a tree file in newick or nexus format, checks its sanity and exports a canonical newick file.')
+    parser = argparse.ArgumentParser(prog = 'getLeavesFromNewick.py', formatter_class=argparse.RawDescriptionHelpFormatter, description= 'getLeavesFromNewick.py is a phylogenetic tree validator. It takes a tree file in newick or nexus format, checks its sanity and exports a canonical newick file.')
 
     parser.add_argument('--version', action='version', version='%(prog)s 0.3.5')
 
     parser.add_argument('-tree_file', required= True, help ='Path to tree file')
-    parser.add_argument('-tree_format', required= True,choices = ["newick","nexus"], help = 'Tree file format [newick,nexus]')
-    parser.add_argument('-output', required= False, help = 'Path to result tree file.Default = tree.nwk', default="tree.nwk")
+    parser.add_argument('-tree_format', required= False,choices = ["newick","nexus"], help = 'Tree file format [newick,nexus]', default = "newick")
+    parser.add_argument('-output', required= False, help = 'Path to result tree file.Default = ids.json', default="ids.json")
     parser.add_argument('-event_id', required= False, help = 'OpenEbench event identifier', default="default")
 
     return parser.parse_args()
@@ -42,9 +43,11 @@ def check_arg (args=None) :
 if __name__ == '__main__' :
 
     # Variables
-    version = 'checkTreeFormat v1.0'  # Script version
-    arguments = ""                    # Arguments from ArgParse
-    tree = ""                         # Tree variable
+    version = 'getLeavesFromNewick v1.0'  # Script version
+    arguments = ""                        # Arguments from ArgParse
+    tree = ""                             # Tree variable
+    ids = {}                              # IDs dictionary
+    leaves = []                           # Leaves list
 
     # Grab arguments
     arguments = check_arg(sys.argv[1:])
@@ -65,21 +68,26 @@ if __name__ == '__main__' :
         raise
         sys.exit(1)
 
-    # If format =! newick convert to canonical format.
-    if(arguments.tree_format != "newick"):
-        print("Tree file not in canonical format. Converting to newick...")
-    else:
-        print("Tree is already in newick format, printing...")
-
-    # Writing tree in newick format
+    # Create ids dictionary with event_id and sample ids from tree leaves.
     try:
-        Phylo.write(tree,arguments.output,"newick")
-        print("Successfully converted/printed to newick format! Saved in " + arguments.output)
+        ids.update(testEventId = arguments.event_id)
+        for leaf in tree.get_terminals():
+            leaves.append(leaf.name)
+
+        ids.update(queryIds = leaves)
+        print("Successfully extracted ids from tree file.")
     except:
         print("Conversion/printing to newick failed.")
         raise
         sys.exit(1)
 
-
-    #for leaf in tree.get_terminals():
-    #    print(leaf.name)
+    # Outputting in json format
+    try:
+        with open (arguments.output,"w") as write_file:
+            json.dump(ids,write_file,indent=4)
+        write_file.close()
+        print("Successfully created json output with ids.")
+    except:
+        print("Creating json output file failed.")
+        raise
+        sys.exit(1)
