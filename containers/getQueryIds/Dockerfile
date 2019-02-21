@@ -6,7 +6,7 @@ FROM centos:latest
 LABEL	description="Sample ids extractor" vendor="ISCIII" version="0.1" maintainer="Sara Monzon <smonzon@isciii.es>"
 
 COPY ./scif_app_recipes/* /opt/
-COPY ./containers/getQueryIds//getLeavesFromNewick.py /opt/
+COPY ./containers/getQueryIds/getLeavesFromNewick.py /opt/
 
 # First, install all the dependencies needed by the results checking procedure
 RUN echo "Install basic development tools" && \
@@ -25,8 +25,8 @@ RUN echo "Install basic development tools" && \
 # The return value tells whether the validation and the translation to
 # the canonical format whether worked or failed
 
-RUN	echo "Installing checkTreeFormat script" && \
-         scif install /opt/checkTreeFormat_v1.0_centos7.scif
+RUN	echo "Installing getLeavesFromNewick script" && \
+         scif install /opt/getLeavesFromNewick_v1.0_centos7.scif
 
 ENTRYPOINT	["/opt/docker-entrypoint.sh"]
 CMD [checkTreeFormat.py]

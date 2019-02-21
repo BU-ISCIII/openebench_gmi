@@ -155,9 +155,9 @@ process dockerPreconditions {
 
   """
   echo "$baseDir"
-  #docker build -t openebench_gmi/sample-getnewickids:latest -f $baseDir/containers/getNewickIds/Dockerfile $baseDir
-  docker build -t openebench_gmi/sample-checkformat:latest -f $baseDir/containers/checkFormat/Dockerfile $baseDir
-  #docker build -t openebench_gmi/sample-getresultsids:latest -f $baseDir/containers/checkFormat/Dockerfile $baseDir
+  docker build -t openebench_gmi/sample-checkresults:latest -f $baseDir/containers/checkFormat/Dockerfile $baseDir
+  docker build -t openebench_gmi/sample-getqueryids:latest -f $baseDir/containers/getQueryIds/Dockerfile $baseDir
+  #docker build -t openebench_gmi/sample-getresultsids:latest -f $baseDir/containers/getResultsIds/Dockerfile $baseDir
   #docker build -t openebench_gmi/sample-robinfoulds:latest -f $baseDir/containers/robinFouldsMetric/Dockerfile $baseDir
   #docker build -t openebench_gmi/sample-consolidate:latest -f $baseDir/containers/consolidateMetrics/Dockerfile $baseDir
   touch docker_image_dependency
@@ -169,70 +169,70 @@ process dockerPreconditions {
 /*
 * The instance generated from this docker file has to check the syntax of the submitted results.
 */
-//process checkResults {
-//
-//  container 'openebench_gmi/sample-checkresults'
-//
-//  publishDir 'nextflow_working_directory', mode: 'copy', overwrite: true
-//
-//  input:
-//  file results_bz2
-//  file docker_image_dependency
-//
-//  output:
-//  file canonical_results_gz
-//
-//  """
-//  doValidateAndCopy.sh $results_bz2 canonical_results_gz
-//  """
-//
-//}
-//
-///*
-//* The instance generated from this docker file knows how to extract query ids from the query.
-//*/
-//process getQueryIds {
-//
-//  container 'openebench_gmi/sample-getqueryids'
-//
-//  publishDir 'nextflow_working_directory', mode: 'copy', overwrite: true
-//
-//  input:
-//  file pre_input
-//  file docker_image_dependency
-//
-//
-//  output:
-//  file query_ids_json
-//
-//  """
-//  getQueryIds.sh ${params.testEventId} $pre_input query_ids_json
-//  """
-//
-//}
-//
-///*
-//* The instance generated from this docker file knows how to extract results ids from the results canonical formats.
-//*/
-//process getResultsIds {
-//
-//  container 'openebench_gmi/sample-getresultsids'
-//
-//  publishDir 'nextflow_working_directory', mode: 'copy', overwrite: true
-//
-//  input:
-//  file canonical_results_gz
-//  file docker_image_dependency
-//
-//  output:
-//  file result_ids_json
-//
-//  """
-//  getResultsIds.sh ${params.testEventId} $canonical_results_gz result_ids_json
-//  """
-//
-//}
-//
+process checkResults {
+
+  container 'openebench_gmi/sample-checkresults'
+
+  publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
+
+  input:
+  file tree from tree_test_file
+  file image_dependency from docker_image_dependency
+
+  output:
+  file "tree.nwk" into canonical_tree_file
+
+  """
+  checkTreeFormat.py -tree_file ${tree} -tree_format ${params.tree_format}
+  """
+
+}
+
+/*
+* The instance generated from this docker file knows how to extract query ids from the query.
+*/
+process getQueryIds {
+
+  container 'openebench_gmi/sample-getqueryids'
+
+  publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
+
+  input:
+  file tree from tree_test_file
+  file image_dependency from docker_image_dependency
+
+
+  output:
+  file "*.json" into query_ids_json
+
+  """
+  getLeavesFromNewick.py -event_id ${params.event_id} -tree_file $pre_input -tree_format ${params.tree_format}
+  """
+
+}
+
+/*
+* The instance generated from this docker file knows how to extract results ids from the results canonical formats.
+*/
+process getResultsIds {
+
+  container 'openebench_gmi/sample-getresultsids'
+
+  publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
+
+  input:
+  file tree from canonical_tree_file
+  file image_dependency from docker_image_dependency
+
+  output:
+  file "*.json" into result_ids_json
+
+  """
+  getLeavesFromNewick.py -event_id ${params.testEventId} -tree_file $tree
+  """
+
+}
+
 ///*
 //* The instance generated from this docker file compute metrics based on the number of lines and words.
 //*/
@@ -251,28 +251,6 @@ process dockerPreconditions {
 //
 //  """
 //  metricsLineCount.sh $canonical_results_gz unusedparam metrics_linemetrics_json
-//  """
-//
-//}
-//
-///*
-//* The instance generated from this docker file compute metrics based on the number of repeated words.
-//*/
-//process WordMetrics {
-//
-//  container 'openebench_gmi/sample-wordmetrics'
-//
-//  publishDir 'nextflow_working_directory', mode: 'copy', overwrite: true
-//
-//  input:
-//  file canonical_results_gz
-//  file docker_image_dependency
-//
-//  output:
-//  file metrics_wordmetrics_json
-//
-//  """
-//  metricsWordDist.sh $canonical_results_gz unusedparam metrics_wordmetrics_json
 //  """
 //
 //}
