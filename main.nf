@@ -31,10 +31,10 @@ def helpMessage() {
 
     The typical command for running the pipeline is as follows:
 
-    nextflow run BU-ISCIII/openebench_gmi --newick_test {test.newick.file} --golden_newick {golden.newick.file} --even_id {event.id}
+    nextflow run BU-ISCIII/openebench_gmi --tree_test {test.newick.file} --golden_newick {golden.newick.file} --even_id {event.id}
 
     Mandatory arguments:
-      --newick_test                 Path to input data (must be surrounded with quotes).
+      --tree_test                 Path to input data (must be surrounded with quotes).
       --golden_newick               Path to reference data. Golden dataset.
       --event_id                    Event identifier.
       --tree_format					Format tree ["nexus","netwick"].
@@ -62,9 +62,9 @@ if (params.help){
 * DEFAULT AND CUSTOM VALUE FOR CONFIGURABLE VARIABLES
 */
 
-if(params.newick_test){
-	newick_test_file = file(params.newick_test)
-	if (!newick_test_file.exists()) exit 1, "Input Newick file not found: ${params.newick_test}"
+if(params.tree_test){
+	tree_test_file = file(params.tree_test)
+	if (!tree_test_file.exists()) exit 1, "Input Newick file not found: ${params.tree_test}"
 }
 
 if(params.golden_newick){
@@ -73,7 +73,7 @@ if(params.golden_newick){
 }
 
 params.tree_format = "newick"
-if ( ! (params.tree_format =~ /newick|nexus)/) ) {
+if ( ! (params.tree_format =~ /newick|nexus/) ) {
 	exit 1, 'Please provide a valid --tree_format option [newick,nexus]'
 }
 
@@ -86,9 +86,9 @@ if(! params.golden_newick){
 	exit 1, "Missing golden newick file : $params.golden_newick. Specify path with --golden_newick"
 }
 
-params.newick_test = false
-if(! params.newick_test){
-	exit 1, "Missing newick test file : $params.newick_test. Specify path with --newick_test"
+params.tree_test = false
+if(! params.tree_test){
+	exit 1, "Missing tree test file : $params.tree_test. Specify path with --tree_test"
 }
 
 params.event_id = false
@@ -104,8 +104,8 @@ log.info "========================================="
 log.info " BU-ISCIII/openebench_gmi : OpenEBench pipeline for Outbreak detection challenge v${version}"
 log.info "========================================="
 def summary = [:]
-summary['Test Newick input']   = params.newick_test
-summary['Golden Newick input'] = params.newick_test
+summary['Test tree input']   = params.tree_test
+summary['Golden Newick input'] = params.golden_newick
 summary['Event ID']            = params.event_id
 if(workflow.revision) summary['Pipeline Release'] = workflow.revision
 summary['Current home']        = "$HOME"
@@ -135,7 +135,6 @@ try {
 }
 
 /*
-
 ===============================
 PIPELINE
 ===============================
@@ -155,11 +154,12 @@ process dockerPreconditions {
     file docker_image_dependency
 
   """
-  docker build -t openebench_gmi/sample-getnewickids:latest $baseDir/containers/getNewickIds
-  docker build -t openebench_gmi/sample-checknewickformat:latest $baseDir/containers/checkNewickFormat
-  #docker build -t openebench_gmi/sample-getresultsids:latest $PWD/../GetResultsIds
-  #docker build -t openebench_gmi/sample-robinfoulds:latest $baseDir/containers/robinFouldsMetric
-  #docker build -t openebench_gmi/sample-consolidate:latest $PWD/../ConsolidateMetrics
+  echo "$baseDir"
+  #docker build -t openebench_gmi/sample-getnewickids:latest -f $baseDir/containers/getNewickIds/Dockerfile $baseDir
+  docker build -t openebench_gmi/sample-checkformat:latest -f $baseDir/containers/checkFormat/Dockerfile $baseDir
+  #docker build -t openebench_gmi/sample-getresultsids:latest -f $baseDir/containers/checkFormat/Dockerfile $baseDir
+  #docker build -t openebench_gmi/sample-robinfoulds:latest -f $baseDir/containers/robinFouldsMetric/Dockerfile $baseDir
+  #docker build -t openebench_gmi/sample-consolidate:latest -f $baseDir/containers/consolidateMetrics/Dockerfile $baseDir
   touch docker_image_dependency
   """
 
