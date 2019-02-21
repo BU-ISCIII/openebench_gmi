@@ -1,6 +1,9 @@
 # Custom
 datasets/inputDataset/data/
 
+# Virtualenv
+virtualenv/
+
 # Nextflow
 .nextflow*
 work/
