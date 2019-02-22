@@ -27,6 +27,8 @@ RUN echo "Install basic development tools" && \
 
 RUN	echo "Installing checkTreeFormat script" && \
          scif install /opt/checkTreeFormat_v1.0_centos7.scif
+#RUN find /scif/apps -maxdepth 2 -name "bin" | while read in; do echo "export PATH=\$PATH:$in" >> /etc/profile.d/myenv.sh;done
+RUN find /scif/apps -maxdepth 2 -name "bin" | xargs -I % echo "ln -s %/* /usr/local/bin/" | bash
 
-ENTRYPOINT	["/opt/docker-entrypoint.sh"]
+#ENTRYPOINT	["/opt/docker-entrypoint.sh"]
 #CMD [checkTreeFormat.py]
