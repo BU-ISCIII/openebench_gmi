@@ -4,8 +4,11 @@ import sys
 import os
 import argparse
 import json
-from Bio import Phylo
-from Bio.Phylo.Applications import RaxmlCommandline
+import subprocess
+#from Bio import Phylo
+#from Bio.Phylo.Applications import RaxmlCommandline
+import dendropy
+from dendropy.calculate import treecompare
 
 #################
 ### FUNCTIONS ###
@@ -48,8 +51,8 @@ if __name__ == '__main__' :
     version = 'calculateRobinFouldsMetric v1.0'  # Script version
     arguments = ""                        # Arguments from ArgParse
     tree = ""                             # Tree variable
-    ids = {}                              # IDs dictionary
-    leaves = []                           # Leaves list
+    metrics = {}                          # IDs dictionary
+    metrics_info = {}                     # Leaves list
 
     # Grab arguments
     arguments = check_arg(sys.argv[1:])
@@ -65,40 +68,53 @@ if __name__ == '__main__' :
 
     # Read file, check it is in the correct format.
     try:
-        trees = [arguments.tree_file1,arguments.tree_file2]
-        with open("all_trees.dnd","w") as tmp_file
-        for fname in filenames:
-            with open(fname) as infile:
-                tmp_file.write(infile.read())
+        print("Reading Trees...")
+        tns = dendropy.TaxonNamespace()
+        tree1 = dendropy.Tree.get_from_path(
+            arguments.tree_file1,
+            "newick",
+            taxon_namespace=tns)
+        tree2 = dendropy.Tree.get_from_path(
+            arguments.tree_file2,
+            "newick",
+            taxon_namespace=tns)
+        tree1.encode_bipartitions()
+        tree2.encode_bipartitions()
+        print("Trees read successfully.")
     except:
         print("Trees couldn't be concatenated.")
         raise
         sys.exit(1)
 
-    # Calculate Robin-Foulds metric using RAxML
-    raxml_cline = RaxmlCommandline(model="GTRCAT", bipartition_filename="all_trees.dnd",algorithm="r",name="Robin-Foulds")
-    raxml_output = subprocess.get_output(raxml_cline)
+    # Calculate Robinson-Foulds distance between two trees REF and test
+    try:
+        print("Calculating robin-foulds distance...")
+        rf_distance = treecompare.symmetric_difference(tree1, tree2)
+        print("Calculation of robin-foulds distance failed.")
+    except:
+        print("Robinson-foulds distance calculation failed.")
+        raise
+        sys.exit(1)
 
-# Create ids dictionary with event_id and sample ids from tree leaves.
-#     try:
-#         ids.update(testEventId = arguments.event_id)
-#         for leaf in tree.get_terminals():
-#             leaves.append(leaf.name)
-#
-#         ids.update(queryIds = leaves)
-#         print("Successfully extracted ids from tree file.")
-#     except:
-#         print("Conversion/printing to newick failed.")
-#         raise
-#         sys.exit(1)
-#
-#     # Outputting in json format
-#     try:
-#         with open (arguments.output,"w") as write_file:
-#             json.dump(ids,write_file,indent=4)
-#         write_file.close()
-#         print("Successfully created json output with ids.")
-#     except:
-#         print("Creating json output file failed.")
-#         raise
-#         sys.exit(1)
+
+    #Create ids dictionary with event_id and sample ids from tree leaves.
+    try:
+        metrics.update(testEventId = arguments.event_id)
+        metrics_info.update(type="metrics",units="none",name="Robinson-Foulds metric",value=rf_distance)
+        metrics.update(metrics = metrics_info)
+        print("Successfully extracted ids from tree file.")
+    except:
+        print("Conversion/printing to newick failed.")
+        raise
+        sys.exit(1)
+
+    # Outputting in json format
+    try:
+        with open (arguments.output,"w") as write_file:
+            json.dump(metrics,write_file,indent=4)
+        write_file.close()
+        print("Successfully created json output with ids.")
+    except:
+        print("Creating json output file failed.")
+        raise
+        sys.exit(1)

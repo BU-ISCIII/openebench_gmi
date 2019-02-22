@@ -158,7 +158,7 @@ process dockerPreconditions {
   docker build -t openebench_gmi/sample-checkresults:latest -f $baseDir/containers/checkFormat/Dockerfile $baseDir
   docker build -t openebench_gmi/sample-getqueryids:latest -f $baseDir/containers/getQueryIds/Dockerfile $baseDir
   #docker build -t openebench_gmi/sample-getresultsids:latest -f $baseDir/containers/getResultsIds/Dockerfile $baseDir
-  #docker build -t openebench_gmi/sample-robinfoulds:latest -f $baseDir/containers/robinFouldsMetric/Dockerfile $baseDir
+  #docker build -t openebench_gmi/sample-robinfoulds:latest -f $baseDir/containers/robinsonouldsMetric/Dockerfile $baseDir
   #docker build -t openebench_gmi/sample-consolidate:latest -f $baseDir/containers/consolidateMetrics/Dockerfile $baseDir
   touch docker_image_dependency
   """

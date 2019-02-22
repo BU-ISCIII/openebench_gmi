@@ -1,0 +1,30 @@
+
+
+WARNING: RAxML is not checking sequences for duplicate seqs and sites with missing data!
+
+
+
+This is RAxML version 8.2.4 released by Alexandros Stamatakis on October 02 2015.
+
+With greatly appreciated code contributions by:
+Andre Aberer      (HITS)
+Simon Berger      (HITS)
+Alexey Kozlov     (HITS)
+Kassian Kobert    (HITS)
+David Dao         (KIT and HITS)
+Nick Pattengale   (Sandia)
+Wayne Pfeiffer    (SDSC)
+Akifumi S. Tanabe (NRIFS)
+
+RAxML computation of RF distances for all pairs of trees in a set of trees
+
+
+RAxML was called as follows:
+
+raxmlHPC -f r -m GTRCAT -n Robin-Foulds -z all_dend3.tre 
+
+
+
+
+Found 2 trees in File all_dend3.tre
+
