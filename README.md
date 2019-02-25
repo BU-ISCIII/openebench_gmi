@@ -20,7 +20,7 @@ First of all, needed datasets have been colled in: [datasets folder](datasets)
 4. **Test dataset:** a test tree for comparing with gold standard result. In this case just the same golden dataset. Robinson-Foulds metrics must be 0.
 
 ## Nextflow pipeline and containers
-Second, a pipeline has been developed which is splitted in three steps following OpenEbench specifications:
+Second, a pipeline has been developed which is splitted in three steps following OpenEbench specifications followint this [repo](https://github.com/inab/opeb-submission) as an example:
 
 ### Nextflow processes
 **1. Validation and data preprocessing:**
