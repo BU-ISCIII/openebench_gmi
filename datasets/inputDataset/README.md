@@ -4,8 +4,10 @@ We are going to use as input Dataset a simulated benchmark dataset with known ph
 
 
 ## Download input Dataset
+```Bash
 export PATH=$PATH:${PWD}/scripts
 GenFSGopher.pl -o data --layout cfsan ./Salmonella_enterica_1203NYJAP-1.simulated.tsv
+```
 
 ## Dependencies
 1. edirect
