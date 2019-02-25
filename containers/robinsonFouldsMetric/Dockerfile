@@ -6,7 +6,7 @@ FROM centos:latest
 LABEL	description="Robin foulds calculator from newick file" vendor="ISCIII" version="0.1" maintainer="Sara Monzon <smonzon@isciii.es>"
 
 COPY ./scif_app_recipes/* /opt/
-COPY ./containers/getQueryIds/calculateRobinsonFouldsMetric.py /opt/
+COPY ./containers/robinsonFouldsMetric/calculateRobinsonFouldsMetric.py /opt/
 
 # First, install all the dependencies needed by the results checking procedure
 RUN echo "Install basic development tools" && \

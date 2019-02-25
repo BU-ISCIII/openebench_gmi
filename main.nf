@@ -158,7 +158,7 @@ process dockerPreconditions {
   docker build -t openebench_gmi/sample-checkresults:latest -f $baseDir/containers/checkFormat/Dockerfile $baseDir
   docker build -t openebench_gmi/sample-getqueryids:latest -f $baseDir/containers/getQueryIds/Dockerfile $baseDir
   #docker build -t openebench_gmi/sample-getresultsids:latest -f $baseDir/containers/getResultsIds/Dockerfile $baseDir
-  #docker build -t openebench_gmi/sample-robinfoulds:latest -f $baseDir/containers/robinsonouldsMetric/Dockerfile $baseDir
+  docker build -t openebench_gmi/sample-robinsonfoulds:latest -f $baseDir/containers/robinsonFouldsMetric/Dockerfile $baseDir
   #docker build -t openebench_gmi/sample-consolidate:latest -f $baseDir/containers/consolidateMetrics/Dockerfile $baseDir
   touch docker_image_dependency
   """
@@ -180,7 +180,7 @@ process checkResults {
   file image_dependency from docker_image_dependency
 
   output:
-  file "tree.nwk" into canonical_tree_file
+  file "tree.nwk" into canonical_getresultsids,canonical_robinsonfoulds
 
   """
   checkTreeFormat.py --tree_file ${tree} --tree_format ${params.tree_format}
@@ -221,7 +221,7 @@ process getResultsIds {
   publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
 
   input:
-  file tree from canonical_tree_file
+  file tree from canonical_getresultsids
   file image_dependency from docker_image_dependency
 
   output:
@@ -233,28 +233,29 @@ process getResultsIds {
 
 }
 
-///*
-//* The instance generated from this docker file compute metrics based on the number of lines and words.
-//*/
-//process LineMetrics {
-//
-//  container 'openebench_gmi/sample-linemetrics'
-//
-//  publishDir 'nextflow_working_directory', mode: 'copy', overwrite: true
-//
-//  input:
-//  file canonical_results_gz
-//  file docker_image_dependency
-//
-//  output:
-//  file metrics_linemetrics_json
-//
-//  """
-//  metricsLineCount.sh $canonical_results_gz unusedparam metrics_linemetrics_json
-//  """
-//
-//}
-//
+/*
+* The instance generated from this docker file compute metrics based on the number of lines and words.
+*/
+process RobinsonFouldsMetrics {
+
+  container 'openebench_gmi/sample-robinsonfoulds'
+
+  publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
+
+  input:
+  file tree1 from canonical_robinsonfoulds
+  file tree2 from golden_newick_file
+  file docker_image_dependency
+
+  output:
+  file "*.json" into metrics_robinsonfoulds_json
+
+  """
+  calculateRobinsonFouldsMetric.py --tree_file1 $tree1 --tree_file2 $tree2
+  """
+
+}
+
 ///*
 //* The instance generated from this docker file computed metrics based on the results of the previous dockers.
 //*/
