@@ -12,7 +12,7 @@ nextflow run main.nf -profile docker
 ```
 Parameters available:
 ```Bash
-nextflow run main.nf -help
+nextflow run main.nf --help
 ```
 
 ```
