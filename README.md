@@ -10,6 +10,25 @@ git clone https://github.com/BU-ISCIII/openebench_gmi.git
 cd openebench_gmi.git
 nextflow run main.nf -profile docker 
 ```
+Parameters available:
+```Bash
+nextflow run main.nf -help
+```
+
+```
+Usage:
+nextflow run BU-ISCIII/openebench_gmi --tree_test {test.newick.file} --golden_newick {golden.newick.file} --even_id {event.id} --tree_format ["nexus","newick"] --outdir {path/name.output}
+
+Mandatory arguments:
+  --tree_test                 Path to input data (must be surrounded with quotes).
+  --golden_newick             Path to reference data. Golden dataset.
+  --event_id                  Event identifier.
+  --tree_format               Format tree ["nexus","netwick"].
+
+Other options:
+  --outdir                    The output directory where the results will be saved
+```
+
 
 ## Datasets
 First of all, needed datasets have been colled in: [datasets folder](datasets)
