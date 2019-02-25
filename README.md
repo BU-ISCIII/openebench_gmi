@@ -40,4 +40,4 @@ Second, a pipeline has been developed which is splitted in three steps following
 
 ### Containers info
 
-Each step run in its own container. Containers are build using a Dockerfile recipe which makes use of [SCI-F](https://sci-f.github.io/) recipes for software installation. All scif recipes are available in [scif_app_recipes repository](https://github.com/BU-ISCIII/scif_app_recipes). Singularity recipes are also provided (Not yet implemented in nextflow pipeline).
+Each step runs in its own container. Containers are built using a Dockerfile recipe which makes use of [SCI-F](https://sci-f.github.io/) recipes for software installation. All scif recipes are available in [scif_app_recipes repository](https://github.com/BU-ISCIII/scif_app_recipes). Singularity recipes are also provided (Not yet adapted in nextflow pipeline).
