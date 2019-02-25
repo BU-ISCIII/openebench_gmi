@@ -28,7 +28,9 @@ RUN echo "Install basic development tools" && \
 RUN	echo "Installing calculateRobinsonFouldsMetric script" && \
          scif install /opt/calculateRobinsonFouldsMetric_v1.0_centos7.scif
 
-RUN find /scif/apps -maxdepth 2 -name "bin" | xargs -I % echo "ln -s %/* /usr/local/bin/" | bash
+#RUN find /scif/apps -maxdepth 2 -name "bin" | xargs -I % echo "ln -s %/* /usr/local/bin/" | bash
 
 #ENTRYPOINT	["/opt/docker-entrypoint.sh"]
 #CMD [checkTreeFormat.py]
+
+RUN find /scif/apps -maxdepth 2 -name "bin" | while read in; do echo "export PATH=\$PATH:$in" >> /etc/bashrc;done
