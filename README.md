@@ -24,13 +24,13 @@ Second, a pipeline has been developed which is splitted in three steps following
 
 ### Nextflow processes
 **1. Validation and data preprocessing:** 
-  a. *Check results format:* 
-    - Tree input: User input tree format is validated, nexus and newick formats are allowed being newick the canonical format. If format validated, a tree is outputted in the canonical format (.nwk).
-    - VCF input: **TODO**
-  b. *Get query ids:* 
-    - Tree input: ids are extracted for user input tree in newick or nexus format. IDs are writed in: queryids.json 
-  c. *Get result ids:* 
-    - Tree input: ids are extracted from canonical tree format. IDs are writed in resultsids.json
+    a. *Check results format:* 
+        - Tree input: User input tree format is validated, nexus and newick formats are allowed being newick the canonical format. If format validated, a tree is outputted in the canonical format (.nwk).
+        - VCF input: **TODO**
+    b. *Get query ids:* 
+        - Tree input: ids are extracted for user input tree in newick or nexus format. IDs are writed in: queryids.json 
+    c. *Get result ids:* 
+        - Tree input: ids are extracted from canonical tree format. IDs are writed in resultsids.json
 
 **2. Metrics:**
   a. *Robinson-Foulds metric calculation:* Robinson-Foulds test is performed between user tree and gold standard tree in order to compare its topologies. Result value is writed to robinsonfoulds.json
