@@ -228,7 +228,7 @@ process getResultsIds {
   file "*.json" into result_ids_json
 
   """
-  getLeavesFromNewick.py --event_id ${params.testEventId} --tree_file $tree
+  getLeavesFromNewick.py --event_id ${params.event_id} --tree_file $tree
   """
 
 }
