@@ -1,0 +1,6 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	rss	vmem	rchar	wchar
+1	0c/276ac4	13624	dockerPreconditions	COMPLETED	0	2019-02-25 11:40:03.315	26m 12s	26m 12s	33.6%	12.7 MB	314.1 MB	291.1 MB	299.1 MB
+3	45/a2aa35	1714	getQueryIds	COMPLETED	0	2019-02-25 12:06:15.319	7.5s	304ms	0.0%	13.8 MB	104.4 MB	1.4 MB	0
+2	fc/417601	1693	checkResults	COMPLETED	0	2019-02-25 12:06:15.300	10.3s	297ms	0.0%	14 MB	106.9 MB	1.4 MB	0
+5	71/dbab49	2374	RobinsonFouldsMetrics	COMPLETED	0	2019-02-25 12:06:25.621	7.8s	412ms	0.0%	15.7 MB	116.7 MB	1.8 MB	0
+4	eb/45fe20	2392	getResultsIds	COMPLETED	0	2019-02-25 12:06:25.635	9.1s	429ms	0.0%	14.4 MB	113.8 MB	1.5 MB	0
