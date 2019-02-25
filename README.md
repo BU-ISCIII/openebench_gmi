@@ -33,7 +33,7 @@ Second, a pipeline has been developed which is splitted in three steps following
     -Tree input: ids are extracted from canonical tree format. IDs are writed in resultsids.json
 
 **2. Metrics:**
-  1. *Robinson-Foulds metric calculation:* Robinson-Foulds test is performed between user tree and gold standard tree in order to compare its topologies. Result value is writed to robinsonfoulds.json
+  1. *Robinson-Foulds metric calculation:* Robinson-Foulds test is performed between user tree and gold standard tree in order to compare its topologies. Result value is writted to robinsonfoulds.json file.
   
 **3. Data visualization and consolidation:**
   **TODO**
