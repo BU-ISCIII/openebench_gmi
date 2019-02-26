@@ -2,7 +2,7 @@
 
 # Nextflow pipeline using containers for a Outbreak detection challenge using OpenEbench platform
 
-This repository intends to be a nextflow + container implementation of OpenEbench workflow for a Outbreak detection challenge. 
+This repository intends to be a nextflow + container implementation of OpenEbench workflow for an Outbreak detection challenge. 
 ## How to use it
 
 ```Bash
@@ -31,7 +31,7 @@ Other options:
 
 
 ## Datasets
-First of all, needed datasets have been colled in: [datasets folder](datasets)
+First of all, needed datasets have been collected in: [datasets folder](datasets)
 
 1. **Input dataset:** fastq input data obtained from [GMI WGS standards and benchmarks repository](https://github.com/globalmicrobialidentifier-WG3/datasets). [Here](datasets/inputDataset/Readme.me) you can find instructions for download.
 2. **Gold standard dataset:** confirmed phylogeny for the outbreak being investigated.
@@ -39,7 +39,7 @@ First of all, needed datasets have been colled in: [datasets folder](datasets)
 4. **Test dataset:** a test tree for comparing with gold standard result. In this case just the same golden dataset. Robinson-Foulds metrics must be 0.
 
 ## Nextflow pipeline and containers
-Second, a pipeline has been developed which is splitted in three steps following OpenEbench specifications followint this [repo](https://github.com/inab/opeb-submission) as an example:
+Second, a pipeline has been developed which is splitted in three steps following OpenEbench specifications following this [repo](https://github.com/inab/opeb-submission) as an example:
 
 ### Nextflow processes
 1. **Validation and data preprocessing:**
