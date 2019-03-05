@@ -37,7 +37,7 @@ def helpMessage() {
       --tree_test                 Path to input data (must be surrounded with quotes).
       --golden_newick               Path to reference data. Golden dataset.
       --event_id                    Event identifier.
-      --tree_format					Format tree ["nexus","netwick"].
+      --tree_format					Format tree ["nexus","newick"].
 
     Other options:
       --outdir                      The output directory where the results will be saved

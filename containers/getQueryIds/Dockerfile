@@ -33,4 +33,4 @@ RUN	echo "Installing getLeavesFromNewick script" && \
 #ENTRYPOINT	["/opt/docker-entrypoint.sh"]
 #CMD [checkTreeFormat.py]
 
-RUN find /scif/apps -maxdepth 2 -name "bin" | while read in; do echo "export PATH=\$PATH:$in" >> /etc/bashrc;done
+#RUN find /scif/apps -maxdepth 2 -name "bin" | while read in; do echo "export PATH=\$PATH:$in" >> /etc/bashrc;done
