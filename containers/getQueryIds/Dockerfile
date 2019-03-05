@@ -28,6 +28,9 @@ RUN echo "Install basic development tools" && \
 RUN	echo "Installing getLeavesFromNewick script" && \
          scif install /opt/getLeavesFromNewick_v1.0_centos7.scif
 
+ENV PATH /scif/apps/getleavesfromnewick/bin/:$PATH
+
+
 #RUN find /scif/apps -maxdepth 2 -name "bin" | xargs -I % echo "ln -s %/* /usr/local/bin/" | bash
 
 #ENTRYPOINT	["/opt/docker-entrypoint.sh"]
