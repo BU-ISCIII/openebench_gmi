@@ -8,6 +8,8 @@ This repository intends to be a nextflow + container implementation of OpenEbenc
 ```Bash
 git clone https://github.com/BU-ISCIII/openebench_gmi.git
 cd openebench_gmi.git
+git submodule init
+git submodule update
 nextflow run main.nf -profile docker 
 ```
 Parameters available:
