@@ -5,7 +5,7 @@ FROM centos:latest
 # Use a single LABEL (multiple ones are discouraged because each one creates a new layer)
 LABEL	description="Robin foulds calculator from newick file" vendor="ISCIII" version="0.1" maintainer="Sara Monzon <smonzon@isciii.es>"
 
-COPY ./scif_app_recipes/* /opt/
+COPY ./scif_app_recipes /opt/scif_app_recipes
 COPY ./containers/robinsonFouldsMetric/calculateRobinsonFouldsMetric.py /opt/
 
 # First, install all the dependencies needed by the results checking procedure
