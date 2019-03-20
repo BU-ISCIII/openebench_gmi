@@ -52,7 +52,8 @@ if __name__ == '__main__' :
     arguments = ""                        # Arguments from ArgParse
     tree = ""                             # Tree variable
     metrics = {}                          # IDs dictionary
-    metrics_info = {}                     # Leaves list
+    metrics_info1 = {}                     # Leaves list
+    metrics_info2 = {}
 
     # Grab arguments
     arguments = check_arg(sys.argv[1:])
@@ -90,6 +91,7 @@ if __name__ == '__main__' :
     try:
         print("Calculating robin-foulds distance...")
         rf_distance = treecompare.symmetric_difference(tree1, tree2)
+        wrf_distance = treecompare.weighted_robinson_foulds_distance(tree1, tree2)
         print("Calculation of robin-foulds distance failed.")
     except:
         print("Robinson-foulds distance calculation failed.")
@@ -100,8 +102,10 @@ if __name__ == '__main__' :
     #Create ids dictionary with event_id and sample ids from tree leaves.
     try:
         metrics.update(testEventId = arguments.event_id)
-        metrics_info.update(type="metrics",units="none",name="Robinson-Foulds metric",value=rf_distance)
-        metrics.update(metrics = metrics_info)
+        metrics_info1.update(type="metrics",units="none",name="Unweighted Robinson-Foulds metric",value=rf_distance)
+        metrics_info2.update(type="metrics",units="none",name="Weighted Robinson-Foulds metric",value=wrf_distance)
+        metrics.update(metrics = {'x' : metrics_info1, 'y' : metrics_info2 })
+
         print("Successfully extracted ids from tree file.")
     except:
         print("Conversion/printing to newick failed.")

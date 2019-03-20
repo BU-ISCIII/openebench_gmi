@@ -34,7 +34,7 @@ def helpMessage() {
     nextflow run BU-ISCIII/openebench_gmi --tree_test {test.newick.file} --golden_newick {golden.newick.file} --even_id {event.id}
 
     Mandatory arguments:
-      --tree_test                 Path to input data (must be surrounded with quotes).
+      --tree_test                   Path to input data (must be surrounded with quotes).
       --golden_newick               Path to reference data. Golden dataset.
       --event_id                    Event identifier.
       --tree_format					Format tree ["nexus","newick"].

@@ -1,9 +1,17 @@
 {
     "testEventId": "default",
     "metrics": {
-        "type": "metrics",
-        "units": "none",
-        "name": "Robinson-Foulds metric",
-        "value": 0
+        "x": {
+            "type": "metrics",
+            "units": "none",
+            "name": "Unweighted Robinson-Foulds metric",
+            "value": 0
+        },
+        "y": {
+            "type": "metrics",
+            "units": "none",
+            "name": "Weighted Robinson-Foulds metric",
+            "value": 0.0
+        }
     }
 }
