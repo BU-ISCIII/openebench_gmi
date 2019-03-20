@@ -35,8 +35,11 @@ def helpMessage() {
 
     Mandatory arguments:
       --tree_test                   Path to input data (must be surrounded with quotes).
-      --golden_newick               Path to reference data. Golden dataset.
+      --goldstandard_dir            Path to reference data. Golden datasets.
+      --public_ref_dir				Path where public dataset info is stored for validation.
+      --asses_dir					Path where benchmark data is stored.
       --event_id                    Event identifier.
+      --participant_id				Participant identifier.
       --tree_format					Format tree ["nexus","newick"].
 
     Other options:
@@ -67,9 +70,19 @@ if(params.tree_test){
 	if (!tree_test_file.exists()) exit 1, "Input Newick file not found: ${params.tree_test}"
 }
 
-if(params.golden_newick){
-	golden_newick_file = file(params.golden_newick)
-	if (!golden_newick_file.exists()) exit 1, "Input Golden newick file not found: ${params.golden_newick}"
+if(params.goldstandard_dir){
+	goldstandard_dir = Channel.fromPath( params.goldstandard_dir, type: 'dir' )
+	if (!goldstandard_dir.exists()) exit 1, "Input Gold standard path not found: ${params.goldstandard_dir}"
+}
+
+if(params.public_ref_dir){
+	ref_dir = Channel.fromPath( params.public_ref_dir, type: 'dir' )
+	if (!ref_dir.exists()) exit 1, "Input Reference dir path not found: ${params.ref_dir}"
+}
+
+if(params.asses_dir){
+	asses_dir = Channel.fromPath( params.asses_dir, type: 'dir' )
+	if (!asses_dir.exists()) exit 1, "Input Asses dir path not found: ${params.asses_dir}"
 }
 
 params.tree_format = "newick"
@@ -81,11 +94,6 @@ if ( ! (params.tree_format =~ /newick|nexus/) ) {
 * CHECK MANDATORY INPUTS
 */
 
-params.golden_newick = false
-if(! params.golden_newick){
-	exit 1, "Missing golden newick file : $params.golden_newick. Specify path with --golden_newick"
-}
-
 params.tree_test = false
 if(! params.tree_test){
 	exit 1, "Missing tree test file : $params.tree_test. Specify path with --tree_test"
@@ -94,6 +102,11 @@ if(! params.tree_test){
 params.event_id = false
 if(! params.event_id){
 	exit 1, "Missing Event identifier : $params.event_id. Specify path with --event_id"
+}
+
+params.participant_id = false
+if(! params.participant_id){
+	exit 1, "Missing Participant identifier : $params.participant_id. Specify path with --participant_id"
 }
 
 
@@ -105,8 +118,11 @@ log.info " BU-ISCIII/openebench_gmi : OpenEBench pipeline for Outbreak detection
 log.info "========================================="
 def summary = [:]
 summary['Test tree input']   = params.tree_test
-summary['Golden Newick input'] = params.golden_newick
+summary['Goldstandard dir']  = params.goldstandard_dir
+summary['Public ref dir']    = params.public_ref_dir
+summary['Benchmark data dir']  = params.asses_dir
 summary['Event ID']            = params.event_id
+summary['Participant ID']      = params.participant_id
 if(workflow.revision) summary['Pipeline Release'] = workflow.revision
 summary['Current home']        = "$HOME"
 summary['Current user']        = "$USER"
@@ -160,7 +176,6 @@ process dockerPreconditions {
   #docker build -t openebench_gmi/sample-getresultsids:latest -f $baseDir/containers/getResultsIds/Dockerfile $baseDir
   docker build -t openebench_gmi/sample-robinsonfoulds:latest -f $baseDir/containers/robinsonFouldsMetric/Dockerfile $baseDir
   #docker build -t openebench_gmi/sample-consolidate:latest -f $baseDir/containers/consolidateMetrics/Dockerfile $baseDir
-  touch docker_image_dependency
   """
 
 }
@@ -169,7 +184,7 @@ process dockerPreconditions {
 /*
 * The instance generated from this docker file has to check the syntax of the submitted results.
 */
-process checkResults {
+process validateInputFormat {
 
   container 'openebench_gmi/sample-checkresults'
 
@@ -177,7 +192,6 @@ process checkResults {
 
   input:
   file tree from tree_test_file
-  file image_dependency from docker_image_dependency
 
   output:
   file "tree.nwk" into canonical_getresultsids,canonical_robinsonfoulds
@@ -199,7 +213,6 @@ process getQueryIds {
 
   input:
   file tree from tree_test_file
-  file image_dependency from docker_image_dependency
 
 
   output:
@@ -214,21 +227,21 @@ process getQueryIds {
 /*
 * The instance generated from this docker file knows how to extract results ids from the results canonical formats.
 */
-process getResultsIds {
+process ValidateInputIds {
 
   container 'openebench_gmi/sample-getqueryids'
 
   publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
 
   input:
-  file tree from canonical_getresultsids
-  file image_dependency from docker_image_dependency
+  file query_ids from query_ids_json
+  file ref_dir
 
   output:
   file "*.json" into result_ids_json
 
   """
-  getLeavesFromNewick.py --event_id ${params.event_id} --tree_file $tree --output resultsids.json
+  compareIds.py --ids1 $query_ids --ids2 $ref_dir/input_ids.json
   """
 
 }
@@ -245,7 +258,6 @@ process RobinsonFouldsMetrics {
   input:
   file tree1 from canonical_robinsonfoulds
   file tree2 from golden_newick_file
-  file docker_image_dependency
 
   output:
   file "*.json" into metrics_robinsonfoulds_json
