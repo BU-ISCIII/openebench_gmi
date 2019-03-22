@@ -241,7 +241,7 @@ process ValidateInputIds {
   file "*.json" into result_ids_json
 
   """
-  compareIds.py --ids1 $query_ids --ids2 $ref_dir/input_ids.json
+  compareIds.py --ids1 $query_ids --ids2 $ref_dir/inputIDs.json
   """
 
 }
