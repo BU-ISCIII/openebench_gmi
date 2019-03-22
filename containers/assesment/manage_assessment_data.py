@@ -20,71 +20,47 @@ def main(args):
     data_dir = args.benchmark_data
     participant_dir = args.participant_data
     output_dir = args.output
-    
+
     # Assuring the output directory does exist
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    
-    cancer_types_part = get_cancer_types(participant_dir)
-    generate_manifest(data_dir, output_dir, cancer_types_part)
-    
-"""
-	Gets the cancer types from the participant result files
-"""
-def get_cancer_types(participant_dir):
-    cancer_types = {}
-    
-    for result_file in os.listdir(participant_dir):
-        abs_result_file = os.path.join(participant_dir, result_file)
-        if fnmatch.fnmatch(result_file,"*.json") and os.path.isfile(abs_result_file):
-            with io.open(abs_result_file,mode='r',encoding="utf-8") as f:
-                result = json.load(f)
-                cancer_types.setdefault(result['cancer_type'],[]).append((result['toolname'],abs_result_file))
-    
-    return cancer_types
+
+    generate_manifest(data_dir, output_dir)
 
 def generate_manifest(data_dir,output_dir, cancer_types):
 
     info = []
+    participants = []
 
-    for cancer,cancer_participants in cancer_types.items():
-        cancer_dir = os.path.join(output_dir,cancer)
-        
-        participants = []
-        
-        cancer_data_dir = os.path.join(data_dir,cancer)
-        if os.path.isdir(cancer_data_dir):
-            # Transferring the public participants data
-            shutil.copytree(cancer_data_dir,cancer_dir)
-            
-            # Gathering the public participants
-            for public_participant in os.listdir(cancer_dir):
-		part_fullpath = os.path.join(cancer_dir,public_participant)
-                if fnmatch.fnmatch(public_participant,"*.json") and os.path.isfile(part_fullpath):
-                    participants.append(public_participant)
-            
-        # And now, the participants
-        # copytree should have created the directory ... if it run
-        if not os.path.exists(cancer_dir):
-            os.makedirs(cancer_dir)
-        for (participant,abs_result_file) in cancer_participants:
-            rel_new_location = participant + ".json"
-            new_location = os.path.join(cancer_dir, rel_new_location)
-            shutil.copy(abs_result_file,new_location)
-            participants.append(rel_new_location)
-        
-        # Let's draw the assessment charts!
-        print_chart(cancer_dir,participants,cancer, "RAW")
-        print_chart(cancer_dir,participants,cancer, "SQR")
-        print_chart(cancer_dir,participants,cancer, "DIAG")
-        
-        obj = {
-            "id" : cancer,
-            "participants": participants
-        }
-        
-        info.append(obj)
-    
+    if os.path.isdir(data_dir):
+        # Transferring the public participants data
+        shutil.copytree(data_dir,output_dir)
+
+        # Gathering the public participants
+        for public_participant in os.listdir(output_dir):
+            part_fullpath = os.path.join(output_dir,public_participant)
+            if fnmatch.fnmatch(public_participant,"*.json") and os.path.isfile(part_fullpath):
+                participants.append(public_participant)
+
+    # And now, the participants
+    for (participant,abs_result_file) in participants:
+        rel_new_location = participant + ".json"
+        new_location = os.path.join(output_dir, rel_new_location)
+        shutil.copy(abs_result_file,new_location)
+        participants.append(rel_new_location)
+
+    # Let's draw the assessment charts!
+    print_chart(cancer_dir,participants,cancer, "RAW")
+    print_chart(cancer_dir,participants,cancer, "SQR")
+    print_chart(cancer_dir,participants,cancer, "DIAG")
+
+    obj = {
+        "id" : cancer,
+        "participants": participants
+    }
+
+    info.append(obj)
+
     with io.open(os.path.join(output_dir, "Manifest.json"), mode='w', encoding="utf-8") as f:
         jdata = json.dumps(info, f, sort_keys=True, indent=4, separators=(',', ': '))
         f.write(unicode(jdata,"utf-8"))
@@ -135,7 +111,7 @@ def plot_square_quartiles(x_values, means, tools, better, ax, percentile=50):
                 tools_quartiles[tools[i]] = 2
 
     elif better == "top-right":
-        
+
         # add quartile numbers to plot
         plt.text(0.99, 0.85, '1', verticalalignment='top', horizontalalignment='right', transform=ax.transAxes, fontsize=25, alpha=0.2)
         plt.text(0.01, 0.85, '2', verticalalignment='top', horizontalalignment='left', transform=ax.transAxes, fontsize=25, alpha=0.2)
@@ -261,8 +237,8 @@ def print_quartiles_table(tools_quartiles):
     row_names = tools_quartiles.keys()
     quartiles_1 = tools_quartiles.values()
 
-    colnames = ["TOOL", "Quartile"] 
-    celltxt = zip(row_names, quartiles_1) 
+    colnames = ["TOOL", "Quartile"]
+    celltxt = zip(row_names, quartiles_1)
     df = pandas.DataFrame(celltxt)
     vals = df.values
 

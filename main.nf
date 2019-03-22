@@ -291,3 +291,17 @@ process RobinsonFouldsMetrics {
 //
 //}
 //
+
+process manage_assessment_data {
+
+	tag "Performing benchmark assessment and building plots"
+
+	input:
+	file benchmark_data
+	file output from metrics_robinsonfoulds_json
+
+	"""
+	python /app/manage_assessment_data.py -b $benchmark_data -p $output -o $output
+	"""
+
+}
