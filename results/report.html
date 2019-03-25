@@ -1,32 +1,28 @@
 <!DOCTYPE html>
 <!--
-  ~ Copyright (c) 2013-2018, Centre for Genomic Regulation (CRG).
-  ~ Copyright (c) 2013-2018, Paolo Di Tommaso and the respective authors.
+  ~ Copyright 2013-2019, Centre for Genomic Regulation (CRG)
   ~
-  ~   This file is part of 'Nextflow'.
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
   ~
-  ~   Nextflow is free software: you can redistribute it and/or modify
-  ~   it under the terms of the GNU General Public License as published by
-  ~   the Free Software Foundation, either version 3 of the License, or
-  ~   (at your option) any later version.
+  ~     http://www.apache.org/licenses/LICENSE-2.0
   ~
-  ~   Nextflow is distributed in the hope that it will be useful,
-  ~   but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~   GNU General Public License for more details.
-  ~
-  ~   You should have received a copy of the GNU General Public License
-  ~   along with Nextflow.  If not, see <http://www.gnu.org/licenses/>.
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
   -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Nextflow workflow report for run id [nostalgic_poitras]">
+  <meta name="description" content="Nextflow workflow report for run id [cheeky_cajal]">
   <meta name="author" content="Paolo Di Tommaso, Phil Ewels">
   <link rel="icon" type="image/png" href="https://www.nextflow.io/img/favicon.png" />
 
-  <title>[nostalgic_poitras] Nextflow Workflow Report</title>
+  <title>[cheeky_cajal] Nextflow Workflow Report</title>
 
   <style type="text/css">
   /*!
@@ -141,7 +137,7 @@ table.DTCR_clonedTable.dataTable{position:absolute !important;background-color:r
         <li class="nav-item"><a class="nav-link" href="#tasks">Tasks</a></li>
       </ul>
       <span class="navbar-text">
-        [nostalgic_poitras]
+        [cheeky_cajal]
       </span>
     </div>
   </nav>
@@ -150,37 +146,117 @@ table.DTCR_clonedTable.dataTable{position:absolute !important;background-color:r
     <div class="container">
 
       <h1 class="display-3">Nextflow workflow report</h1>
-      <h2 class="text-muted mb-4"><samp>[nostalgic_poitras]</samp> </h2>
+      <h2 class="text-muted mb-4"><samp>[cheeky_cajal]</samp> <em>(resumed run)</em></h2>
 
       
-          <div class="alert alert-success mb-4">
-              Workflow execution completed successfully!
+          <div class="alert alert-danger mb-4">
+              <h4>Workflow execution completed unsuccessfully!</h4>
+              <p>The exit status of the task that caused the workflow execution to fail was: <code>1</code>.</p>
+              <p>The full error message was:</p>
+              <pre>Error executing process > 'dockerPreconditions'
+
+Caused by:
+  Process `dockerPreconditions` terminated with an error exit status (1)
+
+Command executed:
+
+  echo "/home/smonzon/Documents/desarrollo/openebench_gmi"
+  docker build -t openebench_gmi/sample-checkresults:latest -f /home/smonzon/Documents/desarrollo/openebench_gmi/containers/checkFormat/Dockerfile /home/smonzon/Documents/desarrollo/openebench_gmi
+  docker build -t openebench_gmi/sample-getqueryids:latest -f /home/smonzon/Documents/desarrollo/openebench_gmi/containers/getQueryIds/Dockerfile /home/smonzon/Documents/desarrollo/openebench_gmi
+  #docker build -t openebench_gmi/sample-getresultsids:latest -f /home/smonzon/Documents/desarrollo/openebench_gmi/containers/getResultsIds/Dockerfile /home/smonzon/Documents/desarrollo/openebench_gmi
+  docker build -t openebench_gmi/sample-robinsonfoulds:latest -f /home/smonzon/Documents/desarrollo/openebench_gmi/containers/robinsonFouldsMetric/Dockerfile /home/smonzon/Documents/desarrollo/openebench_gmi
+  #docker build -t openebench_gmi/sample-consolidate:latest -f /home/smonzon/Documents/desarrollo/openebench_gmi/containers/consolidateMetrics/Dockerfile /home/smonzon/Documents/desarrollo/openebench_gmi
+  docker build -t openebench_gmi/sample-assessment:latest -f /home/smonzon/Documents/desarrollo/openebench_gmi/containers/assessment/Dockerfile /home/smonzon/Documents/desarrollo/openebench_gmi
+  touch docker_image_dependency
+
+Command exit status:
+  1
+
+Command output:
+  Successfully built 02c4573f9f99
+  Successfully tagged openebench_gmi/sample-checkresults:latest
+  Sending build context to Docker daemon  60.99MB
+  
+  Step 1/7 : FROM centos:latest
+   ---> 1e1148e4cc2c
+  Step 2/7 : LABEL	description="Sample ids extractor" vendor="ISCIII" version="0.1" maintainer="Sara Monzon <smonzon@isciii.es>"
+   ---> Using cache
+   ---> 9edcc869a79a
+  Step 3/7 : COPY ./scif_app_recipes /opt/scif_app_recipes
+   ---> Using cache
+   ---> 458acd22ee03
+  Step 4/7 : COPY ./containers/getQueryIds/getLeavesFromNewick.py /opt/
+   ---> Using cache
+   ---> a696099fa6d9
+  Step 5/7 : RUN echo "Install basic development tools" &&     yum -y groupinstall "Development Tools" &&     yum -y update && yum -y install wget curl &&     echo "Install python2.7 setuptools and pip" &&     yum -y install python-setuptools &&     easy_install pip &&     echo "Installing SCI-F" &&     pip install scif ipython
+   ---> Using cache
+   ---> 4b648ebfa6cc
+  Step 6/7 : RUN	echo "Installing getLeavesFromNewick script" &&          scif install /opt/scif_app_recipes/getLeavesFromNewick_v1.0_centos7.scif
+   ---> Using cache
+   ---> c7bc1d758db8
+  Step 7/7 : ENV PATH /scif/apps/getleavesfromnewick/bin/:$PATH
+   ---> Using cache
+   ---> 4ec1349ce7a4
+  Successfully built 4ec1349ce7a4
+  Successfully tagged openebench_gmi/sample-getqueryids:latest
+  Sending build context to Docker daemon  60.99MB
+  
+  Step 1/7 : FROM centos:latest
+   ---> 1e1148e4cc2c
+  Step 2/7 : LABEL	description="Robin foulds calculator from newick file" vendor="ISCIII" version="0.1" maintainer="Sara Monzon <smonzon@isciii.es>"
+   ---> Using cache
+   ---> 172b0ef9b4d4
+  Step 3/7 : COPY ./scif_app_recipes /opt/scif_app_recipes
+   ---> Using cache
+   ---> 5ed6502b6a37
+  Step 4/7 : COPY ./containers/robinsonFouldsMetric/calculateRobinsonFouldsMetric.py /opt/
+   ---> Using cache
+   ---> 2b5ef4bfb44d
+  Step 5/7 : RUN echo "Install basic development tools" &&     yum -y groupinstall "Development Tools" &&     yum -y update && yum -y install wget curl &&     echo "Install python2.7 setuptools and pip" &&     yum -y install python-setuptools &&     easy_install pip &&     echo "Installing SCI-F" &&     pip install scif ipython
+   ---> Using cache
+   ---> 969d253932fa
+  Step 6/7 : RUN	echo "Installing calculateRobinsonFouldsMetric script" &&          scif install /opt/scif_app_recipes/calculateRobinsonFouldsMetric_v1.0_centos7.scif
+   ---> Using cache
+   ---> d6a527c9434b
+  Step 7/7 : ENV PATH /scif/apps/calculaterobinsonfouldsmetric/bin:$PATH
+   ---> Using cache
+   ---> 2f3c06475702
+  Successfully built 2f3c06475702
+  Successfully tagged openebench_gmi/sample-robinsonfoulds:latest
+
+Command error:
+  unable to prepare context: unable to evaluate symlinks in Dockerfile path: lstat /home/smonzon/Documents/desarrollo/openebench_gmi/containers/assessment: no such file or directory
+
+Work dir:
+  /home/smonzon/Documents/desarrollo/openebench_gmi/work/02/b198044503e8f1e028013935bdd53e
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`</pre>
           </div>
       
 
       <dl>
         <dt>Run times</dt>
         <dd>
-          <span id="workflow_start">Mon Feb 25 11:40:01 CET 2019</span> - <span id="workflow_complete">Mon Feb 25 12:06:34 CET 2019</span>
-          (<span id="completed_fromnow"></span>duration: <strong>26m 33s</strong>)
+          <span id="workflow_start">Mon Mar 25 12:12:42 CET 2019</span> - <span id="workflow_complete">Mon Mar 25 12:12:48 CET 2019</span>
+          (<span id="completed_fromnow"></span>duration: <strong>6.4s</strong>)
         </dd>
 
         <dl>
           <div class="progress" style="height: 1.6rem; margin: 1.2rem auto; border-radius: 0.20rem;">
-            <div style="width: 100.0%" class="progress-bar bg-success" data-toggle="tooltip" data-placement="top" title="5 tasks succeeded"><span class="text-truncate">&nbsp; 5 succeeded &nbsp;</span></div>
+            <div style="width: 0.0%" class="progress-bar bg-success" data-toggle="tooltip" data-placement="top" title="0 tasks succeeded"><span class="text-truncate">&nbsp; 0 succeeded &nbsp;</span></div>
             <div style="width: 0.0%" class="progress-bar bg-secondary" data-toggle="tooltip" data-placement="top" title="0 tasks were cached"><span class="text-truncate">&nbsp; 0 cached &nbsp;</span></div>
             <div style="width: 0.0%" class="progress-bar bg-warning" data-toggle="tooltip" data-placement="top" title="0 tasks reported and error and were ignored"><span class="text-truncate">&nbsp; 0 ignored &nbsp;</span></div>
-            <div style="width: 0.0%" class="progress-bar bg-danger" data-toggle="tooltip" data-placement="top" title="0 tasks failed"><span class="text-truncate">&nbsp; 0 failed &nbsp;</span></div>
+            <div style="width: 100.0%" class="progress-bar bg-danger" data-toggle="tooltip" data-placement="top" title="1 tasks failed"><span class="text-truncate">&nbsp; 1 failed &nbsp;</span></div>
           </div>
         </dl>
 
         <dt>Nextflow command</dt>
-        <dd><pre class="nfcommand"><code>nextflow run main.nf --event_id test -profile docker -resume</code></pre></dd>
+        <dd><pre class="nfcommand"><code>nextflow run main.nf -profile docker -resume</code></pre></dd>
       </dl>
 
       <dl class="row small">
         <dt class="col-sm-3">CPU-Hours</dt>
-        <dd class="col-sm-9"><samp>0.4</samp></dd>
+        <dd class="col-sm-9"><samp>(a few seconds)</samp></dd>
 
         <dt class="col-sm-3">Launch directory</dt>
         <dd class="col-sm-9"><samp>/home/smonzon/Documents/desarrollo/openebench_gmi</samp></dd>
@@ -198,11 +274,11 @@ table.DTCR_clonedTable.dataTable{position:absolute !important;background-color:r
 
         
           <dt class="col-sm-3">Script ID</dt>
-          <dd class="col-sm-9"><code>4a4b41d81d4268cf9ec9cebd720e7964</code></dd>
+          <dd class="col-sm-9"><code>6b9ff397a830ca057e9c12b03172c0a9</code></dd>
         
 
         <dt class="col-sm-3">Workflow session</dt>
-        <dd class="col-sm-9"><code>c3d1729b-cdbf-4304-b4ff-203a72cb4fb9</code></dd>
+        <dd class="col-sm-9"><code>30abb650-8b87-4818-af9c-6d7b57355075</code></dd>
 
         
 
@@ -212,7 +288,7 @@ table.DTCR_clonedTable.dataTable{position:absolute !important;background-color:r
         
 
         <dt class="col-sm-3">Nextflow version</dt>
-        <dd class="col-sm-9">version 0.29.0, build 4803 (24-04-2018 08:09 UTC)</dd>
+        <dd class="col-sm-9">version 19.01.0, build 5050 (22-01-2019 11:19 UTC)</dd>
       </dl>
     </div>
   </div>
@@ -333,7 +409,7 @@ table.DTCR_clonedTable.dataTable{position:absolute !important;background-color:r
 
   <footer>
     <div class="container-fluid">
-      Generated by <a href="https://www.nextflow.io" target="_blank">Nextflow</a>, version 0.29.0
+      Generated by <a href="https://www.nextflow.io" target="_blank">Nextflow</a>, version 19.01.0
     </div>
   </footer>
 
@@ -984,7 +1060,7 @@ $(function() {
 
   // Nextflow report data
   window.data = { "trace":[
-{"task_id":"1","hash":"0c\/276ac4","native_id":"13624","process":"dockerPreconditions","module":"-","container":"-","tag":"-","name":"dockerPreconditions","status":"COMPLETED","exit":"0","submit":"1551091203315","start":"1551091203361","complete":"1551092775190","duration":"1571875","realtime":"1571757","%cpu":"33.6","%mem":"0.0","rss":"13320192","vmem":"329367552","peak_rss":"13320192","peak_vmem":"372154368","rchar":"305268686","wchar":"313595343","syscr":"31596","syscw":"25119","read_bytes":"8192","write_bytes":"0","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/0c\/276ac43d46f1be9d85d409dac1145a","script":"\n  echo \"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\"\n  docker build -t openebench_gmi\/sample-checkresults:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/checkFormat\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-getqueryids:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/getQueryIds\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  #docker build -t openebench_gmi\/sample-getresultsids:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/getResultsIds\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-robinsonfoulds:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/robinsonFouldsMetric\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  #docker build -t openebench_gmi\/sample-consolidate:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/consolidateMetrics\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  touch docker_image_dependency\n  ","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"-"},{"task_id":"2","hash":"fc\/417601","native_id":"1693","process":"checkResults","module":"-","container":"openebench_gmi\/sample-checkresults","tag":"-","name":"checkResults","status":"COMPLETED","exit":"0","submit":"1551092775300","start":"1551092775390","complete":"1551092785603","duration":"10303","realtime":"297","%cpu":"0.0","%mem":"0.0","rss":"14667776","vmem":"112107520","peak_rss":"15020032","peak_vmem":"117170176","rchar":"1481106","wchar":"0","syscr":"280","syscw":"0","read_bytes":"11788288","write_bytes":"0","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/fc\/4176019dfdaab4b9dd9ae52a586a62","script":"\n  checkTreeFormat.py --tree_file test.tre --tree_format newick\n  ","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"-"},{"task_id":"3","hash":"45\/a2aa35","native_id":"1714","process":"getQueryIds","module":"-","container":"openebench_gmi\/sample-getqueryids","tag":"-","name":"getQueryIds","status":"COMPLETED","exit":"0","submit":"1551092775319","start":"1551092775394","complete":"1551092782827","duration":"7508","realtime":"304","%cpu":"0.0","%mem":"0.0","rss":"14512128","vmem":"109522944","peak_rss":"14684160","peak_vmem":"114302976","rchar":"1511420","wchar":"0","syscr":"280","syscw":"0","read_bytes":"11046912","write_bytes":"0","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/45\/a2aa350b056d85d4e1b211d7e20edb","script":"\n  getLeavesFromNewick.py --event_id test --tree_file test.tre --tree_format newick --output queryids.json\n  ","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"-"},{"task_id":"5","hash":"71\/dbab49","native_id":"2374","process":"RobinsonFouldsMetrics","module":"-","container":"openebench_gmi\/sample-robinsonfoulds","tag":"-","name":"RobinsonFouldsMetrics","status":"COMPLETED","exit":"0","submit":"1551092785621","start":"1551092785703","complete":"1551092793402","duration":"7781","realtime":"412","%cpu":"0.0","%mem":"0.0","rss":"16457728","vmem":"122400768","peak_rss":"16871424","peak_vmem":"122847232","rchar":"1862548","wchar":"0","syscr":"328","syscw":"0","read_bytes":"11722752","write_bytes":"0","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/71\/dbab492c6699606a41d41fb4b45a83","script":"\n  calculateRobinsonFouldsMetric.py --tree_file1 tree.nwk --tree_file2 SIM-Sbareilly.tre\n  ","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"-"},{"task_id":"4","hash":"eb\/45fe20","native_id":"2392","process":"getResultsIds","module":"-","container":"openebench_gmi\/sample-getqueryids","tag":"-","name":"getResultsIds","status":"COMPLETED","exit":"0","submit":"1551092785635","start":"1551092785707","complete":"1551092794730","duration":"9095","realtime":"429","%cpu":"0.0","%mem":"0.0","rss":"15147008","vmem":"119300096","peak_rss":"15429632","peak_vmem":"119762944","rchar":"1571721","wchar":"0","syscr":"297","syscw":"0","read_bytes":"11575296","write_bytes":"0","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/eb\/45fe20db46e1b7bc05eff8e8f26146","script":"\n  getLeavesFromNewick.py --event_id test --tree_file tree.nwk --output resultsids.json\n  ","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"-"}], "summary":{"getResultsIds":{"cpu":null,"mem":{"mean":119300096,"min":119300096,"q1":119300096,"q2":119300096,"q3":119300096,"max":119300096,"minLabel":"getResultsIds","maxLabel":"getResultsIds","q1Label":"getResultsIds","q2Label":"getResultsIds","q3Label":"getResultsIds"},"time":{"mean":429,"min":429,"q1":429,"q2":429,"q3":429,"max":429,"minLabel":"getResultsIds","maxLabel":"getResultsIds","q1Label":"getResultsIds","q2Label":"getResultsIds","q3Label":"getResultsIds"},"reads":{"mean":11575296,"min":11575296,"q1":11575296,"q2":11575296,"q3":11575296,"max":11575296,"minLabel":"getResultsIds","maxLabel":"getResultsIds","q1Label":"getResultsIds","q2Label":"getResultsIds","q3Label":"getResultsIds"},"writes":null,"cpuUsage":null,"memUsage":null,"timeUsage":null},"RobinsonFouldsMetrics":{"cpu":null,"mem":{"mean":122400768,"min":122400768,"q1":122400768,"q2":122400768,"q3":122400768,"max":122400768,"minLabel":"RobinsonFouldsMetrics","maxLabel":"RobinsonFouldsMetrics","q1Label":"RobinsonFouldsMetrics","q2Label":"RobinsonFouldsMetrics","q3Label":"RobinsonFouldsMetrics"},"time":{"mean":412,"min":412,"q1":412,"q2":412,"q3":412,"max":412,"minLabel":"RobinsonFouldsMetrics","maxLabel":"RobinsonFouldsMetrics","q1Label":"RobinsonFouldsMetrics","q2Label":"RobinsonFouldsMetrics","q3Label":"RobinsonFouldsMetrics"},"reads":{"mean":11722752,"min":11722752,"q1":11722752,"q2":11722752,"q3":11722752,"max":11722752,"minLabel":"RobinsonFouldsMetrics","maxLabel":"RobinsonFouldsMetrics","q1Label":"RobinsonFouldsMetrics","q2Label":"RobinsonFouldsMetrics","q3Label":"RobinsonFouldsMetrics"},"writes":null,"cpuUsage":null,"memUsage":null,"timeUsage":null},"dockerPreconditions":{"cpu":{"mean":33.6,"min":33.6,"q1":33.6,"q2":33.6,"q3":33.6,"max":33.6,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"mem":{"mean":329367552,"min":329367552,"q1":329367552,"q2":329367552,"q3":329367552,"max":329367552,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"time":{"mean":1571757,"min":1571757,"q1":1571757,"q2":1571757,"q3":1571757,"max":1571757,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"reads":{"mean":8192,"min":8192,"q1":8192,"q2":8192,"q3":8192,"max":8192,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"writes":null,"cpuUsage":{"mean":33.6,"min":33.6,"q1":33.6,"q2":33.6,"q3":33.6,"max":33.6,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"memUsage":null,"timeUsage":null},"checkResults":{"cpu":null,"mem":{"mean":112107520,"min":112107520,"q1":112107520,"q2":112107520,"q3":112107520,"max":112107520,"minLabel":"checkResults","maxLabel":"checkResults","q1Label":"checkResults","q2Label":"checkResults","q3Label":"checkResults"},"time":{"mean":297,"min":297,"q1":297,"q2":297,"q3":297,"max":297,"minLabel":"checkResults","maxLabel":"checkResults","q1Label":"checkResults","q2Label":"checkResults","q3Label":"checkResults"},"reads":{"mean":11788288,"min":11788288,"q1":11788288,"q2":11788288,"q3":11788288,"max":11788288,"minLabel":"checkResults","maxLabel":"checkResults","q1Label":"checkResults","q2Label":"checkResults","q3Label":"checkResults"},"writes":null,"cpuUsage":null,"memUsage":null,"timeUsage":null},"getQueryIds":{"cpu":null,"mem":{"mean":109522944,"min":109522944,"q1":109522944,"q2":109522944,"q3":109522944,"max":109522944,"minLabel":"getQueryIds","maxLabel":"getQueryIds","q1Label":"getQueryIds","q2Label":"getQueryIds","q3Label":"getQueryIds"},"time":{"mean":304,"min":304,"q1":304,"q2":304,"q3":304,"max":304,"minLabel":"getQueryIds","maxLabel":"getQueryIds","q1Label":"getQueryIds","q2Label":"getQueryIds","q3Label":"getQueryIds"},"reads":{"mean":11046912,"min":11046912,"q1":11046912,"q2":11046912,"q3":11046912,"max":11046912,"minLabel":"getQueryIds","maxLabel":"getQueryIds","q1Label":"getQueryIds","q2Label":"getQueryIds","q3Label":"getQueryIds"},"writes":null,"cpuUsage":null,"memUsage":null,"timeUsage":null}} };
+{"task_id":"1","hash":"02\/b19804","native_id":"9816","process":"dockerPreconditions","module":"-","container":"-","tag":"-","name":"dockerPreconditions","status":"FAILED","exit":"1","submit":"1553512363142","start":"1553512363197","complete":"1553512368633","duration":"5491","realtime":"2492","%cpu":"34.5","%mem":"0.2","rss":"57479168","vmem":"1161478144","peak_rss":"57479168","peak_vmem":"1161478144","rchar":"32728227","wchar":"33010134","syscr":"1607","syscw":"3197","read_bytes":"0","write_bytes":"0","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/02\/b198044503e8f1e028013935bdd53e","script":"\n  echo \"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\"\n  docker build -t openebench_gmi\/sample-checkresults:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/checkFormat\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-getqueryids:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/getQueryIds\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  #docker build -t openebench_gmi\/sample-getresultsids:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/getResultsIds\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-robinsonfoulds:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/robinsonFouldsMetric\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  #docker build -t openebench_gmi\/sample-consolidate:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/consolidateMetrics\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-assessment:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/assessment\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  touch docker_image_dependency\n  ","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"TERMINATE"}], "summary":{"dockerPreconditions":{"cpu":{"mean":34.5,"min":34.5,"q1":34.5,"q2":34.5,"q3":34.5,"max":34.5,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"mem":{"mean":1161478144,"min":1161478144,"q1":1161478144,"q2":1161478144,"q3":1161478144,"max":1161478144,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"time":{"mean":2492,"min":2492,"q1":2492,"q2":2492,"q3":2492,"max":2492,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"reads":null,"writes":null,"cpuUsage":{"mean":34.5,"min":34.5,"q1":34.5,"q2":34.5,"q3":34.5,"max":34.5,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"memUsage":null,"timeUsage":null}} };
 
   </script>
 

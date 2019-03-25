@@ -26,7 +26,7 @@ RUN echo "Install basic development tools" && \
 # the canonical format whether worked or failed
 
 RUN	echo "Installing getLeavesFromNewick script" && \
-         scif install /opt/getLeavesFromNewick_v1.0_centos7.scif
+         scif install /opt/scif_app_recipes/getLeavesFromNewick_v1.0_centos7.scif
 
 ENV PATH /scif/apps/getleavesfromnewick/bin/:$PATH
 

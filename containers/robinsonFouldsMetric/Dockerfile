@@ -26,7 +26,7 @@ RUN echo "Install basic development tools" && \
 # the canonical format whether worked or failed
 
 RUN	echo "Installing calculateRobinsonFouldsMetric script" && \
-         scif install /opt/calculateRobinsonFouldsMetric_v1.0_centos7.scif
+         scif install /opt/scif_app_recipes/calculateRobinsonFouldsMetric_v1.0_centos7.scif
 
 ENV PATH /scif/apps/calculaterobinsonfouldsmetric/bin:$PATH
 #RUN find /scif/apps -maxdepth 2 -name "bin" | xargs -I % echo "ln -s %/* /usr/local/bin/" | bash

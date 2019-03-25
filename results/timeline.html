@@ -1,22 +1,18 @@
 <!doctype html>
 <!--
-  ~ Copyright (c) 2013-2018, Centre for Genomic Regulation (CRG).
-  ~ Copyright (c) 2013-2018, Paolo Di Tommaso and the respective authors.
+  ~ Copyright 2013-2019, Centre for Genomic Regulation (CRG)
   ~
-  ~   This file is part of 'Nextflow'.
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
   ~
-  ~   Nextflow is free software: you can redistribute it and/or modify
-  ~   it under the terms of the GNU General Public License as published by
-  ~   the Free Software Foundation, either version 3 of the License, or
-  ~   (at your option) any later version.
+  ~     http://www.apache.org/licenses/LICENSE-2.0
   ~
-  ~   Nextflow is distributed in the hope that it will be useful,
-  ~   but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~   GNU General Public License for more details.
-  ~
-  ~   You should have received a copy of the GNU General Public License
-  ~   along with Nextflow.  If not, see <http://www.gnu.org/licenses/>.
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
   -->
 
 <html>
@@ -82,15 +78,11 @@ function c0(index) { return "#9c9c9c"; }
 function c1(index) { return "#bdbdbd"; }
 function c2(index) { return colors[index % 16]; } // <-- note: uses only the first 16 colors
 
-var elapsed="26m 34s"
-var beginningMillis=1551091201839;
-var endingMillis=1551092795727;
+var elapsed="7.4s"
+var beginningMillis=1553512362399;
+var endingMillis=1553512369758;
 var data=[
-{"label": "dockerPreconditions", "times": [{"starting_time": 1551091203315, "ending_time": 1551091203361, "color":c1(0)}, {"starting_time": 1551091203361, "ending_time": 1551092775118, "color":c2(0), "label": "26m 12s \/ 314.1 MB"}, {"starting_time": 1551092775118, "ending_time": 1551092775190, "color":c1(0)}]},
-{"label": "checkResults", "times": [{"starting_time": 1551092775300, "ending_time": 1551092775390, "color":c1(1)}, {"starting_time": 1551092775390, "ending_time": 1551092775687, "color":c2(1), "label": "10.3s \/ 106.9 MB"}, {"starting_time": 1551092775687, "ending_time": 1551092785603, "color":c1(1)}]},
-{"label": "getQueryIds", "times": [{"starting_time": 1551092775319, "ending_time": 1551092775394, "color":c1(2)}, {"starting_time": 1551092775394, "ending_time": 1551092775698, "color":c2(2), "label": "7.5s \/ 104.4 MB"}, {"starting_time": 1551092775698, "ending_time": 1551092782827, "color":c1(2)}]},
-{"label": "RobinsonFouldsMetrics", "times": [{"starting_time": 1551092785621, "ending_time": 1551092785703, "color":c1(3)}, {"starting_time": 1551092785703, "ending_time": 1551092786115, "color":c2(3), "label": "7.8s \/ 116.7 MB"}, {"starting_time": 1551092786115, "ending_time": 1551092793402, "color":c1(3)}]},
-{"label": "getResultsIds", "times": [{"starting_time": 1551092785635, "ending_time": 1551092785707, "color":c1(4)}, {"starting_time": 1551092785707, "ending_time": 1551092786136, "color":c2(4), "label": "9.1s \/ 113.8 MB"}, {"starting_time": 1551092786136, "ending_time": 1551092794730, "color":c1(4)}]}
+{"label": "dockerPreconditions", "times": [{"starting_time": 1553512363142, "ending_time": 1553512363197, "color":c1(0)}, {"starting_time": 1553512363197, "ending_time": 1553512365689, "color":c2(0), "label": "5.5s \/ 1.1 GB"}, {"starting_time": 1553512365689, "ending_time": 1553512368633, "color":c1(0)}]}
 ]
 
 

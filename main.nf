@@ -71,18 +71,18 @@ if(params.tree_test){
 }
 
 if(params.goldstandard_dir){
-	goldstandard_dir = Channel.fromPath( params.goldstandard_dir, type: 'dir' )
-	if (!goldstandard_dir.exists()) exit 1, "Input Gold standard path not found: ${params.goldstandard_dir}"
+	goldstandard_dir = Channel.fromPath( params.goldstandard_dir, type: 'dir',checkIfExists:true )
+	//if (!goldstandard_dir.exists()) exit 1, "Input Gold standard path not found: ${params.goldstandard_dir}"
 }
 
 if(params.public_ref_dir){
-	ref_dir = Channel.fromPath( params.public_ref_dir, type: 'dir' )
-	if (!ref_dir.exists()) exit 1, "Input Reference dir path not found: ${params.ref_dir}"
+	ref_dir = Channel.fromPath( params.public_ref_dir, type: 'dir' ,checkIfExists:true)
+	//if (!ref_dir.exists()) exit 1, "Input Reference dir path not found: ${params.ref_dir}"
 }
 
 if(params.asses_dir){
-	asses_dir = Channel.fromPath( params.asses_dir, type: 'dir' )
-	if (!asses_dir.exists()) exit 1, "Input Asses dir path not found: ${params.asses_dir}"
+	asses_dir = Channel.fromPath( params.asses_dir, type: 'dir' ,checkIfExists:true)
+	//if (!asses_dir.exists()) exit 1, "Input Asses dir path not found: ${params.asses_dir}"
 }
 
 params.tree_format = "newick"
@@ -176,6 +176,8 @@ process dockerPreconditions {
   #docker build -t openebench_gmi/sample-getresultsids:latest -f $baseDir/containers/getResultsIds/Dockerfile $baseDir
   docker build -t openebench_gmi/sample-robinsonfoulds:latest -f $baseDir/containers/robinsonFouldsMetric/Dockerfile $baseDir
   #docker build -t openebench_gmi/sample-consolidate:latest -f $baseDir/containers/consolidateMetrics/Dockerfile $baseDir
+  docker build -t openebench_gmi/sample-assessment:latest -f $baseDir/containers/assessment/Dockerfile $baseDir
+  touch docker_image_dependency
   """
 
 }
@@ -192,6 +194,7 @@ process validateInputFormat {
 
   input:
   file tree from tree_test_file
+  file docker_image_dependency
 
   output:
   file "tree.nwk" into canonical_getresultsids,canonical_robinsonfoulds
@@ -212,7 +215,7 @@ process getQueryIds {
   publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
 
   input:
-  file tree from tree_test_file
+  file tree from canonical_getresultsids
 
 
   output:
@@ -229,7 +232,7 @@ process getQueryIds {
 */
 process ValidateInputIds {
 
-  #container 'openebench_gmi/sample-getqueryids'
+  //container 'openebench_gmi/sample-getqueryids'
 
   publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
 
@@ -238,7 +241,6 @@ process ValidateInputIds {
   file ref_dir
 
   output:
-  file "*.json" into result_ids_json
 
   """
   #compareIds.py --ids1 $query_ids --ids2 $ref_dir/inputIDs.json
@@ -258,13 +260,13 @@ process RobinsonFouldsMetrics {
 
   input:
   file tree1 from canonical_robinsonfoulds
-  file tree2 from golden_newick_file
+  file gold_dir from goldstandard_dir
 
   output:
   file "*.json" into metrics_robinsonfoulds_json
 
   """
-  calculateRobinsonFouldsMetric.py --tree_file1 $tree1 --tree_file2 $tree2 -e ${params.even_id} -p ${params.participant_id} -o ${params.participant_id}"_robinsonfoulds.json"
+  calculateRobinsonFouldsMetric.py --tree_file1 $tree1 --tree_file2 $gold_dir/SIM-Sbareilly.tre -e ${params.event_id} -p ${params.participant_id} -o ${params.participant_id}".json"
   """
 
 }
@@ -294,15 +296,15 @@ process RobinsonFouldsMetrics {
 //
 
 process manage_assessment_data {
-
+	container = "openebench_gmi/sample-assessment:latest"
 	tag "Performing benchmark assessment and building plots"
 
 	input:
-	file benchmark_data
-	file output from metrics_robinsonfoulds_json
+	file asses_dir
+	file participant_result from metrics_robinsonfoulds_json
 
 	"""
-	python /app/manage_assessment_data.py -b $benchmark_data -p $output -o $output
+	python /app/manage_assessment_data.py -b $asses_dir -p ${params.outdir} -o ${params.outdir}
 	"""
 
 }

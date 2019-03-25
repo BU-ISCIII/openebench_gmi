@@ -26,7 +26,7 @@ RUN echo "Install basic development tools" && \
 # the canonical format whether worked or failed
 
 RUN	echo "Installing checkTreeFormat script" && \
-         scif install /opt/checkTreeFormat_v1.0_centos7.scif
+         scif install /opt/scif_app_recipes/checkTreeFormat_v1.0_centos7.scif
 
 ENV PATH /scif/apps/checktreeformat/bin:$PATH
 

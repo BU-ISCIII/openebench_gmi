@@ -1,50 +1,38 @@
-digraph DAG {
-p0 [label="dockerPreconditions"];
-p2 [label="checkResults"];
-p0 -> p2 [label="docker_image_dependency"];
+digraph "DAG" {
+p0 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p8 [label="RobinsonFouldsMetrics"];
+p0 -> p8 [label="goldstandard_dir"];
 
-p1 [shape=point,label="",fixedsize=true,width=0.1];
-p2 [label="checkResults"];
-p1 -> p2 [label="tree"];
+p1 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p7 [label="ValidateInputIds"];
+p1 -> p7 [label="ref_dir"];
 
-p2 [label="checkResults"];
-p6 [label="getResultsIds"];
-p2 -> p6 [label="canonical_getresultsids"];
+p2 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p9 [label="manage_assessment_data"];
+p2 -> p9 [label="asses_dir"];
 
-p2 [label="checkResults"];
-p9 [label="RobinsonFouldsMetrics"];
-p2 -> p9 [label="canonical_robinsonfoulds"];
+p3 [label="dockerPreconditions"];
+p5 [label="validateInputFormat"];
+p3 -> p5 [label="docker_image_dependency"];
 
-p3 [shape=point,label="",fixedsize=true,width=0.1];
-p4 [label="getQueryIds"];
-p3 -> p4 [label="tree"];
+p4 [shape=point,label="",fixedsize=true,width=0.1];
+p5 [label="validateInputFormat"];
+p4 -> p5 [label="tree"];
 
-p0 [label="dockerPreconditions"];
-p4 [label="getQueryIds"];
-p0 -> p4 [label="docker_image_dependency"];
+p5 [label="validateInputFormat"];
+p6 [label="getQueryIds"];
+p5 -> p6 [label="canonical_getresultsids"];
 
-p4 [label="getQueryIds"];
-p5 [shape=point];
-p4 -> p5 [label="query_ids_json"];
+p5 [label="validateInputFormat"];
+p8 [label="RobinsonFouldsMetrics"];
+p5 -> p8 [label="canonical_robinsonfoulds"];
 
-p0 [label="dockerPreconditions"];
-p6 [label="getResultsIds"];
-p0 -> p6 [label="docker_image_dependency"];
+p6 [label="getQueryIds"];
+p7 [label="ValidateInputIds"];
+p6 -> p7 [label="query_ids_json"];
 
-p6 [label="getResultsIds"];
-p7 [shape=point];
-p6 -> p7 [label="result_ids_json"];
-
-p8 [shape=point,label="",fixedsize=true,width=0.1];
-p9 [label="RobinsonFouldsMetrics"];
-p8 -> p9 [label="tree2"];
-
-p0 [label="dockerPreconditions"];
-p9 [label="RobinsonFouldsMetrics"];
-p0 -> p9 [label="docker_image_dependency"];
-
-p9 [label="RobinsonFouldsMetrics"];
-p10 [shape=point];
-p9 -> p10 [label="metrics_robinsonfoulds_json"];
+p8 [label="RobinsonFouldsMetrics"];
+p9 [label="manage_assessment_data"];
+p8 -> p9 [label="metrics_robinsonfoulds_json"];
 
 }
