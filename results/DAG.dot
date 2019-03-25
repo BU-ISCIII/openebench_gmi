@@ -35,4 +35,8 @@ p8 [label="RobinsonFouldsMetrics"];
 p9 [label="manage_assessment_data"];
 p8 -> p9 [label="metrics_robinsonfoulds_json"];
 
+p9 [label="manage_assessment_data"];
+p10 [shape=point];
+p9 -> p10 [label="benchmark_result"];
+
 }

@@ -18,16 +18,16 @@ def main(args):
 
     # input parameters
     data_dir = args.benchmark_data
-    participant_dir = args.participant_data
+    participant_data = args.participant_data
     output_dir = args.output
 
-    # Assuring the output directory does exist
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+    # Copying participant data to benchmark_data
+    if os.path.isfile(participant_data):
+        shutil.copy(participant_data,data_dir)
 
     generate_manifest(data_dir, output_dir)
 
-def generate_manifest(data_dir,output_dir, cancer_types):
+def generate_manifest(data_dir,output_dir):
 
     info = []
     participants = []
@@ -43,11 +43,11 @@ def generate_manifest(data_dir,output_dir, cancer_types):
                 participants.append(public_participant)
 
     # And now, the participants
-    for (participant,abs_result_file) in participants:
-        rel_new_location = participant + ".json"
-        new_location = os.path.join(output_dir, rel_new_location)
-        shutil.copy(abs_result_file,new_location)
-        participants.append(rel_new_location)
+#     for (participant,abs_result_file) in participants:
+#         rel_new_location = participant + ".json"
+#         new_location = os.path.join(output_dir, rel_new_location)
+#         shutil.copy(abs_result_file,new_location)
+#         participants.append(rel_new_location)
 
     # Let's draw the assessment charts!
     print_chart(output_dir,participants,"RAW")
@@ -55,7 +55,7 @@ def generate_manifest(data_dir,output_dir, cancer_types):
     print_chart(output_dir,participants,"DIAG")
 
     obj = {
-        "id" : cancer,
+        "id" : "gmi",
         "participants": participants
     }
 
@@ -268,12 +268,12 @@ def print_chart(output_dir, participants, classification_type):
     x_values = []
     y_values = []
     for participant_file in participants:
-        abs_participant_file = os.path.join(cancer_dir,participant_file)
+        abs_participant_file = os.path.join(output_dir,participant_file)
         with io.open(abs_participant_file,mode='r',encoding="utf-8") as f:
             result = json.load(f)
             tools.append(result['participant_id'])
             x_values.append(result['metrics']['x']['value'])
-            y_values.append(result['metrics]']['y']['value'])
+            y_values.append(result['metrics']['y']['value'])
 
     ax = plt.subplot()
     for i, val in enumerate(tools, 0):
@@ -363,7 +363,7 @@ def print_chart(output_dir, participants, classification_type):
         tools_quartiles = plot_diagonal_quartiles(x_values, y_values, tools, better)
         print_quartiles_table(tools_quartiles)
 
-    outname = os.path.join(cancer_dir,cancer_type + "_benchmark_" + classification_type + ".svg")
+    outname = os.path.join(output_dir,"benchmark_gmi_" + classification_type + ".svg")
     fig = plt.gcf()
     fig.set_size_inches(18.5, 10.5)
     fig.savefig(outname, dpi=100)

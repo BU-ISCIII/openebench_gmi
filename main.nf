@@ -299,12 +299,16 @@ process manage_assessment_data {
 	container = "openebench_gmi/sample-assessment:latest"
 	tag "Performing benchmark assessment and building plots"
 
+  	publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
+
 	input:
 	file assess_dir
 	file participant_result from metrics_robinsonfoulds_json
+	output:
+	file benchmark_result
 
 	"""
-	python /app/manage_assessment_data.py -b $assess_dir -p ${params.outdir} -o ${params.outdir}
+	python /app/manage_assessment_data.py -b $assess_dir -p $participant_result -o benchmark_result
 	"""
 
 }
