@@ -37,7 +37,7 @@ def helpMessage() {
       --tree_test                   Path to input data (must be surrounded with quotes).
       --goldstandard_dir            Path to reference data. Golden datasets.
       --public_ref_dir				Path where public dataset info is stored for validation.
-      --asses_dir					Path where benchmark data is stored.
+      --assess_dir					Path where benchmark data is stored.
       --event_id                    Event identifier.
       --participant_id				Participant identifier.
       --tree_format					Format tree ["nexus","newick"].
@@ -80,9 +80,9 @@ if(params.public_ref_dir){
 	//if (!ref_dir.exists()) exit 1, "Input Reference dir path not found: ${params.ref_dir}"
 }
 
-if(params.asses_dir){
-	asses_dir = Channel.fromPath( params.asses_dir, type: 'dir' ,checkIfExists:true)
-	//if (!asses_dir.exists()) exit 1, "Input Asses dir path not found: ${params.asses_dir}"
+if(params.assess_dir){
+	assess_dir = Channel.fromPath( params.assess_dir, type: 'dir' ,checkIfExists:true)
+	//if (!assess_dir.exists()) exit 1, "Input Asses dir path not found: ${params.assess_dir}"
 }
 
 params.tree_format = "newick"
@@ -120,7 +120,7 @@ def summary = [:]
 summary['Test tree input']   = params.tree_test
 summary['Goldstandard dir']  = params.goldstandard_dir
 summary['Public ref dir']    = params.public_ref_dir
-summary['Benchmark data dir']  = params.asses_dir
+summary['Benchmark data dir']  = params.assess_dir
 summary['Event ID']            = params.event_id
 summary['Participant ID']      = params.participant_id
 if(workflow.revision) summary['Pipeline Release'] = workflow.revision
@@ -300,11 +300,11 @@ process manage_assessment_data {
 	tag "Performing benchmark assessment and building plots"
 
 	input:
-	file asses_dir
+	file assess_dir
 	file participant_result from metrics_robinsonfoulds_json
 
 	"""
-	python /app/manage_assessment_data.py -b $asses_dir -p ${params.outdir} -o ${params.outdir}
+	python /app/manage_assessment_data.py -b $assess_dir -p ${params.outdir} -o ${params.outdir}
 	"""
 
 }
