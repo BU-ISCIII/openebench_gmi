@@ -1,0 +1,12 @@
+[
+    {
+        "id": "gmi",
+        "participants": [
+            "participant0.json",
+            "participant1.json",
+            "participant2.json",
+            "participant4.json",
+            "participant3.json"
+        ]
+    }
+]
