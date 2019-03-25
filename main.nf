@@ -232,7 +232,7 @@ process getQueryIds {
 */
 process ValidateInputIds {
 
-  //container 'openebench_gmi/sample-getqueryids'
+  container 'openebench_gmi/sample-compareids'
 
   publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
 
@@ -243,8 +243,7 @@ process ValidateInputIds {
   output:
 
   """
-  #compareIds.py --ids1 $query_ids --ids2 $ref_dir/inputIDs.json
-  exit 0
+  compareIds.py --ids1 $query_ids --ids2 $ref_dir/inputIDs.json
   """
 
 }
