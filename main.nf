@@ -229,7 +229,7 @@ process getQueryIds {
 */
 process ValidateInputIds {
 
-  container 'openebench_gmi/sample-getqueryids'
+  #container 'openebench_gmi/sample-getqueryids'
 
   publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
 
@@ -241,7 +241,8 @@ process ValidateInputIds {
   file "*.json" into result_ids_json
 
   """
-  compareIds.py --ids1 $query_ids --ids2 $ref_dir/inputIDs.json
+  #compareIds.py --ids1 $query_ids --ids2 $ref_dir/inputIDs.json
+  exit 0
   """
 
 }
@@ -263,7 +264,7 @@ process RobinsonFouldsMetrics {
   file "*.json" into metrics_robinsonfoulds_json
 
   """
-  calculateRobinsonFouldsMetric.py --tree_file1 $tree1 --tree_file2 $tree2
+  calculateRobinsonFouldsMetric.py --tree_file1 $tree1 --tree_file2 $tree2 -e ${params.even_id} -p ${params.participant_id} -o ${params.participant_id}"_robinsonfoulds.json"
   """
 
 }
