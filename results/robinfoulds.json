@@ -1,9 +1,0 @@
-{
-    "testEventId": "default",
-    "metrics": {
-        "type": "metrics",
-        "units": "none",
-        "name": "Robinson-Foulds metric",
-        "value": 0
-    }
-}
