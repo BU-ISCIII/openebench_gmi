@@ -78,16 +78,16 @@ function c0(index) { return "#9c9c9c"; }
 function c1(index) { return "#bdbdbd"; }
 function c2(index) { return colors[index % 16]; } // <-- note: uses only the first 16 colors
 
-var elapsed="22.4s"
-var beginningMillis=1553520791177;
-var endingMillis=1553520813582;
+var elapsed="21s"
+var beginningMillis=1553525342006;
+var endingMillis=1553526476679;
 var data=[
-{"label": "dockerPreconditions", "times": [{"starting_time": 1553520791946, "ending_time": 1553520791974, "color":c1(0)}, {"starting_time": 1553520791974, "ending_time": 1553520795766, "color":c2(0), "label": "5.5s \/ 1.1 GB"}, {"starting_time": 1553520795766, "ending_time": 1553520797436, "color":c1(0)}]},
-{"label": "validateInputFormat", "times": [{"starting_time": 1553520797541, "ending_time": 1553520797637, "color":c1(1)}, {"starting_time": 1553520797637, "ending_time": 1553520797943, "color":c2(1), "label": "3.1s \/ 114.7 MB"}, {"starting_time": 1553520797943, "ending_time": 1553520800645, "color":c1(1)}]},
-{"label": "getQueryIds", "times": [{"starting_time": 1553520800689, "ending_time": 1553520800745, "color":c1(2)}, {"starting_time": 1553520800745, "ending_time": 1553520801019, "color":c2(2), "label": "3.6s \/ 117 MB"}, {"starting_time": 1553520801019, "ending_time": 1553520804308, "color":c1(2)}]},
-{"label": "RobinsonFouldsMetrics (1)", "times": [{"starting_time": 1553520800698, "ending_time": 1553520800749, "color":c1(3)}, {"starting_time": 1553520800749, "ending_time": 1553520801025, "color":c2(3), "label": "3.7s \/ 125.7 MB"}, {"starting_time": 1553520801025, "ending_time": 1553520804349, "color":c1(3)}]},
-{"label": "ValidateInputIds (1)", "times": [{"starting_time": 1553520804335, "ending_time": 1553520804360, "color":c1(4)}, {"starting_time": 1553520804360, "ending_time": 1553520804367, "color":c2(4), "label": "203ms \/ 0"}, {"starting_time": 1553520804367, "ending_time": 1553520804538, "color":c1(4)}]},
-{"label": "manage_assessment_data (Performing benchmark assessment and building plots)", "times": [{"starting_time": 1553520804364, "ending_time": 1553520804450, "color":c1(5)}, {"starting_time": 1553520804450, "ending_time": 1553520806433, "color":c2(5), "label": "8.2s \/ 19.2 MB"}, {"starting_time": 1553520806433, "ending_time": 1553520812532, "color":c1(5)}]}
+{"label": "dockerPreconditions", "times": [{"starting_time": 1553525342006, "ending_time": 1553525342060, "color":c1(0)}, {"starting_time": 1553525342060, "ending_time": 1553525628037, "color":c0(0), "label": "4m 51s \/ 1.1 GB \/ CACHED"}, {"starting_time": 1553525628037, "ending_time": 1553525632813, "color":c1(0)}]},
+{"label": "validateInputFormat", "times": [{"starting_time": 1553526456675, "ending_time": 1553526456713, "color":c1(1)}, {"starting_time": 1553526456713, "ending_time": 1553526456978, "color":c2(1), "label": "2.8s \/ 115.2 MB"}, {"starting_time": 1553526456978, "ending_time": 1553526459434, "color":c1(1)}]},
+{"label": "getQueryIds", "times": [{"starting_time": 1553526459481, "ending_time": 1553526459534, "color":c1(2)}, {"starting_time": 1553526459534, "ending_time": 1553526459798, "color":c2(2), "label": "2.8s \/ 117.4 MB"}, {"starting_time": 1553526459798, "ending_time": 1553526462239, "color":c1(2)}]},
+{"label": "ValidateInputIds (1)", "times": [{"starting_time": 1553526462271, "ending_time": 1553526462339, "color":c1(3)}, {"starting_time": 1553526462339, "ending_time": 1553526462412, "color":c2(3), "label": "2.8s \/ 34.8 MB"}, {"starting_time": 1553526462412, "ending_time": 1553526465041, "color":c1(3)}]},
+{"label": "RobinsonFouldsMetrics (1)", "times": [{"starting_time": 1553526465078, "ending_time": 1553526465139, "color":c1(4)}, {"starting_time": 1553526465139, "ending_time": 1553526465422, "color":c2(4), "label": "2.8s \/ 125.7 MB"}, {"starting_time": 1553526465422, "ending_time": 1553526467841, "color":c1(4)}]},
+{"label": "manage_assessment_data (Performing benchmark assessment and building plots)", "times": [{"starting_time": 1553526467862, "ending_time": 1553526467940, "color":c1(5)}, {"starting_time": 1553526467940, "ending_time": 1553526470003, "color":c2(5), "label": "7.8s \/ 19.2 MB"}, {"starting_time": 1553526470003, "ending_time": 1553526475651, "color":c1(5)}]}
 ]
 
 

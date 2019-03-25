@@ -1,7 +1,7 @@
 task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	rss	vmem	rchar	wchar
-1	80/0a28d3	4389	dockerPreconditions	COMPLETED	0	2019-03-25 14:33:11.946	5.5s	3.8s	69.8%	54.9 MB	1.1 GB	28.4 MB	28.7 MB
-2	96/90c841	4672	validateInputFormat	COMPLETED	0	2019-03-25 14:33:17.541	3.1s	306ms	80.7%	19.6 MB	114.7 MB	1.6 MB	0
-4	e6/58ea4a	4984	getQueryIds	COMPLETED	0	2019-03-25 14:33:20.689	3.6s	274ms	98.4%	20.1 MB	117 MB	1.7 MB	0
-3	60/7ef3e7	4993	RobinsonFouldsMetrics (1)	COMPLETED	0	2019-03-25 14:33:20.698	3.7s	276ms	103.2%	23.3 MB	125.7 MB	2.6 MB	0
-5	f7/7d9190	5583	ValidateInputIds (1)	COMPLETED	0	2019-03-25 14:33:24.335	203ms	7ms	0.0%	0	0	0	0
-6	58/eb0c27	5604	manage_assessment_data (Performing benchmark assessment and building plots)	COMPLETED	0	2019-03-25 14:33:24.364	8.2s	2s	0.0%	3.1 MB	19.2 MB	7.5 KB	0
+1	f9/63bb45	2219	dockerPreconditions	CACHED	0	2019-03-25 15:49:02.006	4m 51s	4m 46s	54.4%	55.7 MB	1.1 GB	260.1 MB	267 MB
+2	aa/9ef310	20776	validateInputFormat	COMPLETED	0	2019-03-25 16:07:36.675	2.8s	265ms	109.9%	20.7 MB	115.2 MB	1.9 MB	0
+3	f0/7c929e	21081	getQueryIds	COMPLETED	0	2019-03-25 16:07:39.481	2.8s	264ms	104.6%	20.5 MB	117.4 MB	1.7 MB	0
+4	fc/fce293	21394	ValidateInputIds (1)	COMPLETED	0	2019-03-25 16:07:42.271	2.8s	73ms	0.0%	10.4 MB	34.8 MB	552.9 KB	0
+5	36/0e4ebf	21643	RobinsonFouldsMetrics (1)	COMPLETED	0	2019-03-25 16:07:45.078	2.8s	283ms	111.5%	23.2 MB	125.7 MB	2.7 MB	0
+6	fa/7cb0f0	21944	manage_assessment_data (Performing benchmark assessment and building plots)	COMPLETED	0	2019-03-25 16:07:47.862	7.8s	2.1s	0.0%	3.1 MB	19.2 MB	7.5 KB	0

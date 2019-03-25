@@ -31,6 +31,10 @@ p6 [label="getQueryIds"];
 p7 [label="ValidateInputIds"];
 p6 -> p7 [label="query_ids_json"];
 
+p7 [label="ValidateInputIds"];
+p8 [label="RobinsonFouldsMetrics"];
+p7 -> p8 [label="EXIT_STAT"];
+
 p8 [label="RobinsonFouldsMetrics"];
 p9 [label="manage_assessment_data"];
 p8 -> p9 [label="metrics_robinsonfoulds_json"];
