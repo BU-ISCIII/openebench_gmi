@@ -241,6 +241,7 @@ process ValidateInputIds {
   file ref_dir
 
   output:
+  val task.exitStatus into EXIT_STAT
 
   """
   compareIds.py --ids1 $query_ids --ids2 $ref_dir/inputIDs.json
@@ -258,11 +259,15 @@ process RobinsonFouldsMetrics {
   publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
 
   input:
+  val file_validated from EXIT_STAT
   file tree1 from canonical_robinsonfoulds
   file gold_dir from goldstandard_dir
 
   output:
   file "*.json" into metrics_robinsonfoulds_json
+
+  when:
+  file_validated == 0
 
   """
   calculateRobinsonFouldsMetric.py --tree_file1 $tree1 --tree_file2 $gold_dir/SIM-Sbareilly.tre -e ${params.event_id} -p ${params.participant_id} -o ${params.participant_id}".json"
