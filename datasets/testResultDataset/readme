@@ -1,0 +1,4 @@
+participant1	RAxML tree. All snps. CFSAN.
+participant2	RAxML tree. Filtered snps. CFSAN.
+participant3	RAxML tree. All snps. GATK.
+participant4	RAxML tree. Filtered snps. GATK.
