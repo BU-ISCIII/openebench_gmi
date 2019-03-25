@@ -8,3 +8,4 @@ virtualenv/
 .nextflow*
 work/
 results/
+results1/
