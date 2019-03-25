@@ -1,5 +1,6 @@
 {
-    "testEventId": "default",
+    "event_id": "gmi",
+    "participant_id": "isciii",
     "metrics": {
         "x": {
             "type": "metrics",

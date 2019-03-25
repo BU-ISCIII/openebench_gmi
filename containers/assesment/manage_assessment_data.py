@@ -50,9 +50,9 @@ def generate_manifest(data_dir,output_dir, cancer_types):
         participants.append(rel_new_location)
 
     # Let's draw the assessment charts!
-    print_chart(cancer_dir,participants,cancer, "RAW")
-    print_chart(cancer_dir,participants,cancer, "SQR")
-    print_chart(cancer_dir,participants,cancer, "DIAG")
+    print_chart(output_dir,participants,"RAW")
+    print_chart(output_dir,participants,"SQR")
+    print_chart(output_dir,participants,"DIAG")
 
     obj = {
         "id" : cancer,
@@ -263,7 +263,7 @@ def print_quartiles_table(tools_quartiles):
 
 
 
-def print_chart(cancer_dir, participants, cancer_type, classification_type):
+def print_chart(output_dir, participants, classification_type):
     tools = []
     x_values = []
     y_values = []
@@ -271,9 +271,9 @@ def print_chart(cancer_dir, participants, cancer_type, classification_type):
         abs_participant_file = os.path.join(cancer_dir,participant_file)
         with io.open(abs_participant_file,mode='r',encoding="utf-8") as f:
             result = json.load(f)
-            tools.append(result['toolname'])
-            x_values.append(result['x'])
-            y_values.append(result['y'])
+            tools.append(result['participant_id'])
+            x_values.append(result['metrics']['x']['value'])
+            y_values.append(result['metrics]']['y']['value'])
 
     ax = plt.subplot()
     for i, val in enumerate(tools, 0):
@@ -291,12 +291,12 @@ def print_chart(cancer_dir, participants, cancer_type, classification_type):
     # change plot style
     # set plot title
 
-    plt.title("Cancer Driver Genes prediction benchmarking - " + cancer_type, fontsize=18, fontweight='bold')
+    plt.title("Outbreak investigation benchmark" , fontsize=18, fontweight='bold')
 
     # set plot title depending on the analysed tool
 
-    ax.set_xlabel("True Positive Rate - % driver genes correctly predicted", fontsize=12)
-    ax.set_ylabel("Precision - % true positives over total predicted", fontsize=12)
+    ax.set_xlabel("Unweighted Robinson-Foulds metric", fontsize=12)
+    ax.set_ylabel("Weighted Robinson-Foulds metric", fontsize=12)
 
     # Shrink current axis's height  on the bottom
     box = ax.get_position()

@@ -37,6 +37,7 @@ def check_arg (args=None) :
     parser.add_argument('--tree_format','-f' ,required= False,choices = ["newick","nexus"], help = 'Tree file format [newick,nexus]', default = "newick")
     parser.add_argument('--output' ,'-o',required= False, help = 'Path to result metric json.Default = robinfoulds.json', default="robinfoulds.json")
     parser.add_argument('--event_id','-e' ,required= False, help = 'OpenEbench event identifier', default="default")
+    parser.add_argument('--participant_id','-p' ,required= False, help = 'OpenEbench participant identifier', default="default")
 
     return parser.parse_args()
 
@@ -101,7 +102,8 @@ if __name__ == '__main__' :
 
     #Create ids dictionary with event_id and sample ids from tree leaves.
     try:
-        metrics.update(testEventId = arguments.event_id)
+        metrics.update(event_id = arguments.event_id)
+        metrics.update(participant_id = arguments.participant_id)
         metrics_info1.update(type="metrics",units="none",name="Unweighted Robinson-Foulds metric",value=rf_distance)
         metrics_info2.update(type="metrics",units="none",name="Weighted Robinson-Foulds metric",value=wrf_distance)
         metrics.update(metrics = {'x' : metrics_info1, 'y' : metrics_info2 })
