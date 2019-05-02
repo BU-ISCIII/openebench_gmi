@@ -5,10 +5,7 @@ import os
 import argparse
 import json
 import subprocess
-#from Bio import Phylo
-#from Bio.Phylo.Applications import RaxmlCommandline
-import dendropy
-from dendropy.calculate import treecompare
+from ete3 import Tree
 
 #################
 ### FUNCTIONS ###
@@ -71,28 +68,18 @@ if __name__ == '__main__' :
     # Read file, check it is in the correct format.
     try:
         print("Reading Trees...")
-        tns = dendropy.TaxonNamespace()
-        tree1 = dendropy.Tree.get_from_path(
-            arguments.tree_file1,
-            "newick",
-            taxon_namespace=tns)
-        tree2 = dendropy.Tree.get_from_path(
-            arguments.tree_file2,
-            "newick",
-            taxon_namespace=tns)
-        tree1.encode_bipartitions()
-        tree2.encode_bipartitions()
+        tree1 = Tree(arguments.tree_file1)
+        tree2 = Tree(arguments.tree_file2)
         print("Trees read successfully.")
     except:
-        print("Trees couldn't be concatenated.")
+        print("Trees couldn't be loaded.")
         raise
         sys.exit(1)
 
     # Calculate Robinson-Foulds distance between two trees REF and test
     try:
-        print("Calculating robin-foulds distance...")
-        rf_distance = treecompare.symmetric_difference(tree1, tree2)
-        wrf_distance = treecompare.weighted_robinson_foulds_distance(tree1, tree2)
+        print("Calculating robinson-foulds distance...")
+        results = tree1.compare(tree2,unrooted=True)
         print("Calculation of robin-foulds distance failed.")
     except:
         print("Robinson-foulds distance calculation failed.")
@@ -104,8 +91,8 @@ if __name__ == '__main__' :
     try:
         metrics.update(event_id = arguments.event_id)
         metrics.update(participant_id = arguments.participant_id)
-        metrics_info1.update(type="metrics",units="none",name="Unweighted Robinson-Foulds metric",value=rf_distance)
-        metrics_info2.update(type="metrics",units="none",name="Weighted Robinson-Foulds metric",value=wrf_distance)
+        metrics_info1.update(type="metrics",units="none",name="Robinson-Foulds metric",value=results["rf"])
+        metrics_info2.update(type="metrics",units="none",name="Normalized Robinson-Foulds metric",value=results["norm_rf"])
         metrics.update(metrics = {'x' : metrics_info1, 'y' : metrics_info2 })
 
         print("Successfully extracted ids from tree file.")
