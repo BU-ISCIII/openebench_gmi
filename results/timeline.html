@@ -78,15 +78,16 @@ function c0(index) { return "#9c9c9c"; }
 function c1(index) { return "#bdbdbd"; }
 function c2(index) { return colors[index % 16]; } // <-- note: uses only the first 16 colors
 
-var elapsed="5m 51s"
-var beginningMillis=1556788214258;
-var endingMillis=1556788565372;
+var elapsed="15m 14s"
+var beginningMillis=1556797611367;
+var endingMillis=1556798525802;
 var data=[
-{"label": "dockerPreconditions", "times": [{"starting_time": 1556788215322, "ending_time": 1556788215401, "color":c1(0)}, {"starting_time": 1556788215401, "ending_time": 1556788543773, "color":c2(0), "label": "5m 29s \/ 1.1 GB"}, {"starting_time": 1556788543773, "ending_time": 1556788543913, "color":c1(0)}]},
-{"label": "validateInputFormat", "times": [{"starting_time": 1556788544185, "ending_time": 1556788544267, "color":c1(1)}, {"starting_time": 1556788544267, "ending_time": 1556788545270, "color":c2(1), "label": "7.8s \/ 86.8 MB"}, {"starting_time": 1556788545270, "ending_time": 1556788552031, "color":c1(1)}]},
-{"label": "getQueryIds", "times": [{"starting_time": 1556788552070, "ending_time": 1556788552131, "color":c1(2)}, {"starting_time": 1556788552131, "ending_time": 1556788553043, "color":c2(2), "label": "7.7s \/ 47 MB"}, {"starting_time": 1556788553043, "ending_time": 1556788559756, "color":c1(2)}]},
-{"label": "ValidateInputIds (1)", "times": [{"starting_time": 1556788559808, "ending_time": 1556788559854, "color":c1(3)}, {"starting_time": 1556788559854, "ending_time": 1556788560216, "color":c2(3), "label": "2.5s \/ 35.1 MB"}, {"starting_time": 1556788560216, "ending_time": 1556788562322, "color":c1(3)}]},
-{"label": "RobinsonFouldsMetrics (1)", "times": [{"starting_time": 1556788562366, "ending_time": 1556788562422, "color":c1(4)}, {"starting_time": 1556788562422, "ending_time": 1556788562505, "color":c2(4), "label": "2s \/ 34.6 MB"}, {"starting_time": 1556788562505, "ending_time": 1556788564368, "color":c1(4)}]}
+{"label": "dockerPreconditions", "times": [{"starting_time": 1556797612238, "ending_time": 1556797612295, "color":c1(0)}, {"starting_time": 1556797612295, "ending_time": 1556798499109, "color":c2(0), "label": "14m 51s \/ 1.1 GB"}, {"starting_time": 1556798499109, "ending_time": 1556798503449, "color":c1(0)}]},
+{"label": "validateInputFormat", "times": [{"starting_time": 1556798503566, "ending_time": 1556798503649, "color":c1(1)}, {"starting_time": 1556798503649, "ending_time": 1556798503943, "color":c2(1), "label": "2.3s \/ 124.9 MB"}, {"starting_time": 1556798503943, "ending_time": 1556798505900, "color":c1(1)}]},
+{"label": "getQueryIds", "times": [{"starting_time": 1556798505953, "ending_time": 1556798506000, "color":c1(2)}, {"starting_time": 1556798506000, "ending_time": 1556798506267, "color":c2(2), "label": "2.2s \/ 117.4 MB"}, {"starting_time": 1556798506267, "ending_time": 1556798508108, "color":c1(2)}]},
+{"label": "ValidateInputIds (1)", "times": [{"starting_time": 1556798508142, "ending_time": 1556798508208, "color":c1(3)}, {"starting_time": 1556798508208, "ending_time": 1556798508286, "color":c2(3), "label": "2.1s \/ 34.6 MB"}, {"starting_time": 1556798508286, "ending_time": 1556798510198, "color":c1(3)}]},
+{"label": "RobinsonFouldsMetrics (1)", "times": [{"starting_time": 1556798510246, "ending_time": 1556798510298, "color":c1(4)}, {"starting_time": 1556798510298, "ending_time": 1556798510640, "color":c2(4), "label": "7.4s \/ 452 MB"}, {"starting_time": 1556798510640, "ending_time": 1556798517624, "color":c1(4)}]},
+{"label": "manage_assessment_data (Performing benchmark assessment and building plots)", "times": [{"starting_time": 1556798517645, "ending_time": 1556798517723, "color":c1(5)}, {"starting_time": 1556798517723, "ending_time": 1556798519747, "color":c2(5), "label": "7.3s \/ 19.2 MB"}, {"starting_time": 1556798519747, "ending_time": 1556798524899, "color":c1(5)}]}
 ]
 
 

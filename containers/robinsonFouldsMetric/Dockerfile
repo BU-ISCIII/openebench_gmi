@@ -25,8 +25,6 @@ RUN echo "Install basic development tools" && \
 # The return value tells whether the validation and the translation to
 # the canonical format whether worked or failed
 
-RUN	echo "Installing ete toolkit" && \
-         scif install /opt/scif_app_recipes/etetoolkit_v3.1.1_centos7.scif
 RUN	echo "Installing calculateRobinsonFouldsMetric script" && \
          scif install /opt/scif_app_recipes/calculateRobinsonFouldsMetric_v1.0_centos7.scif
 
