@@ -69,7 +69,11 @@ if __name__ == '__main__' :
     try:
         print("Reading Trees...")
         tree1 = Tree(arguments.tree_file1)
+        tree1_outgroup = tree1.get_midpoint_outgroup()
+        tree1.set_outgroup(tree1_outgroup)
         tree2 = Tree(arguments.tree_file2)
+        tree2_outgroup = tree2.get_midpoint_outgroup()
+        tree2.set_outgroup(tree2_outgroup)
         print("Trees read successfully.")
     except:
         print("Trees couldn't be loaded.")
@@ -80,6 +84,7 @@ if __name__ == '__main__' :
     try:
         print("Calculating robinson-foulds distance...")
         results = tree1.compare(tree2,unrooted=True)
+        rf, max_rf, common_leaves, parts_t1, parts_t2 = tree1.robinson_foulds(tree2,expand_polytomies=True,polytomy_size_limit=40)
         print("Calculation of robin-foulds distance failed.")
     except:
         print("Robinson-foulds distance calculation failed.")
@@ -91,8 +96,8 @@ if __name__ == '__main__' :
     try:
         metrics.update(event_id = arguments.event_id)
         metrics.update(participant_id = arguments.participant_id)
-        metrics_info1.update(type="metrics",units="none",name="Robinson-Foulds metric",value=results["rf"])
-        metrics_info2.update(type="metrics",units="none",name="Normalized Robinson-Foulds metric",value=results["norm_rf"])
+        metrics_info1.update(type="metrics",units="none",name="Robinson-Foulds metric",value=rf)
+        metrics_info2.update(type="metrics",units="none",name="Normalized Robinson-Foulds metric",value=max_rf)
         metrics.update(metrics = {'x' : metrics_info1, 'y' : metrics_info2 })
 
         print("Successfully extracted ids from tree file.")
