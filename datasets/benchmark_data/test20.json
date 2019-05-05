@@ -1,0 +1,18 @@
+{
+    "event_id": "gmi",
+    "participant_id": "test20",
+    "metrics": {
+        "x": {
+            "type": "metrics",
+            "units": "none",
+            "name": "Robinson-Foulds metric",
+            "value": "NA"
+        },
+        "y": {
+            "type": "metrics",
+            "units": "none",
+            "name": "Normalized Robinson-Foulds metric",
+            "value": "NA"
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "event_id": "gmi",
+    "participant_id": "right",
+    "metrics": {
+        "x": {
+            "type": "metrics",
+            "units": "none",
+            "name": "Robinson-Foulds metric",
+            "value": 0.0
+        },
+        "y": {
+            "type": "metrics",
+            "units": "none",
+            "name": "Normalized Robinson-Foulds metric",
+            "value": 0.0
+        }
+    }
+}

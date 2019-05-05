@@ -70,6 +70,22 @@ if __name__ == '__main__' :
         print("Reading Trees...")
         tree1 = Tree(arguments.tree_file1)
         tree2 = Tree(arguments.tree_file2)
+        print("Setting root on midpoint...")
+        tree1_outgroup = tree1.get_midpoint_outgroup()
+        tree1.set_outgroup(tree1_outgroup)
+        tree2_outgroup = tree2.get_midpoint_outgroup()
+        tree2.set_outgroup(tree2_outgroup)
+        print("Collapsing nodes with branch distance = 0...")
+        for node_tree1 in tree1.get_descendants():
+            #print(node2.dist)
+            #if not node2.is_leaf() and round(node2.dist,4) <= 1:
+            if not node_tree1.is_leaf() and node_tree1.dist <= 1.00000050002909e-06:
+                node_tree1.delete()
+        for node_tree2 in tree2.get_descendants():
+            #print(node2.dist)
+            #if not node2.is_leaf() and round(node2.dist,4) <= 1:
+            if not node_tree2.is_leaf() and node_tree2.dist <= 1.00000050002909e-06:
+                node_tree2.delete()
         print("Trees read successfully.")
     except:
         print("Trees couldn't be loaded.")
@@ -79,7 +95,7 @@ if __name__ == '__main__' :
     # Calculate Robinson-Foulds distance between two trees REF and test
     try:
         print("Calculating robinson-foulds distance...")
-        results = tree1.compare(tree2,unrooted=True)
+        results = tree1.compare(tree2)
         print("Calculation of robin-foulds distance failed.")
     except:
         print("Robinson-foulds distance calculation failed.")
