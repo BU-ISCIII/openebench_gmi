@@ -174,9 +174,8 @@ process dockerPreconditions {
   docker build -t openebench_gmi/sample-checkresults:latest -f $baseDir/containers/checkFormat/Dockerfile $baseDir
   docker build -t openebench_gmi/sample-getqueryids:latest -f $baseDir/containers/getQueryIds/Dockerfile $baseDir
   docker build -t openebench_gmi/sample-compareids:latest -f $baseDir/containers/compareIds/Dockerfile $baseDir
-  #docker build -t openebench_gmi/sample-getresultsids:latest -f $baseDir/containers/getResultsIds/Dockerfile $baseDir
+  docker build -t openebench_gmi/sample-calculatesnprecision:latest -f $baseDir/containers/calculateSnPrecision/Dockerfile $baseDir
   docker build -t openebench_gmi/sample-robinsonfoulds:latest -f $baseDir/containers/robinsonFouldsMetric/Dockerfile $baseDir
-  #docker build -t openebench_gmi/sample-consolidate:latest -f $baseDir/containers/consolidateMetrics/Dockerfile $baseDir
   docker build -t openebench_gmi/sample-assessment:latest -f $baseDir/containers/assessment/Dockerfile $baseDir
   touch docker_image_dependency
   """
@@ -198,7 +197,7 @@ process validateInputFormat {
   file docker_image_dependency
 
   output:
-  file "tree.nwk" into canonical_getresultsids,canonical_robinsonfoulds
+  file "tree.nwk" into canonical_getresultsids,canonical_robinsonfoulds,canonical_snprecision
 
   """
   checkTreeFormat.py --tree_file ${tree} --tree_format ${params.tree_format}
@@ -271,7 +270,33 @@ process RobinsonFouldsMetrics {
   file_validated == 0
 
   """
-  calculateRobinsonFouldsMetric.py --tree_file1 $tree1 --tree_file2 $gold_dir/SIM-Sbareilly.tre -e ${params.event_id} -p ${params.participant_id} -o ${params.participant_id}".json"
+  calculateRobinsonFouldsMetric.py --tree_file1 $tree1 --tree_file2 $gold_dir/SIM-Sbareilly.tre -e ${params.event_id} -p ${params.participant_id} -o ${params.participant_id}"_robinsonfoulds.json"
+  """
+
+}
+
+/*
+* The instance generated from this docker file compute metrics based on the number of lines and words.
+*/
+process SnPrecisionMetrics {
+
+  container 'openebench_gmi/sample-calculatesnprecision'
+
+  publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
+
+  input:
+  val file_validated from EXIT_STAT
+  file tree1 from canonical_snprecision
+  file gold_dir from goldstandard_dir
+
+  output:
+  file "*.json" into metrics_snprecision_json
+
+  when:
+  file_validated == 0
+
+  """
+  calculateSnPrecision.py --tree_file1 $tree1 --tree_file2 $gold_dir/SIM-Sbareilly.tre -e ${params.event_id} -p ${params.participant_id} -o ${params.participant_id}"_snprecision.json"
   """
 
 }
@@ -308,7 +333,7 @@ process manage_assessment_data {
 
 	input:
 	file assess_dir
-	file participant_result from metrics_robinsonfoulds_json
+	file participant_result from metrics_snprecision_json
 	output:
 	file benchmark_result
 
