@@ -71,7 +71,9 @@ if(params.tree_test){
 }
 
 if(params.goldstandard_dir){
-	goldstandard_dir = Channel.fromPath( params.goldstandard_dir, type: 'dir',checkIfExists:true )
+	Channel
+		.fromPath( params.goldstandard_dir, type: 'dir',checkIfExists:true )
+		.into { goldstandard_dir_robinsonfoulds ; goldstandard_dir_snprecision }
 	//if (!goldstandard_dir.exists()) exit 1, "Input Gold standard path not found: ${params.goldstandard_dir}"
 }
 
@@ -81,7 +83,9 @@ if(params.public_ref_dir){
 }
 
 if(params.assess_dir){
-	assess_dir = Channel.fromPath( params.assess_dir, type: 'dir' ,checkIfExists:true)
+	Channel
+		.fromPath( params.assess_dir, type: 'dir' ,checkIfExists:true)
+		.into { asses_dir_assesment ; assess_dir_robinsonfoulds  }
 	//if (!assess_dir.exists()) exit 1, "Input Asses dir path not found: ${params.assess_dir}"
 }
 
@@ -241,7 +245,7 @@ process ValidateInputIds {
   file ref_dir
 
   output:
-  val task.exitStatus into EXIT_STAT
+  val task.exitStatus into EXIT_STAT_ROBINSONFOULDS,EXIT_STAT_SNPRECISION
 
   """
   compareIds.py --ids1 $query_ids --ids2 $ref_dir/inputIDs.json
@@ -250,30 +254,30 @@ process ValidateInputIds {
 }
 
 /*
-* The instance generated from this docker file compute metrics based on the number of lines and words.
+* The instance generated from this docker file compute robinson foulds metric between the participant and all the public participants.
 */
-process RobinsonFouldsMetrics {
-
-  container 'openebench_gmi/sample-robinsonfoulds'
-
-  publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
-
-  input:
-  val file_validated from EXIT_STAT
-  file tree1 from canonical_robinsonfoulds
-  file gold_dir from goldstandard_dir
-
-  output:
-  file "*.json" into metrics_robinsonfoulds_json
-
-  when:
-  file_validated == 0
-
-  """
-  calculateRobinsonFouldsMetric.py --tree_file1 $tree1 --tree_file2 $gold_dir/SIM-Sbareilly.tre -e ${params.event_id} -p ${params.participant_id} -o ${params.participant_id}"_robinsonfoulds.json"
-  """
-
-}
+//process RobinsonFouldsMetrics {
+//
+//  container 'openebench_gmi/sample-robinsonfoulds'
+//
+//  publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
+//
+//  input:
+//  val file_validated from EXIT_STAT_ROBINSONFOULDS
+//  file tree1 from canonical_robinsonfoulds
+//  file benchmark_dir from assess_dir_robinsonfoulds
+//
+//  output:
+//  file "*.json" into metrics_robinsonfoulds_json
+//
+//  when:
+//  file_validated == 0
+//
+//  """
+//  calculateRobinsonFouldsMetric.py --tree_file1 $tree1 --benchmark_trees_path $benchmark_dir -e ${params.event_id} -p ${params.participant_id} -o ${params.participant_id}"_robinsonfoulds.json"
+//  """
+//
+//}
 
 /*
 * The instance generated from this docker file compute metrics based on the number of lines and words.
@@ -285,9 +289,9 @@ process SnPrecisionMetrics {
   publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
 
   input:
-  val file_validated from EXIT_STAT
+  val file_validated from EXIT_STAT_SNPRECISION
   file tree1 from canonical_snprecision
-  file gold_dir from goldstandard_dir
+  file gold_dir from goldstandard_dir_snprecision
 
   output:
   file "*.json" into metrics_snprecision_json
@@ -332,7 +336,7 @@ process manage_assessment_data {
   	publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
 
 	input:
-	file assess_dir
+	file assess_dir from asses_dir_assesment
 	file participant_result from metrics_snprecision_json
 	output:
 	file benchmark_result

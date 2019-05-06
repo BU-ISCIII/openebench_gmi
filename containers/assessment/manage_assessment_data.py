@@ -48,7 +48,7 @@ def generate_manifest(data_dir,output_dir):
 #         new_location = os.path.join(output_dir, rel_new_location)
 #         shutil.copy(abs_result_file,new_location)
 #         participants.append(rel_new_location)
-    import pdb; pdb.set_trace()
+    #import pdb; pdb.set_trace()
     # Let's draw the assessment charts!
     print_chart(output_dir,participants,"RAW")
     print_chart(output_dir,participants,"SQR")
@@ -143,7 +143,7 @@ def plot_square_quartiles(x_values, means, tools, better, ax, percentile=50):
                 tools_quartiles[tools[i]] = 3
             elif x_values[i] < x_percentile and means[i] <= y_percentile:
                 tools_quartiles[tools[i]] = 1
-    
+
     return (tools_quartiles)
 
 
@@ -185,7 +185,7 @@ def draw_diagonal_line(scores_and_values, quartile, better, max_x, max_y):
     elif better == "bottom-left":
         x_coords = (half_point[0] - max_x, half_point[0] + max_x)
         y_coords = (half_point[1] + max_y, half_point[1] - max_y)
-        
+
     plt.plot(x_coords, y_coords, linestyle='--', color='#0A58A2', linewidth=1.5)
 
 
@@ -315,8 +315,8 @@ def print_chart(output_dir, participants, classification_type):
 
     # set plot title depending on the analysed tool
 
-    ax.set_xlabel("Unweighted Robinson-Foulds metric", fontsize=12)
-    ax.set_ylabel("Weighted Robinson-Foulds metric", fontsize=12)
+    ax.set_xlabel("Recall", fontsize=12)
+    ax.set_ylabel("Precision", fontsize=12)
 
     # Shrink current axis's height  on the bottom
     box = ax.get_position()
@@ -339,8 +339,8 @@ def print_chart(output_dir, participants, classification_type):
         ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda y, loc: "{:,}".format(int(y))))
 
     # set parameters for optimization
-    better = "bottom-left"
-    #better = "top-right"
+    #better = "bottom-left"
+    better = "top-right"
     #better = 'bottom-right'
     max_x = True
     max_y = True

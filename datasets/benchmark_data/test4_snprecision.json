@@ -1,18 +1,18 @@
 {
     "event_id": "gmi",
-    "participant_id": "participant3",
+    "participant_id": "test4",
     "metrics": {
         "x": {
             "type": "metrics",
             "units": "none",
-            "name": "Unweighted Robinson-Foulds metric",
-            "value": 71
+            "name": "sensitivity",
+            "value": 0.8571428571428571
         },
         "y": {
             "type": "metrics",
             "units": "none",
-            "name": "Weighted Robinson-Foulds metric",
-            "value": 4.176001
+            "name": "precision",
+            "value": 1.0
         }
     }
 }

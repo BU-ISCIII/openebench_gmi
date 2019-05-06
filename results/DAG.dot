@@ -1,46 +1,70 @@
 digraph "DAG" {
 p0 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
-p8 [label="RobinsonFouldsMetrics"];
-p0 -> p8 [label="goldstandard_dir"];
+p1 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p0 -> p1;
 
-p1 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
-p7 [label="ValidateInputIds"];
-p1 -> p7 [label="ref_dir"];
+p1 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p2 [shape=point];
+p1 -> p2 [label="goldstandard_dir_robinsonfoulds"];
 
-p2 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
-p9 [label="manage_assessment_data"];
-p2 -> p9 [label="assess_dir"];
+p1 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p14 [label="SnPrecisionMetrics"];
+p1 -> p14 [label="goldstandard_dir_snprecision"];
 
-p3 [label="dockerPreconditions"];
-p5 [label="validateInputFormat"];
-p3 -> p5 [label="docker_image_dependency"];
+p3 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p12 [label="ValidateInputIds"];
+p3 -> p12 [label="ref_dir"];
 
-p4 [shape=point,label="",fixedsize=true,width=0.1];
-p5 [label="validateInputFormat"];
-p4 -> p5 [label="tree"];
+p4 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p4 -> p5;
 
-p5 [label="validateInputFormat"];
-p6 [label="getQueryIds"];
-p5 -> p6 [label="canonical_getresultsids"];
+p5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p15 [label="manage_assessment_data"];
+p5 -> p15 [label="asses_dir_assesment"];
 
-p5 [label="validateInputFormat"];
-p8 [label="RobinsonFouldsMetrics"];
-p5 -> p8 [label="canonical_robinsonfoulds"];
+p5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p6 [shape=point];
+p5 -> p6 [label="assess_dir_robinsonfoulds"];
 
-p6 [label="getQueryIds"];
-p7 [label="ValidateInputIds"];
-p6 -> p7 [label="query_ids_json"];
+p7 [label="dockerPreconditions"];
+p9 [label="validateInputFormat"];
+p7 -> p9 [label="docker_image_dependency"];
 
-p7 [label="ValidateInputIds"];
-p8 [label="RobinsonFouldsMetrics"];
-p7 -> p8 [label="EXIT_STAT"];
+p8 [shape=point,label="",fixedsize=true,width=0.1];
+p9 [label="validateInputFormat"];
+p8 -> p9 [label="tree"];
 
-p8 [label="RobinsonFouldsMetrics"];
-p9 [label="manage_assessment_data"];
-p8 -> p9 [label="metrics_robinsonfoulds_json"];
+p9 [label="validateInputFormat"];
+p11 [label="getQueryIds"];
+p9 -> p11 [label="canonical_getresultsids"];
 
-p9 [label="manage_assessment_data"];
+p9 [label="validateInputFormat"];
 p10 [shape=point];
-p9 -> p10 [label="benchmark_result"];
+p9 -> p10 [label="canonical_robinsonfoulds"];
+
+p9 [label="validateInputFormat"];
+p14 [label="SnPrecisionMetrics"];
+p9 -> p14 [label="canonical_snprecision"];
+
+p11 [label="getQueryIds"];
+p12 [label="ValidateInputIds"];
+p11 -> p12 [label="query_ids_json"];
+
+p12 [label="ValidateInputIds"];
+p13 [shape=point];
+p12 -> p13 [label="EXIT_STAT_ROBINSONFOULDS"];
+
+p12 [label="ValidateInputIds"];
+p14 [label="SnPrecisionMetrics"];
+p12 -> p14 [label="EXIT_STAT_SNPRECISION"];
+
+p14 [label="SnPrecisionMetrics"];
+p15 [label="manage_assessment_data"];
+p14 -> p15 [label="metrics_snprecision_json"];
+
+p15 [label="manage_assessment_data"];
+p16 [shape=point];
+p15 -> p16 [label="benchmark_result"];
 
 }

@@ -30,21 +30,13 @@ def check_arg (args=None) :
     parser.add_argument('--version','-v', action='version', version='%(prog)s 0.3.5')
 
     parser.add_argument('--tree_file1','-t1', required= True, help ='Path to tree file 1')
-    parser.add_argument('--benchmark_trees_path','-b', required= True, help ='Path to benchmark path where other participants tree are found.')
+    parser.add_argument('--tree_file2','-t2', required= True, help ='Path to tree file 2')
+    parser.add_argument('--tree_format','-f' ,required= False,choices = ["newick","nexus"], help = 'Tree file format [newick,nexus]', default = "newick")
     parser.add_argument('--output' ,'-o',required= False, help = 'Path to result metric json.Default = robinfoulds.json', default="robinfoulds.json")
     parser.add_argument('--event_id','-e' ,required= False, help = 'OpenEbench event identifier', default="default")
     parser.add_argument('--participant_id','-p' ,required= False, help = 'OpenEbench participant identifier', default="default")
 
     return parser.parse_args()
-
-
-#################
-### FUNCTIONS ###
-#################
- def midpoint_root (tree):
-    tree_outgroup = tree.get_midpoint_outgroup()
-    tree.set_outgroup(tree_outgroup)
-    return tree
 
 
 ###################
@@ -69,22 +61,20 @@ if __name__ == '__main__' :
         print("Tree file 1 not found.")
         sys.exit(1)
 
-    if (not os.path.exists(arguments.benchmark_trees_path)):
-        print("Benchmark path with public participants trees not found.")
+    if (not os.path.exists(arguments.tree_file2)):
+        print("Tree file 2 not found.")
         sys.exit(1)
-
 
     # Read file, check it is in the correct format.
     try:
-        print("Reading participant tree...")
+        print("Reading Trees...")
         tree1 = Tree(arguments.tree_file1)
-        for public_participant in os.listdir(benchmark_trees_path):
-            part_fullpath = os.path.join(benchmark_trees_path,public_participant)
-            if fnmatch.fnmatch(public_participant,"*.nwk") and os.path.isfile(part_fullpath):
-                participants.append(public_participant)
-        print ("Reading public participants trees...")
+        tree2 = Tree(arguments.tree_file2)
         print("Setting root on midpoint...")
-
+        tree1_outgroup = tree1.get_midpoint_outgroup()
+        tree1.set_outgroup(tree1_outgroup)
+        tree2_outgroup = tree2.get_midpoint_outgroup()
+        tree2.set_outgroup(tree2_outgroup)
         print("Collapsing nodes with branch distance = 0...")
         for node_tree1 in tree1.get_descendants():
             #print(node2.dist)
@@ -137,6 +127,3 @@ if __name__ == '__main__' :
         print("Creating json output file failed.")
         raise
         sys.exit(1)
-
-    if os.path.isfile(tree_file1):
-        shutil.copy(tree_file1,benchmark_trees_path)
