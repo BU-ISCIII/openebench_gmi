@@ -12,3 +12,4 @@ results1/
 
 #jupyter
 .ipynb_checkpoints
+./*.ipynb
