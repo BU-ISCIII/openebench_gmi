@@ -1,6 +1,6 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Scif](https://img.shields.io/badge/Filesystem-Scientific-brightgreen.svg)](https://sci-f.github.io)
 
-# Nextflow pipeline using containers for a Outbreak detection challenge using OpenEbench platform
+# Nextflow pipeline using containers for an Outbreak detection challenge using OpenEbench platform
 
 This repository intends to be a nextflow + container implementation of OpenEbench workflow for an Outbreak detection challenge. 
 ## How to use it
