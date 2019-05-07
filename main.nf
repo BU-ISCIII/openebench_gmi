@@ -85,7 +85,7 @@ if(params.public_ref_dir){
 if(params.assess_dir){
 	Channel
 		.fromPath( params.assess_dir, type: 'dir' ,checkIfExists:true)
-		.into { asses_dir_assesment ; assess_dir_robinsonfoulds  }
+		.into { asses_dir_rbheatmap ; asses_dir_snprecision ; assess_dir_robinsonfoulds  }
 	//if (!assess_dir.exists()) exit 1, "Input Asses dir path not found: ${params.assess_dir}"
 }
 
@@ -180,7 +180,8 @@ process dockerPreconditions {
   docker build -t openebench_gmi/sample-compareids:latest -f $baseDir/containers/compareIds/Dockerfile $baseDir
   docker build -t openebench_gmi/sample-calculatesnprecision:latest -f $baseDir/containers/calculateSnPrecision/Dockerfile $baseDir
   docker build -t openebench_gmi/sample-robinsonfoulds:latest -f $baseDir/containers/robinsonFouldsMetric/Dockerfile $baseDir
-  docker build -t openebench_gmi/sample-assessment:latest -f $baseDir/containers/assessment/Dockerfile $baseDir
+  docker build -t openebench_gmi/sample-assessment-snprecision:latest -f $baseDir/containers/assessmentSnPrecision/Dockerfile $baseDir
+  docker build -t openebench_gmi/sample-assessment-rfheatmap:latest -f $baseDir/containers/assessmentRbHeatmap/Dockerfile $baseDir
   touch docker_image_dependency
   """
 
@@ -256,28 +257,28 @@ process ValidateInputIds {
 /*
 * The instance generated from this docker file compute robinson foulds metric between the participant and all the public participants.
 */
-//process RobinsonFouldsMetrics {
-//
-//  container 'openebench_gmi/sample-robinsonfoulds'
-//
-//  publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
-//
-//  input:
-//  val file_validated from EXIT_STAT_ROBINSONFOULDS
-//  file tree1 from canonical_robinsonfoulds
-//  file benchmark_dir from assess_dir_robinsonfoulds
-//
-//  output:
-//  file "*.json" into metrics_robinsonfoulds_json
-//
-//  when:
-//  file_validated == 0
-//
-//  """
-//  calculateRobinsonFouldsMetric.py --tree_file1 $tree1 --benchmark_trees_path $benchmark_dir -e ${params.event_id} -p ${params.participant_id} -o ${params.participant_id}"_robinsonfoulds.json"
-//  """
-//
-//}
+process RobinsonFouldsMetrics {
+
+  container 'openebench_gmi/sample-robinsonfoulds'
+
+  publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
+
+  input:
+  val file_validated from EXIT_STAT_ROBINSONFOULDS
+  file tree1 from canonical_robinsonfoulds
+  file benchmark_dir from assess_dir_robinsonfoulds
+
+  output:
+  file "*.json" into metrics_robinsonfoulds_json
+
+  when:
+  file_validated == 0
+
+  """
+  calculateRobinsonFouldsMetric.py --tree_file1 $tree1 --benchmark_trees_path $benchmark_dir -e ${params.event_id} -p ${params.participant_id}
+  """
+
+}
 
 /*
 * The instance generated from this docker file compute metrics based on the number of lines and words.
@@ -305,38 +306,14 @@ process SnPrecisionMetrics {
 
 }
 
-///*
-//* The instance generated from this docker file computed metrics based on the results of the previous dockers.
-//*/
-//process ConsolidateMetrics {
-//
-//  container 'openebench_gmi/sample-consolidate'
-//
-//  publishDir 'nextflow_working_directory', mode: 'copy', overwrite: true
-//
-//  input:
-//  file metrics_linemetrics_json
-//  file metrics_wordmetrics_json
-//  file docker_image_dependency
-//
-//  output:
-//  file metrics_consolidated_json
-//
-//  """
-//  metricsConsolidator.sh . unusedparam metrics_consolidated_json
-//  """
-//
-//}
-//
-
-process manage_assessment_data {
-	container = "openebench_gmi/sample-assessment:latest"
+process manage_assessment_snprecision {
+	container = "openebench_gmi/sample-assessment-snprecision:latest"
 	tag "Performing benchmark assessment and building plots"
 
   	publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
 
 	input:
-	file assess_dir from asses_dir_assesment
+	file assess_dir from asses_dir_snprecision
 	file participant_result from metrics_snprecision_json
 	output:
 	file benchmark_result
@@ -344,5 +321,22 @@ process manage_assessment_data {
 	"""
 	python /app/manage_assessment_data.py -b $assess_dir -p $participant_result -o benchmark_result
 	"""
+
+}
+
+process manage_assessment_rbheatmap {
+	container = "openebench_gmi/sample-assessment-snprecision:latest"
+	tag "Performing benchmark assessment and building plots"
+
+  	publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
+
+	input:
+	file assess_dir from asses_dir_rbheatmap
+	output:
+	file benchmark_result
+
+	"""
+	manageAssesmentRbHeatmap.py --assess_dir $assess_dir --output benchmark_result
+	"arguments.output,path_output""
 
 }

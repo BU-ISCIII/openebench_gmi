@@ -148,9 +148,10 @@ if __name__ == '__main__' :
     try:
         path_output = os.path.join(arguments.benchmark_trees_path,arguments.output)
         print("Creating json output: " + path_output)
-        with open (path_output,"w") as write_file:
+        with open (arguments.output,"w") as write_file:
             json.dump(data,write_file,indent=4)
         write_file.close()
+        shutil.copy(arguments.output,path_output)
         print("Successfully created json output with ids.")
     except:
         print("Creating json output file failed.")
