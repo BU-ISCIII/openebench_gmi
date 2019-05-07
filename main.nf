@@ -336,7 +336,7 @@ process manage_assessment_rbheatmap {
 	file benchmark_result
 
 	"""
-	manageAssesmentRbHeatmap.py --assess_dir $assess_dir --output benchmark_result
+	manageAssessmentRbHeatmap.py --assess_dir $assess_dir --output benchmark_result
 	"arguments.output,path_output""
 
 }
