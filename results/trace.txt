@@ -1,7 +1,2 @@
 task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	rss	vmem	rchar	wchar
-1	ef/9dfb34	1463	dockerPreconditions	CACHED	0	2019-05-06 17:47:39.134	6m 19s	6m 14s	38.1%	55.3 MB	1.1 GB	284.4 MB	288.7 MB
-2	d7/bd0886	24167	validateInputFormat	COMPLETED	0	2019-05-06 18:04:34.070	2.2s	258ms	107.6%	19.8 MB	114.7 MB	1.6 MB	0
-3	48/ab2a7a	24498	getQueryIds	COMPLETED	0	2019-05-06 18:04:36.331	2.3s	258ms	104.6%	21.1 MB	117.5 MB	1.9 MB	0
-4	85/83dbd9	24797	ValidateInputIds (1)	COMPLETED	0	2019-05-06 18:04:38.711	2.2s	66ms	0.0%	10.5 MB	35.1 MB	552.9 KB	0
-5	b6/d61044	25048	SnPrecisionMetrics (1)	COMPLETED	0	2019-05-06 18:04:40.934	7.3s	356ms	363.6%	26.3 MB	409 MB	3.6 MB	15 B
-6	0b/957bd4	25421	manage_assessment_data (Performing benchmark assessment and building plots)	COMPLETED	0	2019-05-06 18:04:48.306	7.5s	1.8s	0.0%	3 MB	19.2 MB	7.5 KB	0
+1	64/f2a373	22080	dockerPreconditions	FAILED	1	2019-05-07 18:03:44.031	12m 26s	12m 25s	59.1%	55.5 MB	1.2 GB	273.4 MB	278.8 MB

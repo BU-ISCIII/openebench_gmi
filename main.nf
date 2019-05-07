@@ -316,27 +316,29 @@ process manage_assessment_snprecision {
 	file assess_dir from asses_dir_snprecision
 	file participant_result from metrics_snprecision_json
 	output:
-	file benchmark_result
+	file benchmark_snprecision_result
 
 	"""
-	python /app/manage_assessment_data.py -b $assess_dir -p $participant_result -o benchmark_result
+	python /app/manage_assessment_data.py -b $assess_dir -p $participant_result -o benchmark_snprecision_result
 	"""
 
 }
 
 process manage_assessment_rbheatmap {
-	container = "openebench_gmi/sample-assessment-snprecision:latest"
+	container = "openebench_gmi/sample-assessment-rfheatmap:latest"
 	tag "Performing benchmark assessment and building plots"
 
   	publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
 
 	input:
 	file assess_dir from asses_dir_rbheatmap
+	file rb_metrics from metrics_robinsonfoulds_json
 	output:
-	file benchmark_result
+	file benchmark_rfheatmap_result
 
 	"""
-	manageAssessmentRbHeatmap.py --assess_dir $assess_dir --output benchmark_result
-	"arguments.output,path_output""
+	manageAssessmentRfHeatmap.py --assess_dir $assess_dir --output benchmark_rbheatmap_result
+	"""
 
 }
+

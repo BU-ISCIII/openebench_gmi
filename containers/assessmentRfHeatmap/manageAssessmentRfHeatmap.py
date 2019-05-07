@@ -47,7 +47,7 @@ def check_arg (args=None) :
 if __name__ == '__main__' :
 
     # Variables
-    version = 'manageAssesmentRbHeatmap v1.0'  # Script version
+    version = 'manageAssesmentRfHeatmap v1.0'  # Script version
     arguments = ""                        # Arguments from ArgParse
 
     # Grab arguments

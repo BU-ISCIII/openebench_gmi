@@ -3,7 +3,7 @@
 FROM centos:latest
 
 # Use a single LABEL (multiple ones are discouraged because each one creates a new layer)
-LABEL	description="Robin foulds calculator from newick file" vendor="ISCIII" version="0.1" maintainer="Sara Monzon <smonzon@isciii.es>"
+LABEL	description="Manage assesment robinson-foulds statistics for constructing a heatmap" vendor="ISCIII" version="0.1" maintainer="Sara Monzon <smonzon@isciii.es>"
 
 COPY ./scif_app_recipes /opt/scif_app_recipes
 COPY ./containers/assessmentRbHeatmap/manageAssesmentRbHeatmap.py /opt/
@@ -25,10 +25,10 @@ RUN echo "Install basic development tools" && \
 # The return value tells whether the validation and the translation to
 # the canonical format whether worked or failed
 
-RUN	echo "Installing manageAssesmentRbHeatmap script" && \
-         scif install /opt/scif_app_recipes/manageAssesmentRbHeatmap_v1.0_centos7.scif
+RUN	echo "Installing manageAssesmentRfHeatmap script" && \
+         scif install /opt/scif_app_recipes/manageAssesmentRfHeatmap_v1.0_centos7.scif
 
-ENV PATH /scif/apps/manageassessmentrbheatmap/bin:$PATH
+ENV PATH /scif/apps/manageassessmentrfheatmap/bin:$PATH
 #RUN find /scif/apps -maxdepth 2 -name "bin" | xargs -I % echo "ln -s %/* /usr/local/bin/" | bash
 
 #ENTRYPOINT	["/opt/docker-entrypoint.sh"]
