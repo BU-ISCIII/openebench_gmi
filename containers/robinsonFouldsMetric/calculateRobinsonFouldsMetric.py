@@ -135,6 +135,8 @@ if __name__ == '__main__' :
     #Create ids dictionary with event_id and sample ids from tree leaves.
     try:
         print("Updating benchmark data with new participant..")
+        for row in benchmark_data:
+            row.append(0)
         benchmark_data.append(participant_row)
         data.update(participants=participants)
         data.update(matrix = {"values" : benchmark_data } )
