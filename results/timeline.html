@@ -78,11 +78,18 @@ function c0(index) { return "#9c9c9c"; }
 function c1(index) { return "#bdbdbd"; }
 function c2(index) { return colors[index % 16]; } // <-- note: uses only the first 16 colors
 
-var elapsed="12m 28s"
-var beginningMillis=1557245023085;
-var endingMillis=1557245770703;
+var elapsed="10s"
+var beginningMillis=1557248616631;
+var endingMillis=1557250272884;
 var data=[
-{"label": "dockerPreconditions", "times": [{"starting_time": 1557245024031, "ending_time": 1557245024094, "color":c1(0)}, {"starting_time": 1557245024094, "ending_time": 1557245768980, "color":c2(0), "label": "12m 26s \/ 1.2 GB"}, {"starting_time": 1557245768980, "ending_time": 1557245769697, "color":c1(0)}]}
+{"label": "dockerPreconditions", "times": [{"starting_time": 1557248616631, "ending_time": 1557248616721, "color":c1(0)}, {"starting_time": 1557248616721, "ending_time": 1557248879875, "color":c0(0), "label": "4m 27s \/ 1.1 GB \/ CACHED"}, {"starting_time": 1557248879875, "ending_time": 1557248883313, "color":c1(0)}]},
+{"label": "validateInputFormat", "times": [{"starting_time": 1557248883431, "ending_time": 1557248883513, "color":c1(1)}, {"starting_time": 1557248883513, "ending_time": 1557248883769, "color":c0(1), "label": "2.2s \/ 115.1 MB \/ CACHED"}, {"starting_time": 1557248883769, "ending_time": 1557248885640, "color":c1(1)}]},
+{"label": "getQueryIds", "times": [{"starting_time": 1557248885678, "ending_time": 1557248885740, "color":c1(2)}, {"starting_time": 1557248885740, "ending_time": 1557248885999, "color":c0(2), "label": "2.2s \/ 117.4 MB \/ CACHED"}, {"starting_time": 1557248885999, "ending_time": 1557248887898, "color":c1(2)}]},
+{"label": "ValidateInputIds (1)", "times": [{"starting_time": 1557248887929, "ending_time": 1557248887997, "color":c1(3)}, {"starting_time": 1557248887997, "ending_time": 1557248888066, "color":c0(3), "label": "2s \/ 34.6 MB \/ CACHED"}, {"starting_time": 1557248888066, "ending_time": 1557248889922, "color":c1(3)}]},
+{"label": "RobinsonFouldsMetrics (1)", "times": [{"starting_time": 1557248889963, "ending_time": 1557248890021, "color":c1(4)}, {"starting_time": 1557248890021, "ending_time": 1557248890437, "color":c0(4), "label": "7.8s \/ 475.7 MB \/ CACHED"}, {"starting_time": 1557248890437, "ending_time": 1557248897809, "color":c1(4)}]},
+{"label": "SnPrecisionMetrics (1)", "times": [{"starting_time": 1557248889974, "ending_time": 1557248890025, "color":c1(5)}, {"starting_time": 1557248890025, "ending_time": 1557248890358, "color":c0(5), "label": "2.7s \/ 452.5 MB \/ CACHED"}, {"starting_time": 1557248890358, "ending_time": 1557248892710, "color":c1(5)}]},
+{"label": "manage_assessment_rbheatmap (Performing benchmark assessment and building plots)", "times": [{"starting_time": 1557250264130, "ending_time": 1557250264171, "color":c1(6)}]},
+{"label": "manage_assessment_snprecision (Performing benchmark assessment and building plots)", "times": [{"starting_time": 1557250264159, "ending_time": 1557250264176, "color":c1(7)}, {"starting_time": 1557250264176, "ending_time": 1557250265536, "color":c2(7), "label": "7.7s \/ 19.3 MB"}, {"starting_time": 1557250265536, "ending_time": 1557250271887, "color":c1(7)}]}
 ]
 
 

@@ -6,7 +6,7 @@ FROM centos:latest
 LABEL	description="Manage assesment robinson-foulds statistics for constructing a heatmap" vendor="ISCIII" version="0.1" maintainer="Sara Monzon <smonzon@isciii.es>"
 
 COPY ./scif_app_recipes /opt/scif_app_recipes
-COPY ./containers/assessmentRbHeatmap/manageAssesmentRbHeatmap.py /opt/
+COPY ./containers/assessmentRfHeatmap/manageAssessmentRfHeatmap.py /opt/
 
 # First, install all the dependencies needed by the results checking procedure
 RUN echo "Install basic development tools" && \
@@ -26,7 +26,7 @@ RUN echo "Install basic development tools" && \
 # the canonical format whether worked or failed
 
 RUN	echo "Installing manageAssesmentRfHeatmap script" && \
-         scif install /opt/scif_app_recipes/manageAssesmentRfHeatmap_v1.0_centos7.scif
+         scif install /opt/scif_app_recipes/manageAssessmentRfHeatmap_v1.0_centos7.scif
 
 ENV PATH /scif/apps/manageassessmentrfheatmap/bin:$PATH
 #RUN find /scif/apps -maxdepth 2 -name "bin" | xargs -I % echo "ln -s %/* /usr/local/bin/" | bash

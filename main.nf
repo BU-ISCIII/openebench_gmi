@@ -181,7 +181,7 @@ process dockerPreconditions {
   docker build -t openebench_gmi/sample-calculatesnprecision:latest -f $baseDir/containers/calculateSnPrecision/Dockerfile $baseDir
   docker build -t openebench_gmi/sample-robinsonfoulds:latest -f $baseDir/containers/robinsonFouldsMetric/Dockerfile $baseDir
   docker build -t openebench_gmi/sample-assessment-snprecision:latest -f $baseDir/containers/assessmentSnPrecision/Dockerfile $baseDir
-  docker build -t openebench_gmi/sample-assessment-rfheatmap:latest -f $baseDir/containers/assessmentRbHeatmap/Dockerfile $baseDir
+  docker build -t openebench_gmi/sample-assessment-rfheatmap:latest -f $baseDir/containers/assessmentRfHeatmap/Dockerfile $baseDir
   touch docker_image_dependency
   """
 

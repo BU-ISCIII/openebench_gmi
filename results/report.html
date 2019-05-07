@@ -18,11 +18,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Nextflow workflow report for run id [prickly_bohr]">
+  <meta name="description" content="Nextflow workflow report for run id [nauseous_colden]">
   <meta name="author" content="Paolo Di Tommaso, Phil Ewels">
   <link rel="icon" type="image/png" href="https://www.nextflow.io/img/favicon.png" />
 
-  <title>[prickly_bohr] Nextflow Workflow Report</title>
+  <title>[nauseous_colden] Nextflow Workflow Report</title>
 
   <style type="text/css">
   /*!
@@ -137,7 +137,7 @@ table.DTCR_clonedTable.dataTable{position:absolute !important;background-color:r
         <li class="nav-item"><a class="nav-link" href="#tasks">Tasks</a></li>
       </ul>
       <span class="navbar-text">
-        [prickly_bohr]
+        [nauseous_colden]
       </span>
     </div>
   </nav>
@@ -146,90 +146,45 @@ table.DTCR_clonedTable.dataTable{position:absolute !important;background-color:r
     <div class="container">
 
       <h1 class="display-3">Nextflow workflow report</h1>
-      <h2 class="text-muted mb-4"><samp>[prickly_bohr]</samp> </h2>
+      <h2 class="text-muted mb-4"><samp>[nauseous_colden]</samp> <em>(resumed run)</em></h2>
 
       
           <div class="alert alert-danger mb-4">
               <h4>Workflow execution completed unsuccessfully!</h4>
               <p>The exit status of the task that caused the workflow execution to fail was: <code>1</code>.</p>
               <p>The full error message was:</p>
-              <pre>Error executing process > 'dockerPreconditions'
+              <pre>Error executing process > 'manage_assessment_snprecision (Performing benchmark assessment and building plots)'
 
 Caused by:
-  Process `dockerPreconditions` terminated with an error exit status (1)
+  Process `manage_assessment_snprecision (Performing benchmark assessment and building plots)` terminated with an error exit status (1)
 
 Command executed:
 
-  echo "/home/smonzon/Documents/desarrollo/openebench_gmi"
-  docker build -t openebench_gmi/sample-checkresults:latest -f /home/smonzon/Documents/desarrollo/openebench_gmi/containers/checkFormat/Dockerfile /home/smonzon/Documents/desarrollo/openebench_gmi
-  docker build -t openebench_gmi/sample-getqueryids:latest -f /home/smonzon/Documents/desarrollo/openebench_gmi/containers/getQueryIds/Dockerfile /home/smonzon/Documents/desarrollo/openebench_gmi
-  docker build -t openebench_gmi/sample-compareids:latest -f /home/smonzon/Documents/desarrollo/openebench_gmi/containers/compareIds/Dockerfile /home/smonzon/Documents/desarrollo/openebench_gmi
-  docker build -t openebench_gmi/sample-calculatesnprecision:latest -f /home/smonzon/Documents/desarrollo/openebench_gmi/containers/calculateSnPrecision/Dockerfile /home/smonzon/Documents/desarrollo/openebench_gmi
-  docker build -t openebench_gmi/sample-robinsonfoulds:latest -f /home/smonzon/Documents/desarrollo/openebench_gmi/containers/robinsonFouldsMetric/Dockerfile /home/smonzon/Documents/desarrollo/openebench_gmi
-  docker build -t openebench_gmi/sample-assessment-snprecision:latest -f /home/smonzon/Documents/desarrollo/openebench_gmi/containers/assessmentSnPrecision/Dockerfile /home/smonzon/Documents/desarrollo/openebench_gmi
-  docker build -t openebench_gmi/sample-assessment-rfheatmap:latest -f /home/smonzon/Documents/desarrollo/openebench_gmi/containers/assessmentRbHeatmap/Dockerfile /home/smonzon/Documents/desarrollo/openebench_gmi
-  touch docker_image_dependency
+  python /app/manage_assessment_data.py -b benchmark_data -p participant4_snprecision.json -o benchmark_snprecision_result
 
 Command exit status:
   1
 
 Command output:
-    which.x86_64 0:2.20-7.el7                                                     
-    xml-common.noarch 0:0.6.3-39.el7                                              
-  
-  Complete!
-  Collecting lxml
-    Downloading https://files.pythonhosted.org/packages/35/8a/5e066949f2b40caac32c7b2a77da63ad304b5fbe869036cc3fe4a198f724/lxml-4.3.3-cp36-cp36m-manylinux1_x86_64.whl (5.7MB)
-  Collecting six
-    Using cached https://files.pythonhosted.org/packages/73/fb/00a976f728d0d1fecfe898238ce23f502a721c0ac0ecfedb80e0d88c64e9/six-1.12.0-py2.py3-none-any.whl
-  Installing collected packages: lxml, six
-  Successfully installed lxml-4.3.3 six-1.12.0
-  Install ete
-  Collecting ete3
-    Downloading https://files.pythonhosted.org/packages/21/17/3c49b7fafe10ed63bb7904ebf9764b98db726aa5fd482fb006818854bc04/ete3-3.1.1.tar.gz (10.5MB)
-  Installing collected packages: ete3
-    Running setup.py install for ete3: started
-      Running setup.py install for ete3: finished with status 'done'
-  Successfully installed ete3-3.1.1
-  + appinstall etetoolkit
-  + apptest     etetoolkit
-  Install dependencies
-  Collecting biopython>=1.70
-    Downloading https://files.pythonhosted.org/packages/28/15/8ac646ff24cfa2588b4d5e5ea51e8d13f3d35806bd9498fbf40ef79026fd/biopython-1.73-cp36-cp36m-manylinux1_x86_64.whl (2.2MB)
-  Collecting dendropy>=4.4.0
-    Downloading https://files.pythonhosted.org/packages/f5/21/17e4fbb1c2a68421eec43930b1e118660c7483229f1b28ba4402e8856884/DendroPy-4.4.0.tar.gz (15.2MB)
-  Collecting numpy (from biopython>=1.70)
-    Downloading https://files.pythonhosted.org/packages/c1/e2/4db8df8f6cddc98e7d7c537245ef2f4e41a1ed17bf0c3177ab3cc6beac7f/numpy-1.16.3-cp36-cp36m-manylinux1_x86_64.whl (17.3MB)
-  Requirement already satisfied: setuptools in /usr/lib/python3.6/site-packages (from dendropy>=4.4.0) (39.0.1)
-  Installing collected packages: numpy, biopython, dendropy
-    Running setup.py install for dendropy: started
-      Running setup.py install for dendropy: finished with status 'done'
-  Successfully installed biopython-1.73 dendropy-4.4.0 numpy-1.16.3
-  Installing calculaterobinsonfouldsmetric
-  + appinstall calculaterobinsonfouldsmetric
-  + apptest     calculaterobinsonfouldsmetric
-  Removing intermediate container 5aaa42e20276
-   ---> 07862f08d53a
-  Step 7/7 : ENV PATH /scif/apps/calculaterobinsonfouldsmetric/bin:$PATH
-   ---> Running in 095a8c5554fb
-  Removing intermediate container 095a8c5554fb
-   ---> b81623f18e5d
-  Successfully built b81623f18e5d
-  Successfully tagged openebench_gmi/sample-robinsonfoulds:latest
-  Sending build context to Docker daemon  58.96MB
-  
-  Step 1/6 : FROM python:2.7-slim
-   ---> a93921f01a53
-  Step 2/6 : WORKDIR /app
-   ---> Using cache
-   ---> ecaf9707bfa5
-  Step 3/6 : COPY ./containers/assessment/requirements.txt /app
+  (empty)
 
 Command error:
-  COPY failed: stat /var/lib/docker/tmp/docker-builder511553314/containers/assessment/requirements.txt: no such file or directory
+  .command.stub: line 45: ps: command not found
+  .command.stub: line 45: ps: command not found
+  .command.stub: line 45: ps: command not found
+  Traceback (most recent call last):
+    File "/app/manage_assessment_data.py", line 416, in <module>
+      main(args)
+    File "/app/manage_assessment_data.py", line 28, in main
+      generate_manifest(data_dir, output_dir)
+    File "/app/manage_assessment_data.py", line 53, in generate_manifest
+      print_chart(output_dir,participants,"RAW")
+    File "/app/manage_assessment_data.py", line 294, in print_chart
+      tools.append(result['participant_id'])
+  KeyError: 'participant_id'
 
 Work dir:
-  /home/smonzon/Documents/desarrollo/openebench_gmi/work/64/f2a3738ff2bfd8fa1906d5b0a1cd25
+  /home/smonzon/Documents/desarrollo/openebench_gmi/work/4e/ce5c66e88d503fd7be74cd24d6aefb
 
 Tip: when you have fixed the problem you can continue the execution appending to the nextflow command line the option `-resume`</pre>
           </div>
@@ -238,26 +193,26 @@ Tip: when you have fixed the problem you can continue the execution appending to
       <dl>
         <dt>Run times</dt>
         <dd>
-          <span id="workflow_start">Tue May 07 18:03:43 CEST 2019</span> - <span id="workflow_complete">Tue May 07 18:16:09 CEST 2019</span>
-          (<span id="completed_fromnow"></span>duration: <strong>12m 27s</strong>)
+          <span id="workflow_start">Tue May 07 19:31:02 CEST 2019</span> - <span id="workflow_complete">Tue May 07 19:31:11 CEST 2019</span>
+          (<span id="completed_fromnow"></span>duration: <strong>9.2s</strong>)
         </dd>
 
         <dl>
           <div class="progress" style="height: 1.6rem; margin: 1.2rem auto; border-radius: 0.20rem;">
             <div style="width: 0.0%" class="progress-bar bg-success" data-toggle="tooltip" data-placement="top" title="0 tasks succeeded"><span class="text-truncate">&nbsp; 0 succeeded &nbsp;</span></div>
-            <div style="width: 0.0%" class="progress-bar bg-secondary" data-toggle="tooltip" data-placement="top" title="0 tasks were cached"><span class="text-truncate">&nbsp; 0 cached &nbsp;</span></div>
+            <div style="width: 75.0%" class="progress-bar bg-secondary" data-toggle="tooltip" data-placement="top" title="6 tasks were cached"><span class="text-truncate">&nbsp; 6 cached &nbsp;</span></div>
             <div style="width: 0.0%" class="progress-bar bg-warning" data-toggle="tooltip" data-placement="top" title="0 tasks reported and error and were ignored"><span class="text-truncate">&nbsp; 0 ignored &nbsp;</span></div>
-            <div style="width: 100.0%" class="progress-bar bg-danger" data-toggle="tooltip" data-placement="top" title="1 tasks failed"><span class="text-truncate">&nbsp; 1 failed &nbsp;</span></div>
+            <div style="width: 25.0%" class="progress-bar bg-danger" data-toggle="tooltip" data-placement="top" title="2 tasks failed"><span class="text-truncate">&nbsp; 2 failed &nbsp;</span></div>
           </div>
         </dl>
 
         <dt>Nextflow command</dt>
-        <dd><pre class="nfcommand"><code>nextflow run main.nf -profile docker --tree_test datasets/testResultDataset/participant4.nwk --participant_id participant4</code></pre></dd>
+        <dd><pre class="nfcommand"><code>nextflow run main.nf -profile docker --tree_test datasets/testResultDataset/participant4.nwk --participant_id participant4 -resume</code></pre></dd>
       </dl>
 
       <dl class="row small">
         <dt class="col-sm-3">CPU-Hours</dt>
-        <dd class="col-sm-9"><samp>0.2 (100% failed)</samp></dd>
+        <dd class="col-sm-9"><samp>0.1 (99.5% cached, 0.5% failed)</samp></dd>
 
         <dt class="col-sm-3">Launch directory</dt>
         <dd class="col-sm-9"><samp>/home/smonzon/Documents/desarrollo/openebench_gmi</samp></dd>
@@ -275,11 +230,11 @@ Tip: when you have fixed the problem you can continue the execution appending to
 
         
           <dt class="col-sm-3">Script ID</dt>
-          <dd class="col-sm-9"><code>8a135b29da3714f4386449f2212ca43c</code></dd>
+          <dd class="col-sm-9"><code>70c7a882fbf8b6b7740be9b2085acdbe</code></dd>
         
 
         <dt class="col-sm-3">Workflow session</dt>
-        <dd class="col-sm-9"><code>b62d02bc-d4b4-4756-b4ae-bd2f1304f991</code></dd>
+        <dd class="col-sm-9"><code>39b184d8-3634-41ca-a8a6-f9eeda37677e</code></dd>
 
         
 
@@ -1061,7 +1016,7 @@ $(function() {
 
   // Nextflow report data
   window.data = { "trace":[
-{"task_id":"1","hash":"64\/f2a373","native_id":"22080","process":"dockerPreconditions","module":"-","container":"-","tag":"-","name":"dockerPreconditions","status":"FAILED","exit":"1","submit":"1557245024031","start":"1557245024094","complete":"1557245769697","duration":"745666","realtime":"744886","%cpu":"59.1","%mem":"0.2","rss":"58232832","vmem":"1236107264","peak_rss":"58232832","peak_vmem":"1303216128","rchar":"286651339","wchar":"292343783","syscr":"25511","syscw":"31048","read_bytes":"0","write_bytes":"0","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/64\/f2a3738ff2bfd8fa1906d5b0a1cd25","script":"\n  echo \"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\"\n  docker build -t openebench_gmi\/sample-checkresults:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/checkFormat\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-getqueryids:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/getQueryIds\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-compareids:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/compareIds\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-calculatesnprecision:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/calculateSnPrecision\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-robinsonfoulds:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/robinsonFouldsMetric\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-assessment-snprecision:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/assessmentSnPrecision\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-assessment-rfheatmap:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/assessmentRbHeatmap\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  touch docker_image_dependency\n  ","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"TERMINATE"}], "summary":{"dockerPreconditions":{"cpu":{"mean":59.1,"min":59.1,"q1":59.1,"q2":59.1,"q3":59.1,"max":59.1,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"mem":{"mean":1236107264,"min":1236107264,"q1":1236107264,"q2":1236107264,"q3":1236107264,"max":1236107264,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"time":{"mean":744886,"min":744886,"q1":744886,"q2":744886,"q3":744886,"max":744886,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"reads":null,"writes":null,"cpuUsage":{"mean":59.1,"min":59.1,"q1":59.1,"q2":59.1,"q3":59.1,"max":59.1,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"memUsage":null,"timeUsage":null}} };
+{"task_id":"1","hash":"a7\/4b6e48","native_id":"17287","process":"dockerPreconditions","module":"-","container":"-","tag":"-","name":"dockerPreconditions","status":"CACHED","exit":"0","submit":"1557248616631","start":"1557248616721","complete":"1557248883313","duration":"266682","realtime":"263154","%cpu":"39.7","%mem":"0.2","rss":"58236928","vmem":"1161687040","peak_rss":"58236928","peak_vmem":"1161687040","rchar":"415533500","wchar":"424911231","syscr":"32408","syscw":"41973","read_bytes":"0","write_bytes":"0","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/a7\/4b6e48df351e94ecddb659215c1371","script":"\n  echo \"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\"\n  docker build -t openebench_gmi\/sample-checkresults:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/checkFormat\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-getqueryids:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/getQueryIds\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-compareids:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/compareIds\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-calculatesnprecision:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/calculateSnPrecision\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-robinsonfoulds:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/robinsonFouldsMetric\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-assessment-snprecision:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/assessmentSnPrecision\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  docker build -t openebench_gmi\/sample-assessment-rfheatmap:latest -f \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/containers\/assessmentRfHeatmap\/Dockerfile \/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\n  touch docker_image_dependency\n  ","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"-"},{"task_id":"2","hash":"a8\/f4bc53","native_id":"852","process":"validateInputFormat","module":"-","container":"openebench_gmi\/sample-checkresults","tag":"-","name":"validateInputFormat","status":"CACHED","exit":"0","submit":"1557248883431","start":"1557248883513","complete":"1557248885640","duration":"2209","realtime":"256","%cpu":"104.9","%mem":"0.1","rss":"21024768","vmem":"120643584","peak_rss":"22306816","peak_vmem":"124145664","rchar":"1831607","wchar":"0","syscr":"312","syscw":"0","read_bytes":"0","write_bytes":"0","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/a8\/f4bc53fdc22de7eaa7b0e0e0b2de1a","script":"\n  checkTreeFormat.py --tree_file participant4.nwk --tree_format newick\n  ","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"-"},{"task_id":"3","hash":"83\/96b0d0","native_id":"1173","process":"getQueryIds","module":"-","container":"openebench_gmi\/sample-getqueryids","tag":"-","name":"getQueryIds","status":"CACHED","exit":"0","submit":"1557248885678","start":"1557248885740","complete":"1557248887898","duration":"2220","realtime":"259","%cpu":"102.4","%mem":"0.1","rss":"21409792","vmem":"123117568","peak_rss":"22163456","peak_vmem":"126320640","rchar":"1821349","wchar":"0","syscr":"319","syscw":"0","read_bytes":"0","write_bytes":"0","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/83\/96b0d0ff4b59298de5cdbac1003602","script":"\n  getLeavesFromNewick.py --event_id gmi --tree_file tree.nwk --tree_format newick --output queryids.json\n  ","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"-"},{"task_id":"4","hash":"cc\/edc2a5","native_id":"1492","process":"ValidateInputIds","module":"-","container":"openebench_gmi\/sample-compareids","tag":"-","name":"ValidateInputIds (1)","status":"CACHED","exit":"0","submit":"1557248887929","start":"1557248887997","complete":"1557248889922","duration":"1993","realtime":"69","%cpu":"0.0","%mem":"0.0","rss":"10760192","vmem":"36257792","peak_rss":"11030528","peak_vmem":"36802560","rchar":"503054","wchar":"0","syscr":"112","syscw":"0","read_bytes":"0","write_bytes":"0","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/cc\/edc2a5c70bccaa7ba01b592f6251f0","script":"\n  compareIds.py --ids1 queryids.json --ids2 inputIDs\/inputIDs.json\n  ","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"-"},{"task_id":"6","hash":"e5\/9cb48b","native_id":"1756","process":"RobinsonFouldsMetrics","module":"-","container":"openebench_gmi\/sample-robinsonfoulds","tag":"-","name":"RobinsonFouldsMetrics (1)","status":"CACHED","exit":"0","submit":"1557248889963","start":"1557248890021","complete":"1557248897809","duration":"7846","realtime":"416","%cpu":"289.8","%mem":"0.1","rss":"41799680","vmem":"498843648","peak_rss":"42196992","peak_vmem":"499130368","rchar":"5581849","wchar":"850","syscr":"637","syscw":"1","read_bytes":"0","write_bytes":"4096","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/e5\/9cb48b60ca1608c4bd7d133543a9f1","script":"\n  calculateRobinsonFouldsMetric.py --tree_file1 tree.nwk --benchmark_trees_path benchmark_data -e gmi -p participant4\n  ","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"-"},{"task_id":"5","hash":"ff\/1f7972","native_id":"1770","process":"SnPrecisionMetrics","module":"-","container":"openebench_gmi\/sample-calculatesnprecision","tag":"-","name":"SnPrecisionMetrics (1)","status":"CACHED","exit":"0","submit":"1557248889974","start":"1557248890025","complete":"1557248892710","duration":"2736","realtime":"333","%cpu":"335.3","%mem":"0.1","rss":"32342016","vmem":"474468352","peak_rss":"32583680","peak_vmem":"479072256","rchar":"4363575","wchar":"0","syscr":"549","syscw":"0","read_bytes":"0","write_bytes":"0","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/ff\/1f7972c09dbe396865bfd36d1ab352","script":"\n  calculateSnPrecision.py --tree_file1 tree.nwk --tree_file2 goldenDataset\/SIM-Sbareilly.tre -e gmi -p participant4 -o participant4\"_snprecision.json\"\n  ","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"-"},{"task_id":"7","hash":"4d\/2be9a1","native_id":"3324","process":"manage_assessment_rbheatmap","module":"-","container":"openebench_gmi\/sample-assessment-rfheatmap:latest","tag":"Performing benchmark assessment and building plots","name":"manage_assessment_rbheatmap (Performing benchmark assessment and building plots)","status":"ABORTED","exit":"-","submit":"1557250264130","start":"1557250264171","complete":"-","duration":"-","realtime":"-","%cpu":"-","%mem":"-","rss":"-","vmem":"-","peak_rss":"-","peak_vmem":"-","rchar":"-","wchar":"-","syscr":"-","syscw":"-","read_bytes":"-","write_bytes":"-","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/4d\/2be9a118f1e5fc68b7676588f35a27","script":"\n\tmanageAssessmentRfHeatmap.py --assess_dir benchmark_data --output benchmark_rbheatmap_result\n\t","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"-"},{"task_id":"8","hash":"4e\/ce5c66","native_id":"3345","process":"manage_assessment_snprecision","module":"-","container":"openebench_gmi\/sample-assessment-snprecision:latest","tag":"Performing benchmark assessment and building plots","name":"manage_assessment_snprecision (Performing benchmark assessment and building plots)","status":"FAILED","exit":"1","submit":"1557250264159","start":"1557250264176","complete":"1557250271887","duration":"7728","realtime":"1360","%cpu":"0.0","%mem":"0.0","rss":"3207168","vmem":"20189184","peak_rss":"3207168","peak_vmem":"20189184","rchar":"7664","wchar":"0","syscr":"16","syscw":"0","read_bytes":"0","write_bytes":"0","attempt":"1","workdir":"\/home\/smonzon\/Documents\/desarrollo\/openebench_gmi\/work\/4e\/ce5c66e88d503fd7be74cd24d6aefb","script":"\n\tpython \/app\/manage_assessment_data.py -b benchmark_data -p participant4_snprecision.json -o benchmark_snprecision_result\n\t","scratch":"-","queue":"-","cpus":"1","memory":"-","disk":"-","time":"-","env":"-","error_action":"TERMINATE"}], "summary":{"RobinsonFouldsMetrics":{"cpu":{"mean":289.8,"min":289.8,"q1":289.8,"q2":289.8,"q3":289.8,"max":289.8,"minLabel":"RobinsonFouldsMetrics (1)","maxLabel":"RobinsonFouldsMetrics (1)","q1Label":"RobinsonFouldsMetrics (1)","q2Label":"RobinsonFouldsMetrics (1)","q3Label":"RobinsonFouldsMetrics (1)"},"mem":{"mean":498843648,"min":498843648,"q1":498843648,"q2":498843648,"q3":498843648,"max":498843648,"minLabel":"RobinsonFouldsMetrics (1)","maxLabel":"RobinsonFouldsMetrics (1)","q1Label":"RobinsonFouldsMetrics (1)","q2Label":"RobinsonFouldsMetrics (1)","q3Label":"RobinsonFouldsMetrics (1)"},"time":{"mean":416,"min":416,"q1":416,"q2":416,"q3":416,"max":416,"minLabel":"RobinsonFouldsMetrics (1)","maxLabel":"RobinsonFouldsMetrics (1)","q1Label":"RobinsonFouldsMetrics (1)","q2Label":"RobinsonFouldsMetrics (1)","q3Label":"RobinsonFouldsMetrics (1)"},"reads":null,"writes":{"mean":4096,"min":4096,"q1":4096,"q2":4096,"q3":4096,"max":4096,"minLabel":"RobinsonFouldsMetrics (1)","maxLabel":"RobinsonFouldsMetrics (1)","q1Label":"RobinsonFouldsMetrics (1)","q2Label":"RobinsonFouldsMetrics (1)","q3Label":"RobinsonFouldsMetrics (1)"},"cpuUsage":{"mean":289.8,"min":289.8,"q1":289.8,"q2":289.8,"q3":289.8,"max":289.8,"minLabel":"RobinsonFouldsMetrics (1)","maxLabel":"RobinsonFouldsMetrics (1)","q1Label":"RobinsonFouldsMetrics (1)","q2Label":"RobinsonFouldsMetrics (1)","q3Label":"RobinsonFouldsMetrics (1)"},"memUsage":null,"timeUsage":null},"dockerPreconditions":{"cpu":{"mean":39.7,"min":39.7,"q1":39.7,"q2":39.7,"q3":39.7,"max":39.7,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"mem":{"mean":1161687040,"min":1161687040,"q1":1161687040,"q2":1161687040,"q3":1161687040,"max":1161687040,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"time":{"mean":263154,"min":263154,"q1":263154,"q2":263154,"q3":263154,"max":263154,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"reads":null,"writes":null,"cpuUsage":{"mean":39.7,"min":39.7,"q1":39.7,"q2":39.7,"q3":39.7,"max":39.7,"minLabel":"dockerPreconditions","maxLabel":"dockerPreconditions","q1Label":"dockerPreconditions","q2Label":"dockerPreconditions","q3Label":"dockerPreconditions"},"memUsage":null,"timeUsage":null},"validateInputFormat":{"cpu":{"mean":104.9,"min":104.9,"q1":104.9,"q2":104.9,"q3":104.9,"max":104.9,"minLabel":"validateInputFormat","maxLabel":"validateInputFormat","q1Label":"validateInputFormat","q2Label":"validateInputFormat","q3Label":"validateInputFormat"},"mem":{"mean":120643584,"min":120643584,"q1":120643584,"q2":120643584,"q3":120643584,"max":120643584,"minLabel":"validateInputFormat","maxLabel":"validateInputFormat","q1Label":"validateInputFormat","q2Label":"validateInputFormat","q3Label":"validateInputFormat"},"time":{"mean":256,"min":256,"q1":256,"q2":256,"q3":256,"max":256,"minLabel":"validateInputFormat","maxLabel":"validateInputFormat","q1Label":"validateInputFormat","q2Label":"validateInputFormat","q3Label":"validateInputFormat"},"reads":null,"writes":null,"cpuUsage":{"mean":104.9,"min":104.9,"q1":104.9,"q2":104.9,"q3":104.9,"max":104.9,"minLabel":"validateInputFormat","maxLabel":"validateInputFormat","q1Label":"validateInputFormat","q2Label":"validateInputFormat","q3Label":"validateInputFormat"},"memUsage":null,"timeUsage":null},"getQueryIds":{"cpu":{"mean":102.4,"min":102.4,"q1":102.4,"q2":102.4,"q3":102.4,"max":102.4,"minLabel":"getQueryIds","maxLabel":"getQueryIds","q1Label":"getQueryIds","q2Label":"getQueryIds","q3Label":"getQueryIds"},"mem":{"mean":123117568,"min":123117568,"q1":123117568,"q2":123117568,"q3":123117568,"max":123117568,"minLabel":"getQueryIds","maxLabel":"getQueryIds","q1Label":"getQueryIds","q2Label":"getQueryIds","q3Label":"getQueryIds"},"time":{"mean":259,"min":259,"q1":259,"q2":259,"q3":259,"max":259,"minLabel":"getQueryIds","maxLabel":"getQueryIds","q1Label":"getQueryIds","q2Label":"getQueryIds","q3Label":"getQueryIds"},"reads":null,"writes":null,"cpuUsage":{"mean":102.4,"min":102.4,"q1":102.4,"q2":102.4,"q3":102.4,"max":102.4,"minLabel":"getQueryIds","maxLabel":"getQueryIds","q1Label":"getQueryIds","q2Label":"getQueryIds","q3Label":"getQueryIds"},"memUsage":null,"timeUsage":null},"SnPrecisionMetrics":{"cpu":{"mean":335.3,"min":335.3,"q1":335.3,"q2":335.3,"q3":335.3,"max":335.3,"minLabel":"SnPrecisionMetrics (1)","maxLabel":"SnPrecisionMetrics (1)","q1Label":"SnPrecisionMetrics (1)","q2Label":"SnPrecisionMetrics (1)","q3Label":"SnPrecisionMetrics (1)"},"mem":{"mean":474468352,"min":474468352,"q1":474468352,"q2":474468352,"q3":474468352,"max":474468352,"minLabel":"SnPrecisionMetrics (1)","maxLabel":"SnPrecisionMetrics (1)","q1Label":"SnPrecisionMetrics (1)","q2Label":"SnPrecisionMetrics (1)","q3Label":"SnPrecisionMetrics (1)"},"time":{"mean":333,"min":333,"q1":333,"q2":333,"q3":333,"max":333,"minLabel":"SnPrecisionMetrics (1)","maxLabel":"SnPrecisionMetrics (1)","q1Label":"SnPrecisionMetrics (1)","q2Label":"SnPrecisionMetrics (1)","q3Label":"SnPrecisionMetrics (1)"},"reads":null,"writes":null,"cpuUsage":{"mean":335.3,"min":335.3,"q1":335.3,"q2":335.3,"q3":335.3,"max":335.3,"minLabel":"SnPrecisionMetrics (1)","maxLabel":"SnPrecisionMetrics (1)","q1Label":"SnPrecisionMetrics (1)","q2Label":"SnPrecisionMetrics (1)","q3Label":"SnPrecisionMetrics (1)"},"memUsage":null,"timeUsage":null},"manage_assessment_snprecision":{"cpu":null,"mem":{"mean":20189184,"min":20189184,"q1":20189184,"q2":20189184,"q3":20189184,"max":20189184,"minLabel":"manage_assessment_snprecision (Performing benchmark assessment and building plots)","maxLabel":"manage_assessment_snprecision (Performing benchmark assessment and building plots)","q1Label":"manage_assessment_snprecision (Performing benchmark assessment and building plots)","q2Label":"manage_assessment_snprecision (Performing benchmark assessment and building plots)","q3Label":"manage_assessment_snprecision (Performing benchmark assessment and building plots)"},"time":{"mean":1360,"min":1360,"q1":1360,"q2":1360,"q3":1360,"max":1360,"minLabel":"manage_assessment_snprecision (Performing benchmark assessment and building plots)","maxLabel":"manage_assessment_snprecision (Performing benchmark assessment and building plots)","q1Label":"manage_assessment_snprecision (Performing benchmark assessment and building plots)","q2Label":"manage_assessment_snprecision (Performing benchmark assessment and building plots)","q3Label":"manage_assessment_snprecision (Performing benchmark assessment and building plots)"},"reads":null,"writes":null,"cpuUsage":null,"memUsage":null,"timeUsage":null},"ValidateInputIds":{"cpu":null,"mem":{"mean":36257792,"min":36257792,"q1":36257792,"q2":36257792,"q3":36257792,"max":36257792,"minLabel":"ValidateInputIds (1)","maxLabel":"ValidateInputIds (1)","q1Label":"ValidateInputIds (1)","q2Label":"ValidateInputIds (1)","q3Label":"ValidateInputIds (1)"},"time":{"mean":69,"min":69,"q1":69,"q2":69,"q3":69,"max":69,"minLabel":"ValidateInputIds (1)","maxLabel":"ValidateInputIds (1)","q1Label":"ValidateInputIds (1)","q2Label":"ValidateInputIds (1)","q3Label":"ValidateInputIds (1)"},"reads":null,"writes":null,"cpuUsage":null,"memUsage":null,"timeUsage":null},"manage_assessment_rbheatmap":{"cpu":null,"mem":null,"time":null,"reads":null,"writes":null,"cpuUsage":null,"memUsage":null,"timeUsage":null}} };
 
   </script>
 

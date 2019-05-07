@@ -43,11 +43,11 @@ def generate_manifest(data_dir,output_dir):
                 participants.append(public_participant)
 
     # And now, the participants
-#     for (participant,abs_result_file) in participants:
-#         rel_new_location = participant + ".json"
-#         new_location = os.path.join(output_dir, rel_new_location)
-#         shutil.copy(abs_result_file,new_location)
-#         participants.append(rel_new_location)
+     for (participant,abs_result_file) in participants:
+         rel_new_location = participant + ".json"
+         new_location = os.path.join(output_dir, rel_new_location)
+         shutil.copy(abs_result_file,new_location)
+         participants.append(rel_new_location)
     #import pdb; pdb.set_trace()
     # Let's draw the assessment charts!
     print_chart(output_dir,participants,"RAW")

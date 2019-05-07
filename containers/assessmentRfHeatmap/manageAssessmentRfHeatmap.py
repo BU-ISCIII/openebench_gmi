@@ -30,10 +30,10 @@ def check_arg (args=None) :
         parser.parse_args() # Parsed arguments
 
     '''
-    parser = argparse.ArgumentParser(prog = 'calculateSnPrecision.py', formatter_class=argparse.RawDescriptionHelpFormatter, description= 'calculateSpPrecision.py calculates Specificity and Precision metric between two newick trees using RAxML.')
+    parser = argparse.ArgumentParser(prog = 'manageAssesmentRfHeatmap.py', formatter_class=argparse.RawDescriptionHelpFormatter, description= 'manageAssesmentRfHeatmap.py creates a heatmap using a robinson-foulds matrix in a json format.')
 
     parser.add_argument('--version','-v', action='version', version='%(prog)s 0.3.5')
-    parser.add_argument('--assess_dir','-a' ,required= False,choices = ["newick","nexus"], help = 'Tree file format [newick,nexus]', default = "newick")
+    parser.add_argument('--assess_dir','-a' ,required= False,help = "Path to assessment dir")
     parser.add_argument('--output' ,'-o',required= False, help = 'Path to result folder. Default = benchmark_result', default="benchmark_result")
     parser.add_argument('--event_id','-e' ,required= False, help = 'OpenEbench event identifier', default="default")
     parser.add_argument('--participant_id','-p' ,required= False, help = 'OpenEbench participant identifier', default="default")
