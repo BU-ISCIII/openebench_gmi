@@ -111,7 +111,7 @@ if __name__ == '__main__' :
     try:
         print ("Reading public participants trees...")
         for public_participant in participants:
-            tree_file = public_participant + ".nwk"
+            tree_file = public_participant + "_canonical.nwk"
             part_fullpath = os.path.join(arguments.benchmark_trees_path,tree_file)
             if os.path.isfile(part_fullpath):
                 tree_files.append(part_fullpath)

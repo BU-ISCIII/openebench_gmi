@@ -48,7 +48,7 @@ def generate_manifest(data_dir,output_dir):
 #          new_location = os.path.join(output_dir, rel_new_location)
 #          shutil.copy(abs_result_file,new_location)
 #          participants.append(rel_new_location)
-    import pdb; pdb.set_trace()
+#     import pdb; pdb.set_trace()
     # Let's draw the assessment charts!
     print_chart(output_dir,participants,"RAW")
     print_chart(output_dir,participants,"SQR")

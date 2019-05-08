@@ -85,7 +85,7 @@ if(params.public_ref_dir){
 if(params.assess_dir){
 	Channel
 		.fromPath( params.assess_dir, type: 'dir' ,checkIfExists:true)
-		.into { asses_dir_rbheatmap ; asses_dir_snprecision ; assess_dir_robinsonfoulds  }
+		.into { asses_dir_rfheatmap ; asses_dir_snprecision ; assess_dir_robinsonfoulds  }
 	//if (!assess_dir.exists()) exit 1, "Input Asses dir path not found: ${params.assess_dir}"
 }
 
@@ -202,10 +202,10 @@ process validateInputFormat {
   file docker_image_dependency
 
   output:
-  file "tree.nwk" into canonical_getresultsids,canonical_robinsonfoulds,canonical_snprecision
+  file "*.nwk" into canonical_getresultsids,canonical_robinsonfoulds,canonical_snprecision
 
   """
-  checkTreeFormat.py --tree_file ${tree} --tree_format ${params.tree_format}
+  checkTreeFormat.py --tree_file ${tree} --tree_format ${params.tree_format} --output ${params.participant_id}_canonical.nwk
   """
 
 }
@@ -324,20 +324,20 @@ process manage_assessment_snprecision {
 
 }
 
-process manage_assessment_rbheatmap {
+process manage_assessment_rfheatmap {
 	container = "openebench_gmi/sample-assessment-rfheatmap:latest"
 	tag "Performing benchmark assessment and building plots"
 
   	publishDir path: "${params.outdir}", mode: 'copy', overwrite: true
 
 	input:
-	file assess_dir from asses_dir_rbheatmap
+	file assess_dir from asses_dir_rfheatmap
 	file rb_metrics from metrics_robinsonfoulds_json
 	output:
 	file benchmark_rfheatmap_result
 
 	"""
-	manageAssessmentRfHeatmap.py --assess_dir $assess_dir --output benchmark_rbheatmap_result
+	manageAssessmentRfHeatmap.py --assess_dir $assess_dir --output benchmark_rfheatmap_result
 	"""
 
 }

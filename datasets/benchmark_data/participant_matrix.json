@@ -1,12 +1,18 @@
 {
     "event_id": "gmi",
     "participants": [
-        "ref"
+        "ref",
+        "participant1"
     ],
     "matrix": {
         "values": [
             [
+                0,
                 0
+            ],
+            [
+                0.09090909090909091,
+                0.0
             ]
         ]
     }

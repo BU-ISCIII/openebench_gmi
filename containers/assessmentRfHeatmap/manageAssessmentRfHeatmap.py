@@ -89,6 +89,8 @@ if __name__ == '__main__' :
 
     ax.set_title("Heat map for participants)")
     fig.tight_layout()
+
+    os.mkdir(arguments.output)
     outname = os.path.join(arguments.output,"benchmark_gmi_robinsonfoulds_heatmap.svg")
     fig.set_size_inches(18.5, 10.5)
     fig.savefig(outname, dpi=100)
