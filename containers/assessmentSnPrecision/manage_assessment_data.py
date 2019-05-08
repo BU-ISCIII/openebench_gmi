@@ -317,6 +317,8 @@ def print_chart(output_dir, participants, classification_type):
 
     ax.set_xlabel("Recall", fontsize=12)
     ax.set_ylabel("Precision", fontsize=12)
+    ax.set_xlim(right = 1.001)
+    ax.set_ylim(top = 1.001)
 
     # Shrink current axis's height  on the bottom
     box = ax.get_position()
