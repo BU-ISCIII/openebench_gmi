@@ -39,16 +39,16 @@ def generate_manifest(data_dir,output_dir):
         # Gathering the public participants
         for public_participant in os.listdir(output_dir):
             part_fullpath = os.path.join(output_dir,public_participant)
-            if fnmatch.fnmatch(public_participant,"*.json") and os.path.isfile(part_fullpath):
+            if fnmatch.fnmatch(public_participant,"*_snprecision.json") and os.path.isfile(part_fullpath):
                 participants.append(public_participant)
 
     # And now, the participants
-     for (participant,abs_result_file) in participants:
-         rel_new_location = participant + ".json"
-         new_location = os.path.join(output_dir, rel_new_location)
-         shutil.copy(abs_result_file,new_location)
-         participants.append(rel_new_location)
-    #import pdb; pdb.set_trace()
+#     for participant in participants:
+#          rel_new_location = participant + ".json"
+#          new_location = os.path.join(output_dir, rel_new_location)
+#          shutil.copy(abs_result_file,new_location)
+#          participants.append(rel_new_location)
+    import pdb; pdb.set_trace()
     # Let's draw the assessment charts!
     print_chart(output_dir,participants,"RAW")
     print_chart(output_dir,participants,"SQR")
