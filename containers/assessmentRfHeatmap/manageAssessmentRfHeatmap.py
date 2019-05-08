@@ -65,10 +65,14 @@ if __name__ == '__main__' :
     participants = data['participants']
     p_matrix_values = np.array(data['matrix']['values'])
 
+    #Mask upper matrix
+    mask =  np.tri(p_matrix_values.shape[0],k=-1)
+    p_matrix_values = np.ma.array(p_matrix_values, mask=mask.T) # mask out the lower triangle
+    # Round to 2 decimals
+    p_matrix_values = np.around(p_matrix_values,decimals=2)
     # Draw heatmap
     fig, ax = plt.subplots()
     im = ax.imshow(p_matrix_values)
-
 
     # We want to show all ticks...
     ax.set_xticks(np.arange(len(participants)))
@@ -76,16 +80,18 @@ if __name__ == '__main__' :
     # ... and label them with the respective list entries
     ax.set_xticklabels(participants)
     ax.set_yticklabels(participants)
-
+    # Create colorbar
+    cbar = ax.figure.colorbar(im, ax=ax, **cbar_kw)
+    cbar.ax.set_ylabel(cbarlabel, rotation=-90, va="bottom")
     # Rotate the tick labels and set their alignment.
     plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
             rotation_mode="anchor")
 
     # Loop over data dimensions and create text annotations.
-    #for i in range(len(p_matrix_values)):
-    #    for j in range(len(p_matrix_values)):
-    #        text = ax.text(j, i, harvest[i, j],
-    #                       ha="center", va="center", color="w")
+    for i in range(len(p_matrix_values)):
+        for j in range(len(p_matrix_values)):
+            text = ax.text(j, i, p_matrix_values[i, j],
+                           ha="center", va="center", color="black")
 
     ax.set_title("Heat map for participants)")
     fig.tight_layout()
