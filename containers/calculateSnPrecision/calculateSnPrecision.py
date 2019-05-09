@@ -41,7 +41,7 @@ def check_arg (args=None) :
 def calculate_sensitivity(true_positives, false_negatives) :
     sensitivity = true_positives /(true_positives + false_negatives)
     return sensitivity
-    
+
 def calculate_precision(true_positives, false_positives) :
     precision = true_positives /(true_positives + false_positives)
     return precision
@@ -118,7 +118,7 @@ if __name__ == '__main__' :
 
     #Create ids dictionary with event_id and sample ids from tree leaves.
     try:
-        
+
         metrics.update(event_id = arguments.event_id)
         metrics.update(participant_id = arguments.participant_id)
         metrics_info1.update(type="metrics",units="none",name="sensitivity",value=sensitivity)

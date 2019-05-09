@@ -40,6 +40,44 @@ def check_arg (args=None) :
 
     return parser.parse_args()
 
+
+#################
+### FUNCTIONS ###
+#################
+def heatmap(data, row_labels, col_labels, ax=None,
+            cbar_kw={}, cbarlabel="", **kwargs):
+
+    if not ax:
+        ax = plt.gca()
+
+    # Plot the heatmap
+    im = ax.imshow(data, **kwargs)
+
+    # We want to show all ticks...
+    ax.set_xticks(np.arange(len(participants)))
+    ax.set_yticks(np.arange(len(participants)))
+    # ... and label them with the respective list entries
+    ax.set_xticklabels(participants)
+    ax.set_yticklabels(participants)
+
+    # Create colorbar
+    cbar = ax.figure.colorbar(im, ax=ax, **cbar_kw)
+    cbar.ax.set_ylabel(cbarlabel, rotation=-90, va="bottom")
+
+    # Rotate the tick labels and set their alignment.
+    plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
+             rotation_mode="anchor")
+
+    # Loop over data dimensions and create text annotations.
+    for i in range(len(p_matrix_values)):
+        for j in range(len(p_matrix_values)):
+            text = ax.text(j, i, p_matrix_values[i, j],
+                           ha="center", va="center", color="black")
+
+    ax.set_title("Heat map for participants)")
+    return im, cbar
+
+
 ###################
 ### MAIN SCRIPT ###
 ###################
@@ -70,32 +108,14 @@ if __name__ == '__main__' :
     p_matrix_values = np.ma.array(p_matrix_values, mask=mask.T) # mask out the lower triangle
     # Round to 2 decimals
     p_matrix_values = np.around(p_matrix_values,decimals=2)
+
     # Draw heatmap
     fig, ax = plt.subplots()
-    im = ax.imshow(p_matrix_values)
 
-    # We want to show all ticks...
-    ax.set_xticks(np.arange(len(participants)))
-    ax.set_yticks(np.arange(len(participants)))
-    # ... and label them with the respective list entries
-    ax.set_xticklabels(participants)
-    ax.set_yticklabels(participants)
-    # Create colorbar
-    cbar = ax.figure.colorbar(im, ax=ax, **cbar_kw)
-    cbar.ax.set_ylabel(cbarlabel, rotation=-90, va="bottom")
-    # Rotate the tick labels and set their alignment.
-    plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
-            rotation_mode="anchor")
+    im, cbar = heatmap(p_matrix_values, participants, participants, ax=ax,
+                    cmap="YlGn", cbarlabel="openebench [t/year]")
 
-    # Loop over data dimensions and create text annotations.
-    for i in range(len(p_matrix_values)):
-        for j in range(len(p_matrix_values)):
-            text = ax.text(j, i, p_matrix_values[i, j],
-                           ha="center", va="center", color="black")
-
-    ax.set_title("Heat map for participants)")
-    fig.tight_layout()
-
+    # Write image
     os.mkdir(arguments.output)
     outname = os.path.join(arguments.output,"benchmark_gmi_robinsonfoulds_heatmap.svg")
     fig.set_size_inches(18.5, 10.5)

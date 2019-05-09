@@ -31,7 +31,7 @@ def helpMessage() {
 
     The typical command for running the pipeline is as follows:
 
-    nextflow run BU-ISCIII/openebench_gmi --tree_test {test.newick.file} --golden_newick {golden.newick.file} --even_id {event.id}
+    nextflow run BU-ISCIII/openebench_gmi --tree_test {test.newick.file} --goldstandard_dir {golden.folder.path} --assess_dir {assessment.path} --public_ref_dir {path.to.info.ref.dataset} --event_id {event.id}
 
     Mandatory arguments:
       --tree_test                   Path to input data (must be surrounded with quotes).
