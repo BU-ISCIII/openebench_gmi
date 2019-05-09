@@ -7,7 +7,7 @@ virtualenv/
 # Nextflow
 .nextflow*
 work/
-results/
+#results/
 results1/
 
 #jupyter
