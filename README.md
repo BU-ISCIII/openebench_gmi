@@ -19,16 +19,19 @@ nextflow run main.nf --help
 
 ```
 Usage:
-nextflow run BU-ISCIII/openebench_gmi --tree_test {test.newick.file} --golden_newick {golden.newick.file} --even_id {event.id} --tree_format ["nexus","newick"] --outdir {path/name.output}
+nextflow run BU-ISCIII/openebench_gmi --tree_test {test.newick.file} --goldstandard_dir {golden.folder.path} --assess_dir {assessment.path} --public_ref_dir {path.to.info.ref.dataset} --event_id {event.id}
 
 Mandatory arguments:
-  --tree_test                 Path to input data (must be surrounded with quotes).
-  --golden_newick             Path to reference data. Golden dataset.
-  --event_id                  Event identifier.
-  --tree_format               Format tree ["nexus","newick"].
+  --tree_test                   Path to input data (must be surrounded with quotes).
+  --goldstandard_dir            Path to reference data. Golden datasets.
+  --public_ref_dir              Path where public dataset info is stored for validation.
+  --assess_dir                  Path where benchmark data is stored.
+  --event_id                    Event identifier.
+  --participant_id              Participant identifier.
+  --tree_format                 Format tree ["nexus","newick"].
 
 Other options:
-  --outdir                    The output directory where the results will be saved
+  --outdir                      The output directory where the results will be saved
 ```
 
 
@@ -39,6 +42,7 @@ First of all, needed datasets have been collected in: [datasets folder](datasets
 2. **Gold standard dataset:** confirmed phylogeny for the outbreak being investigated.
 3. **Input dataset ids:** input dataset ids in .txt and .json format.
 4. **Test dataset:** a test tree for comparing with gold standard result. In this case just the same golden dataset. Robinson-Foulds metrics must be 0.
+5. **benchmark_data**: path where benchmark results are stored.
 
 ## Nextflow pipeline and containers
 Second, a pipeline has been developed which is splitted in three steps following OpenEbench specifications following this [repo](https://github.com/inab/opeb-submission) as an example:
@@ -52,14 +56,16 @@ Second, a pipeline has been developed which is splitted in three steps following
    2. *Get query ids:* 
       - Tree input: ids are extracted for user input tree in newick or nexus format. IDs are writed in: queryids.json 
     
-   3. *Get result ids:* 
-      - Tree input: ids are extracted from canonical tree format. IDs are writed in resultsids.json
+   3. *Validate query ids:* 
+      - Tree input: query ids are validated against ref input ids.
 
 2. **Metrics:**
-   1. *Robinson-Foulds metric calculation:* Robinson-Foulds test is performed between user tree and gold standard tree in order to compare its topologies. Result value is writted to robinsonfoulds.json file.
+   1. *Precision/Recall calculation:* common (TP), source (FP) and ref(FN) edges are calculated in the comparison of ref and test tree topologies. Recall and precision are calculated using this values and stored in a json file called {participant_id}_snprecision.json.
+   2. *Robinson-Foulds metric calculation:* Normalized Robinson-Foulds test is performed between user tree and every participant tree already analyzed and stored in the benchmark_data folder in order to compare their topologies. Result value is writted to participant_matrix.json file.
   
 3. **Data visualization and consolidation:**
-  **TODO**
+  1. Precision/Recall graph is created, classifying each participant inside a quartile.
+  2. A all participant vs all participant heatmap is created usign normalized robinson-foulds matrix.
 
 ### Containers info
 
