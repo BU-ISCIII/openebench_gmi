@@ -1,0 +1,18 @@
+{
+    "event_id": "gmi",
+    "participant_id": "participant7",
+    "metrics": {
+        "x": {
+            "type": "metrics",
+            "units": "none",
+            "name": "sensitivity",
+            "value": 0.8571428571428571
+        },
+        "y": {
+            "type": "metrics",
+            "units": "none",
+            "name": "precision",
+            "value": 1.0
+        }
+    }
+}
