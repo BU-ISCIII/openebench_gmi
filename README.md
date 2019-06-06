@@ -64,8 +64,8 @@ Second, a pipeline has been developed which is splitted in three steps following
    2. *Robinson-Foulds metric calculation:* Normalized Robinson-Foulds test is performed between user tree and every participant tree already analyzed and stored in the benchmark_data folder in order to compare their topologies. Result value is writted to participant_matrix.json file.
   
 3. **Data visualization and consolidation:**
-  1. Precision/Recall graph is created, classifying each participant inside a quartile.
-  2. A all participant vs all participant heatmap is created usign normalized robinson-foulds matrix.
+   1. Precision/Recall graph is created, classifying each participant inside a quartile.
+   2. A all participant vs all participant heatmap is created usign normalized robinson-foulds matrix.
 
 ### Containers info
 
